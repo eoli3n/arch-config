@@ -28,6 +28,7 @@ echo $hostname > /mnt/etc/hostname
 print "Prepare locales and keymap"
 echo "KEYMAP=fr" > /mnt/etc/vconsole.conf
 sed -i 's/#\(fr_FR.UTF-8\)/\1/' /mnt/etc/locale.gen
+echo 'LANG="fr_FR.UTF-8"' > /mnt/etc/locale.conf
 
 # Configure /etc/hosts
 print "Configure hosts file"
@@ -47,7 +48,7 @@ arch-chroot /mnt /bin/bash -xe <<"EOF"
 
   # Generate locale
   locale-gen
-  echo 'LANG="fr_FR.UTF-8"' > /etc/locale.conf
+  source /etc/locale.conf
 
   # Generate Initramfs
   mkinitcpio -p linux
