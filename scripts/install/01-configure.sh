@@ -54,9 +54,9 @@ mkfs.vfat $EFI
 # Create plain encrypted SWAP
 print "Create encrypted SWAP"
 cryptsetup open --type plain $SWAP swap
-SWAP=/dev/mapper/swap
-mkswap $SWAP
-swapon $SWAP
+ESWAP=/dev/mapper/swap
+mkswap $ESWAP
+swapon $ESWAP
 
 # Create LUKS
 print "Create LUKS"
@@ -67,7 +67,7 @@ BTRFS=/dev/mapper/universe
 
 # Format BTRFS part
 print "Format BTRFS"
-mkfs.btrfs -L "Universe" $BTRFS
+mkfs.btrfs -L "Sun" $BTRFS
 
 # Create BTRFS subvolumes
 print "Create subvolumes"
