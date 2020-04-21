@@ -71,15 +71,18 @@ arch-chroot /mnt /bin/bash -xe <<"EOF"
   cp /efi/EFI/GRUB/grubx64.efi /efi/EFI/boot/bootx64.efi
   grub-mkconfig -o /boot/grub/grub.cfg
 
+  # Create user
+  useradd -m user
+
 EOF
 
 # Set root passwd
 print "Set root password"
 arch-chroot /mnt /bin/passwd
 
-# Create user
-print "Create user"
-arch-chroot /mnt /usr/bin/useradd -m user
+# Set user passwd
+print "Set user password"
+arch-chroot /mnt /bin/passwd user
 
 # Umount all parts
 umount -R /mnt
