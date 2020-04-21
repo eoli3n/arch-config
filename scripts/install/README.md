@@ -1,5 +1,6 @@
 ### To install
 
+EFI install
 Boot latest arch iso
 
 ```

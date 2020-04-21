@@ -40,7 +40,7 @@ EOF
 # Chroot and configure
 print "Chroot and configure system"
 
-arch-chroot /mnt /bin/bash -e <<"EOF"
+arch-chroot /mnt /bin/bash -xe <<"EOF"
 
   # Sync clock
   hwclock --systohc
