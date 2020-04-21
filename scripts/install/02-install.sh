@@ -63,12 +63,18 @@ arch-chroot /mnt /bin/bash -xe <<"EOF"
   # Generate Initramfs
   mkinitcpio -p linux
 
-  # Install grub2
+  # Install packages
   pacman -S grub efibootmgr grub-btrfs --noconfirm
-  sed -i 's/#\(GRUB_ENABLE_CRYPTODISK=y\)/\1/' /etc/default/grub
-  grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
-  mkdir -p /efi/EFI/boot
-  cp /efi/EFI/GRUB/grubx64.efi /efi/EFI/boot/bootx64.efi
+
+  # TODO: to test encrypted /boot
+  #sed -i 's/#\(GRUB_ENABLE_CRYPTODISK=y\)/\1/' /etc/default/grub
+
+  # Install grub2
+  grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+
+  # Configure EFI and grub2
+  mkdir -p /boot/EFI/boot
+  cp /boot/EFI/GRUB/grubx64.efi /boot/EFI/boot/bootx64.efi
   grub-mkconfig -o /boot/grub/grub.cfg
 
   # Create user
