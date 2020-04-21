@@ -53,14 +53,11 @@ arch-chroot /mnt /bin/bash -xe <<"EOF"
   # Generate Initramfs
   mkinitcpio -p linux
 
-  # Create snapper configuration
-  snapper -c root create-config /
-
   # Install grub2
   pacman -S grub efibootmgr grub-btrfs --noconfirm
-  grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-  mkdir -p /boot/EFI/boot
-  cp /boot/EFI/GRUB/grubx64.efi /boot/EFI/boot/bootx64.efi
+  grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+  mkdir -p /efi/EFI/boot
+  cp /efi/EFI/GRUB/grubx64.efi /efi/EFI/boot/bootx64.efi
   grub-mkconfig -o /boot/grub/grub.cfg
 
 EOF

@@ -88,8 +88,8 @@ mkdir /mnt/home
 mount -o subvol=@home $BTRFS /mnt/home
 mkdir /mnt/.snapshots
 mount -o subvol=@snapshots $BTRFS /mnt/.snapshots
-mkdir /mnt/boot
-mount $EFI /mnt/boot
+mkdir /mnt/efi
+mount $EFI /mnt/efi
 
 # Finish
 echo -e "\e[32mAll OK"
