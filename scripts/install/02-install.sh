@@ -19,26 +19,35 @@ pacstrap /mnt base linux linux-firmware btrfs-progs ansible git snapper
 print "Generate fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
 
+# Set hostname
+echo "Please enter hostname :"
+read hostname
+echo $hostname > /mnt/etc/hostname
+
+# Prepare locales and keymap
+print "Prepare locales and keymap"
+echo "KEYMAP=fr" > /mnt/etc/vconsole.conf
+sed -i 's/#\(fr_FR.UTF-8\)/\1/' /mnt/etc/locale.gen
+echo 'LANG="fr_FR.UTF-8"' > /mnt/etc/locale.conf
+
+# Configure /etc/hosts
+print "Configure hosts file"
+cat > /etc/hosts <<EOF
+#<ip-address>	<hostname.domain.org>	<hostname>
+127.0.0.1	    localhost   	        $hostname
+::1   		    localhost              	$hostname
+EOF
+
 # Chroot and configure
 print "Chroot and configure system"
 
-echo "Please enter hostname :"
-read hostname
-hostname=$hostname arch-chroot /mnt /bin/bash -e <<"EOF"
-  
-  # Set hostname
-  echo $hostname > /etc/hostname
+arch-chroot /mnt /bin/bash -e <<"EOF"
 
   # Sync clock
   hwclock --systohc
 
   # Generate locale
-  sed -i 's/#\(fr_FR.UTF-8\)/\1/' /etc/locale.gen
   locale-gen
-  echo 'LANG="fr_FR.UTF-8"' > /etc/locale.conf
-
-  # Keymap layout
-  echo "KEYMAP=fr" > /etc/vconsole.conf
 
   # Generate Initramfs
   mkinitcpio -p linux
@@ -52,6 +61,7 @@ hostname=$hostname arch-chroot /mnt /bin/bash -e <<"EOF"
   mkdir -p /boot/EFI/boot
   cp /boot/EFI/GRUB/grubx64.efi /boot/EFI/boot/bootx64.efi
   grub-mkconfig -o /boot/grub/grub.cfg
+
 EOF
 
 # Set root passwd
@@ -60,3 +70,10 @@ arch-chroot /mnt /bin/passwd
 
 # Create user
 print "Create user"
+arch-chroot /mnt /usr/bin/useradd -m user
+
+# Umount all parts
+umount -R /mnt
+
+# Finish
+echo -e "\e[32mAll OK"
