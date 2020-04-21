@@ -60,11 +60,34 @@ swapon $SWAP
 
 # Create LUKS
 print "Create LUKS"
-cryptsetup -v --type luks2 --cipher aes-xts-plain64 --key-size 256 --hash sha256 --iter-time 2000 --use-urandom --verify-passphrase luksFormat $LUKS
+# https://savannah.gnu.org/bugs/?55093
+cryptsetup -v --type luks1 --cipher aes-xts-plain64 --key-size 256 --hash sha256 --iter-time 2000 --use-urandom --verify-passphrase luksFormat $LUKS
 cryptsetup luksOpen $LUKS universe
 BTRFS=/dev/mapper/universe
 
 # Format BTRFS part
+print "Format BTRFS"
 mkfs.btrfs -L "Universe" $BTRFS
 
 # Create BTRFS subvolumes
+print "Create subvolumes"
+mount $BTFRS /mnt
+btrfs subvolume create /mnt/@
+btrfs subvolume create /mnt/@home
+btrfs subvolume create /mnt/@snapshots
+btrfs subvolume create /mnt/var/cache/pacman/pkg
+btrfs subvolume create /mnt/var/tmp
+umount /mnt
+
+# Mount filesystems
+print "Mount parts"
+mount -o subvol=@ $BTRFS /mnt
+mkdir /mnt/home
+mount -o subvol=@home $BTRFS /mnt/home
+mkdir /mnt/.snapshots
+mount -o subvol=@snapshots $BTRFS /mnt/.snapshots
+mkdir /mnt/boot
+mount $EFI /mnt/boot
+
+# Finish
+echo -e "\e[32mAll OK"
