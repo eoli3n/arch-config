@@ -1,4 +1,4 @@
-- configure initramfs
+- intel microcode
 - configure kernel parameters
 - reflector systemd timer
 - configure snapper
