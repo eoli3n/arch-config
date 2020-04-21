@@ -55,6 +55,7 @@ arch-chroot /mnt /bin/bash -xe <<"EOF"
 
   # Install grub2
   pacman -S grub efibootmgr grub-btrfs --noconfirm
+  sed -i 's/#\(GRUB_ENABLE_CRYPTODISK=y)/\1/' /etc/default/grub
   grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
   mkdir -p /efi/EFI/boot
   cp /efi/EFI/GRUB/grubx64.efi /efi/EFI/boot/bootx64.efi
