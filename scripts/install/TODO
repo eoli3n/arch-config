@@ -1,4 +1,5 @@
 - intel microcode
-- configure kernel parameters
+- discards in fstab
+- test resume in GRUB_CMDLINE_LINUX
 - reflector systemd timer
 - configure snapper

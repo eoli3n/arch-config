@@ -13,11 +13,21 @@ reflector --country France --country Germany --latest 6 --protocol https --sort 
 
 # Install
 print "Install Archlinux"
-pacstrap /mnt base linux linux-firmware btrfs-progs ansible git snapper
+pacstrap /mnt base base-devel linux linux-firmware btrfs-progs ansible git snapper
 
-# Generate Fstab
+# Generate fstab
 print "Generate fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
+
+# Generate crypttab
+print "Generate crypttab"
+cat > /mnt/etc/crypttab <<EOF
+# Mount swap re-encrypting it with a fresh key each reboot
+swap	/dev/sda2   	/dev/urandom	swap,cipher=aes-xts-plain64,size=256
+EOF
+cat > /mnt/etc/crypttab.initramfs <<EOF
+universe   /dev/sda3
+EOF
 
 # Set hostname
 echo "Please enter hostname :"
@@ -41,7 +51,7 @@ echo 'LANG="fr_FR.UTF-8"' > /mnt/etc/locale.conf
 # Prepare initramfs
 print "Prepare initramfs"
 cat > /mnt/etc/mkinitcpio.conf <<"EOF"
-MODULES=()
+MODULES=(i915 intel_agp)
 BINARIES=(/usr/bin/btrfs)
 FILES=()
 HOOKS=(base systemd autodetect modconf block keyboard sd-vconsole sd-encrypt fsck filesystems)
@@ -66,8 +76,9 @@ arch-chroot /mnt /bin/bash -xe <<"EOF"
   # Install packages
   pacman -S grub efibootmgr grub-btrfs --noconfirm
 
-  # TODO: to test encrypted /boot
+  # Prepare grub2
   #sed -i 's/#\(GRUB_ENABLE_CRYPTODISK=y\)/\1/' /etc/default/grub
+  sed -i 's/\(GRUB_CMDLINE_LINUX=\).*/\1"resume=/dev/mapper/swap"/' /etc/default/grub
 
   # Install grub2
   grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
