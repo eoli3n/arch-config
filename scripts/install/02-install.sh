@@ -16,7 +16,7 @@ rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
 
 # Install
 print "Install Archlinux"
-pacstrap /mnt base linux linux-firmware btrfs-progs ansible git
+pacstrap /mnt base linux linux-firmware btrfs-progs ansible git snapper
 
 # Generate Fstab
 print "Generate fstab"
