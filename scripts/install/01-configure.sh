@@ -7,9 +7,10 @@ print () {
 }
 
 # Tests
-ls /sys/firmware/efi/efivars
-ping archlinux.org -c 1
-timedatectl set-ntp true
+ls /sys/firmware/efi/efivars > /dev/null && \
+  ping archlinux.org -c 1 > /dev/null &&    \
+  timedatectl set-ntp true > /dev/null &&   \
+  print "Tests ok"
 
 # Set DISK
 select ENTRY in $(ls /dev/disk/by-id/);
