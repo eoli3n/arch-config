@@ -76,7 +76,7 @@ mount -t btrfs $BTRFS /mnt
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@snapshots
-btrfs subvolume create /mnt/var/cache/pacman/pkg
+mkdir -p /mnt/var
 btrfs subvolume create /mnt/var/tmp
 btrfs subvolume create /mnt/var/cache
 umount /mnt
