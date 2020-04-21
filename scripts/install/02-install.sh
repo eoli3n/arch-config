@@ -43,6 +43,9 @@ hostname=$hostname arch-chroot /mnt /bin/bash -e <<"EOF"
   # Generate Initramfs
   mkinitcpio -p linux
 
+  # Create snapper configuration
+  snapper -c root create-config /
+
   # Install grub2
   pacman -S grub efibootmgr grub-btrfs --noconfirm
   grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
