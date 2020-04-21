@@ -13,7 +13,7 @@ ls /sys/firmware/efi/efivars > /dev/null && \
   print "Tests ok"
 
 # Set DISK
-select ENTRY in $(ls /dev/disk/by-id/);
+select ENTRY in $(find /dev/disk/);
 do
     DISK="/dev/disk/by-id/$ENTRY"
     echo "Installing on $ENTRY."
