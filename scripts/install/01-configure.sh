@@ -72,7 +72,7 @@ mkfs.btrfs -L "Sun" $BTRFS
 
 # Create BTRFS subvolumes
 print "Create subvolumes"
-mount -t btrfs $BTFRS /mnt
+mount -t btrfs $BTRFS /mnt
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@snapshots
