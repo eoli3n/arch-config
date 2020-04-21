@@ -1,3 +1,4 @@
 - configure initramfs
+- configure kernel parameters
 - reflector systemd timer
 - configure snapper

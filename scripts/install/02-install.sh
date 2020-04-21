@@ -24,18 +24,28 @@ echo "Please enter hostname :"
 read hostname
 echo $hostname > /mnt/etc/hostname
 
-# Prepare locales and keymap
-print "Prepare locales and keymap"
-echo "KEYMAP=fr" > /mnt/etc/vconsole.conf
-sed -i 's/#\(fr_FR.UTF-8\)/\1/' /mnt/etc/locale.gen
-echo 'LANG="fr_FR.UTF-8"' > /mnt/etc/locale.conf
-
 # Configure /etc/hosts
 print "Configure hosts file"
 cat > /etc/hosts <<EOF
 #<ip-address>	<hostname.domain.org>	<hostname>
 127.0.0.1	    localhost   	        $hostname
 ::1   		    localhost              	$hostname
+EOF
+
+# Prepare locales and keymap
+print "Prepare locales and keymap"
+echo "KEYMAP=fr" > /mnt/etc/vconsole.conf
+sed -i 's/#\(fr_FR.UTF-8\)/\1/' /mnt/etc/locale.gen
+echo 'LANG="fr_FR.UTF-8"' > /mnt/etc/locale.conf
+
+# Prepare initramfs
+print "Prepare initramfs"
+cat > /mnt/etc/mkinitcpio.conf <<"EOF"
+MODULES=()
+BINARIES=(/usr/bin/btrfs)
+FILES=()
+HOOKS=(base systemd autodetect modconf block keyboard sd-vconsole sd-encrypt fsck filesystems)
+COMPRESSION="lz4"
 EOF
 
 # Chroot and configure
