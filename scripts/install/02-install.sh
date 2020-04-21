@@ -22,16 +22,23 @@ pacstrap /mnt base linux linux-firmware btrfs-progs ansible git
 print "Generate fstab"
 genfstab -U /mnt >> /mnt/etc/fstab
 
-# Chroot
+# Chroot and configure
 print "Chroot and configure system"
-arch-chroot /mnt /bin/bash -e <<EOF
+
+echo "Please enter hostname :"
+read hostname
+hostname=$hostname arch-chroot /mnt /bin/bash -e <<"EOF"
   
   # Set hostname
+  echo $hostname > /etc/hostname
 
   # Sync clock
   hwclock --systohc
 
   # Generate locale
+  sed -i 's/#\(fr_FR.UTF-8\)/\1/' /etc/locale.gen
+  locale-gen
+  echo 'LANG="fr_FR.UTF-8"' > /etc/locale.conf
 
   # Keymap layout
   echo "KEYMAP=fr" > /etc/vconsole.conf
@@ -39,13 +46,18 @@ arch-chroot /mnt /bin/bash -e <<EOF
   # Generate Initramfs
   mkinitcpio -p linux
 
-  # Set root passwd
-  passwd
-
   # Install grub2
-
-  # Create user
-
+  boot=$(mount | grep boot | awk '{print $1}')
+  pacman -S grub efibootmgr grub-btrfs --noconfirm
+  grub-install --target=x86_64-efi --efi-directory=$boot --bootloader-id=GRUB
+  mkdir -p $boot/EFI/boot
+  cp $boot/EFI/grub_uefi/grubx64.efi $boot/EFI/boot/bootx64.efi
+  grub-mkconfig -o /boot/grub/grub.cfg
 EOF
 
+# Set root passwd
+print "Set root password"
+arch-chroot /mnt /bin/passwd
 
+# Create user
+print "Create user"
