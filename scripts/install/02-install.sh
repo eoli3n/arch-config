@@ -13,7 +13,7 @@ reflector --country France --country Germany --latest 6 --protocol https --sort 
 
 # Install
 print "Install Archlinux"
-pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim
+pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim snapper
 
 # Generate fstab
 print "Generate fstab"
@@ -51,7 +51,7 @@ echo 'LANG="fr_FR.UTF-8"' > /mnt/etc/locale.conf
 # Prepare initramfs
 print "Prepare initramfs"
 cat > /mnt/etc/mkinitcpio.conf <<"EOF"
-MODULES=()
+MODULES=(i915 intel_agp)
 BINARIES=(/usr/bin/btrfs)
 FILES=()
 HOOKS=(base systemd autodetect modconf block keyboard sd-vconsole sd-encrypt fsck filesystems)
