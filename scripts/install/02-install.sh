@@ -51,7 +51,7 @@ echo 'LANG="fr_FR.UTF-8"' > /mnt/etc/locale.conf
 # Prepare initramfs
 print "Prepare initramfs"
 cat > /mnt/etc/mkinitcpio.conf <<"EOF"
-MODULES=(i915 intel_agp)
+MODULES=()
 BINARIES=(/usr/bin/btrfs)
 FILES=()
 HOOKS=(base systemd autodetect modconf block keyboard sd-vconsole sd-encrypt fsck filesystems)
