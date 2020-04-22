@@ -78,7 +78,7 @@ arch-chroot /mnt /bin/bash -xe <<"EOF"
 
   # Prepare grub2
   #sed -i 's/#\(GRUB_ENABLE_CRYPTODISK=y\)/\1/' /etc/default/grubA
-  cmdline=""
+  cmdline="resume=/dev/mapper/swap"
   sed -i 's:\(GRUB_CMDLINE_LINUX=\).*:\1"$cmdline":' /etc/default/grub
 
   # Install grub2
