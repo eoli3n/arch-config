@@ -1,7 +1,7 @@
-- configure sdencrypt hook : crypttab ?
 - solve locale grub : https://forums.archlinux.fr/viewtopic.php?t=13830
 - intel microcode
 - discards in fstab
 - test resume in GRUB_CMDLINE_LINUX
 - reflector systemd timer
 - configure snapper
+- network config

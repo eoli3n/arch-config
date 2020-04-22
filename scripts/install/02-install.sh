@@ -13,7 +13,7 @@ reflector --country France --country Germany --latest 6 --protocol https --sort 
 
 # Install
 print "Install Archlinux"
-pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim snapper
+pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim git ansible snapper
 
 # Generate fstab
 print "Generate fstab"
