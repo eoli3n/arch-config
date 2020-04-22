@@ -77,8 +77,9 @@ arch-chroot /mnt /bin/bash -xe <<"EOF"
   pacman -S grub efibootmgr grub-btrfs --noconfirm
 
   # Prepare grub2
-  #sed -i 's/#\(GRUB_ENABLE_CRYPTODISK=y\)/\1/' /etc/default/grub
-  sed -i 's:\(GRUB_CMDLINE_LINUX=\).*:\1"resume=/dev/mapper/swap rd.luks.options=timeout=0 rootflags=x-systemd.device-timeout=0":' /etc/default/grub
+  #sed -i 's/#\(GRUB_ENABLE_CRYPTODISK=y\)/\1/' /etc/default/grubA
+  cmdline=""
+  sed -i 's:\(GRUB_CMDLINE_LINUX=\).*:\1"$cmdline":' /etc/default/grub
 
   # Install grub2
   grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
