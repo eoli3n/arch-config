@@ -13,11 +13,11 @@ reflector --country France --country Germany --latest 6 --protocol https --sort 
 
 # Install
 print "Install Archlinux"
-pacstrap /mnt base base-devel linux linux-firmware btrfs-progs
+pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim
 
 # Generate fstab
 print "Generate fstab"
-genfstab -U /mnt >> /mnt/etc/fstab
+genfstab /mnt >> /mnt/etc/fstab
 
 # Generate crypttab
 print "Generate crypttab"
