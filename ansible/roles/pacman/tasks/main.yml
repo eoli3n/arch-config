@@ -21,9 +21,9 @@
         path: /etc/pacman.conf
         regexp: '#ILoveCandy'
         line: 'ILoveCandy'
-    - lineinfile:
+    - blockinfile:
         path: /etc/pacman.conf
-        regexp: '#[multilib]'
-        line: '[multilib]\nInclude = /etc/pacman.d/mirrorlist'
-        backrefs: yes
+        block: |
+          [multilib]
+          Include = /etc/pacman.d/mirrorlist
 
