@@ -29,4 +29,5 @@
           Include = /etc/pacman.d/mirrorlist
     - pacman:
         update_cache: yes
+        upgrade: yes
 
