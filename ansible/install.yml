@@ -1,6 +1,16 @@
 ---
 - hosts: all
   roles:
-    - { role: base, tags: base }
-    - { role: desktop, tags: desktop }
-    #- { role: snapper, tags: snapper }
+    - { role: base, tags: base, become: yes }
+    - { role: desktop, tags: desktop, become: yes }
+    - { role: aur, tags: aur }
+    - { role: snapper, tags: snapper, become: yes }
+    - { role: virtualization, tags: virtualization, become: yes }
+    - { role: containers, tags: containers, become: yes }
+  tasks:
+    - name: Configure user
+      user:
+        name: user
+        shell: /usr/bin/fish
+        groups: docker,bumblebee,libvirt
+        append: yes

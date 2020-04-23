@@ -1,0 +1,5 @@
+---
+- name: install snapper
+  pacman:
+    name: snapper
+    state: present

@@ -1,0 +1,9 @@
+---
+- name: install virt packages
+  pacman:
+    name:
+      - libvirt
+      - virt-manager
+      - ebtables
+      - dnsmasq
+  notify: restart libvirt

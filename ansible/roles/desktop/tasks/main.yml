@@ -13,3 +13,50 @@
       - wl-clipboard
       - wofi
     state: present
+
+- name: install video packages
+  pacman:
+    name:
+      - nvidia
+      - nvidia-settings
+      - nvidia-utils
+      - libvdpau
+      - bumblebee
+      - primus
+      - mesa
+      - mesa-demos
+      - lib32-nvidia-utils
+      - lib32-virtualgl
+    state: present
+  notify: restart bumblebee
+
+- name: install audio packages
+  pacman:
+    name:
+      - pulseaudio
+      - pulseaudio-alsa
+      - pavucontrol
+    state: present
+
+- name: install applications packages
+  pacman:
+    name:
+      - termite
+      - code
+      - evince
+      - firefox
+      - firefox-i18n-fr
+      - kolourpaint
+      - lollypop
+      - lxappearance
+      - mpv
+      - thunar
+      - openvpn
+      - playerctl
+      - rdesktop
+      - steam
+      - transmission-gtk
+      - weechat
+      - x2goclient
+      - youtube-dl
+    state: present

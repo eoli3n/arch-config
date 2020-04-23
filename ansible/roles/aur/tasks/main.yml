@@ -1,0 +1,36 @@
+---
+- name: Install AUR package manager
+  aur:
+    name: trizen
+    state: present
+
+- name: Install AUR packages
+  aur:
+    name:
+      - adb-sync-git
+      - connman-gtk
+      - downgrade
+      - equilux-theme
+      - gnome-ssh-askpass2
+      - google-chrome
+      - kazam
+      - kernel-modules-hook
+      - laptop-mode-tools
+      - lf
+      - light-git
+      - mindustry-git
+      - minecraft-launcher
+      - molotov
+      - openvpn-update-systemd-resolved
+      - overdue
+      - paper-icon-theme
+      - pastel
+      - podman-compose
+      - pokerth
+      - spotify
+      - starleaf-breeze
+      - swaylock-fancy-git
+      - wdisplays-git
+      - tiny-irc-client-git
+      - zoom
+    state: present

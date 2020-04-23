@@ -21,7 +21,6 @@
       - tcpdump
       - whois
       - ncdu
-      - lf
       - asciinema
       - speedtest-cli
       - rclone
@@ -31,4 +30,11 @@
       - bind-tools
       - cifs-utils
       - fish
+    state: present
+
+- name: install system packages
+  pacman:
+    name:
+      - linux-headers
+      - 
     state: present
