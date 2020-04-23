@@ -2,7 +2,8 @@
 - name: Install AUR package manager
   aur:
     name: trizen
-    state: present
+    use: makepkg
+    skip_installed: true
 
 - name: Install AUR packages
   aur:
@@ -33,4 +34,5 @@
       - wdisplays-git
       - tiny-irc-client-git
       - zoom
-    state: present
+    use: trizen
+    skip_installed: true
