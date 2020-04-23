@@ -1,0 +1,28 @@
+---
+- name: configure pacman
+  block:
+    - lineinfile:
+        path: /etc/pacman.conf
+        regexp: '#Color'
+        line: 'Color'
+    - lineinfile:
+        path: /etc/pacman.conf
+        regexp: '#UseSyslog'
+        line: 'UseSyslog'
+    - lineinfile:
+        path: /etc/pacman.conf
+        regexp: '#TotalDownload'
+        line: 'TotalDownload'
+    - lineinfile:
+        path: /etc/pacman.conf
+        regexp: '#CheckSpace'
+        line: 'CheckSpace'
+    - lineinfile:
+        path: /etc/pacman.conf
+        regexp: '#ILoveCandy'
+        line: 'ILoveCandy'
+    - lineinfile:
+        path: /etc/pacman.conf
+        regexp: '#[multilib]'
+        line: '[multilib]\nInclude = /etc/pacman.d/mirrorlist'
+

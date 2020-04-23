@@ -1,6 +1,7 @@
 ---
 - hosts: all
   roles:
+    - { role: pacman, tags: pacman, become: yes }
     - { role: base, tags: base, become: yes }
     - { role: desktop, tags: desktop, become: yes }
     - { role: aur, tags: aur }

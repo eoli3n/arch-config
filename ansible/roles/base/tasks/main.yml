@@ -30,11 +30,5 @@
       - cifs-utils
       - fish
       - weechat
-    state: present
-
-- name: install system packages
-  pacman:
-    name:
       - linux-headers
-      - 
     state: present
