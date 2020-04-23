@@ -3,3 +3,8 @@
   pacman:
     name: snapper
     state: present
+
+- name: configure snapper
+  shell: snapper -c root create-config /
+  args:
+    creates: /etc/snapper/configs/root
