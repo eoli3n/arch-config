@@ -104,12 +104,12 @@ print "Set user password"
 arch-chroot /mnt /bin/passwd user
 
 # Configure network
-cat > /etc/systemd/network/br0.netdev <<"EOF"
+cat > /mnt/etc/systemd/network/br0.netdev <<"EOF"
 [NetDev]
 Name=br0
 Kind=bridge
 EOF
-cat > /etc/systemd/network/br0.network <<"EOF"
+cat > /mnt/etc/systemd/network/br0.network <<"EOF"
 [Match]
 Name=br0
 
@@ -121,7 +121,7 @@ IPForward=kernel
 UseDNS=true
 RouteMetric=10
 EOF
-cat > /etc/systemd/network/enoX.network <<"EOF"
+cat > /mnt/etc/systemd/network/enoX.network <<"EOF"
 [Match]
 Name=en*
 
@@ -132,7 +132,7 @@ IPForward=kernel
 [DHCP]
 RouteMetric=10
 EOF
-cat > /etc/systemd/network/wlX.network <<"EOF"
+cat > /mnt/etc/systemd/network/wlX.network <<"EOF"
 [Match]
 Name=wl*
 
