@@ -41,7 +41,7 @@
 - name: install applications packages
   pacman:
     name:
-      - termite
+      - alacritty
       - code
       - evince
       - firefox
@@ -56,7 +56,7 @@
       - rdesktop
       - steam
       - transmission-gtk
-      - weechat
+      - variety
       - x2goclient
       - youtube-dl
     state: present

@@ -3,7 +3,6 @@
   pacman:
     name:
       - ttf-hack
-      - otf-font-awesome
       - bc
       - wget
       - jq
@@ -30,6 +29,8 @@
       - bind-tools
       - cifs-utils
       - fish
+      - weechat
+      - tiny
     state: present
 
 - name: install system packages

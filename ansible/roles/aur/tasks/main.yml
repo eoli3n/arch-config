@@ -14,6 +14,7 @@
       - equilux-theme
       - gnome-ssh-askpass2
       - google-chrome
+      - gtk-theme-minwaita #https://github.com/Alexays/Waybar/issues/515
       - kazam
       - kernel-modules-hook
       - laptop-mode-tools
@@ -24,6 +25,7 @@
       - molotov
       - openvpn-update-systemd-resolved
       - overdue
+      - otf-font-awesome
       - paper-icon-theme
       - pastel
       - podman-compose
