@@ -21,6 +21,7 @@
         path: /etc/pacman.conf
         regexp: '#ILoveCandy'
         line: 'ILoveCandy'
+        insertafter: '# Misc options'
     - blockinfile:
         path: /etc/pacman.conf
         block: |
