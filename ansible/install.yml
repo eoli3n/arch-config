@@ -1,0 +1,6 @@
+---
+- hosts: all
+  roles:
+    - { role: base, tags: base }
+    - { role: desktop, tags: desktop }
+    #- { role: snapper, tags: snapper }

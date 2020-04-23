@@ -1,0 +1,3 @@
+[submodule "ansible/plugins/modules/aur"]
+	path = ansible/plugins/modules/aur
+	url = https://github.com/kewlfft/ansible-aur.git

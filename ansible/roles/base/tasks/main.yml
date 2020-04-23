@@ -1,0 +1,34 @@
+---
+- name: install base packages
+  pacman:
+    name:
+      - ttf-hack
+      - otf-font-awesome
+      - bc
+      - wget
+      - jq
+      - most
+      - fzf
+      - rsync
+      - git
+      - neovim
+      - screen
+      - tree
+      - htop
+      - nmap
+      - nethogs
+      - openbsd-netcat
+      - tcpdump
+      - whois
+      - ncdu
+      - lf
+      - asciinema
+      - speedtest-cli
+      - rclone
+      - neofetch
+      - unzip
+      - stress
+      - bind-tools
+      - cifs-utils
+      - fish
+    state: present

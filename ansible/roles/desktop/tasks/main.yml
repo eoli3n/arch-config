@@ -1,0 +1,15 @@
+---
+- name: install desktop packages
+  pacman:
+    name:
+      - sway
+      - swaybg
+      - xwayland
+      - waybar
+      - mako
+      - kanshi
+      - grim
+      - slurp
+      - wl-clipboard
+      - wofi
+    state: present
