@@ -25,4 +25,5 @@
         path: /etc/pacman.conf
         regexp: '#[multilib]'
         line: '[multilib]\nInclude = /etc/pacman.d/mirrorlist'
+        backrefs: yes
 
