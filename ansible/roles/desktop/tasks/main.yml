@@ -4,7 +4,7 @@
     name:
       - sway
       - swaybg
-      - xwayland
+      - xorg-server-xwayland
       - waybar
       - mako
       - kanshi
