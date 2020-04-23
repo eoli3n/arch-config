@@ -1,0 +1,5 @@
+---
+- name: enable grub-btrfs
+  systemd:
+    name: grub-btrfs.path
+    enabled: yes

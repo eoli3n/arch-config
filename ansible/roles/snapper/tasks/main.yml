@@ -8,3 +8,4 @@
   shell: snapper -c root create-config /
   args:
     creates: /etc/snapper/configs/root
+  notify: enable grub-btrfs
