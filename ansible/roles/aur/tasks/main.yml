@@ -1,15 +1,11 @@
 ---
 - name: Install AUR package manager
-  become: yes
-  become_user: user
   aur:
     name: trizen
     use: makepkg
     skip_installed: true
 
 - name: Install AUR packages
-  become: yes
-  become_user: user
   aur:
     use: trizen
     skip_installed: true
