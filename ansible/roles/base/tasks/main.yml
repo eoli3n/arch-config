@@ -30,7 +30,6 @@
       - cifs-utils
       - fish
       - weechat
-      - tiny
     state: present
 
 - name: install system packages
