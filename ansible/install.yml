@@ -4,7 +4,7 @@
     - { role: pacman, tags: pacman, become: yes }
     - { role: base, tags: base, become: yes }
     - { role: desktop, tags: desktop, become: yes }
-    - { role: aur, tags: aur }
+    - { role: aur, tags: aur, become: yes }
     - { role: snapper, tags: snapper, become: yes }
     - { role: virtualization, tags: virtualization, become: yes }
     - { role: containers, tags: containers, become: yes }
