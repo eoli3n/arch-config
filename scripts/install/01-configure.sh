@@ -75,6 +75,7 @@ print "Create subvolumes"
 mount -t btrfs $BTRFS /mnt
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
+btrfs subvolume create /mnt/@snapshots
 mkdir -p /mnt/var
 btrfs subvolume create /mnt/var/tmp
 btrfs subvolume create /mnt/var/cache
