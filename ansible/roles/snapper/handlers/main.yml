@@ -6,12 +6,3 @@
   systemd:
     name: grub-btrfs.path
     enabled: yes
-
-- name: remount snapshots
-  shell: |
-    umount /.snapshots
-    rm -r /.snapshots
-    btrfs subvolume delete /.snapshots
-    mkdir /.snapshots
-    mount -a
-

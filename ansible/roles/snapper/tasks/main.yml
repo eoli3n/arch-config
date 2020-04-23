@@ -6,9 +6,12 @@
   notify: init btrfs grub config
 
 - name: configure snapper
-  shell: snapper -c root create-config /
-  args:
-    creates: /etc/snapper/configs/root
-  notify:
-    - enable grub-btrfs
-    - remount snapshots
+  copy:
+    src: root
+    dest: /etc/snapper/configs/
+  notify: enable grub-btrfs
+
+- name: configure snapper
+  copy:
+    src: snapper
+    dest: /etc/conf.d
