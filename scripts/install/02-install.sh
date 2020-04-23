@@ -103,6 +103,13 @@ arch-chroot /mnt /bin/passwd
 print "Set user password"
 arch-chroot /mnt /bin/passwd user
 
+# Configure sudo
+cat > /mnt/etc/sudoers <<"EOF"
+root ALL=(ALL) ALL
+user ALL=(ALL) ALL
+Defaults rootpw
+EOF
+
 # Configure network
 cat > /mnt/etc/systemd/network/br0.netdev <<"EOF"
 [NetDev]
