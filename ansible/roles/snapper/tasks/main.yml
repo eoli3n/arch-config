@@ -3,6 +3,7 @@
   pacman:
     name: snapper
     state: present
+  notify: init btrfs grub config
 
 - name: configure snapper
   shell: snapper -c root create-config /

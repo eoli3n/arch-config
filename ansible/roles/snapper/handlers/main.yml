@@ -1,4 +1,7 @@
 ---
+- name: init btrfs grub config
+  shell: grub-mkconfig -o /boot/grub/grub.cfg
+
 - name: enable grub-btrfs
   systemd:
     name: grub-btrfs.path
