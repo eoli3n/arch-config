@@ -27,4 +27,6 @@
         block: |
           [multilib]
           Include = /etc/pacman.d/mirrorlist
-      notify: update pacman
+    - pacman:
+        update_cache: yes
+
