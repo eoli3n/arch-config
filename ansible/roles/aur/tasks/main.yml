@@ -36,5 +36,5 @@
       - starleaf-breeze
       - swaylock-fancy-git
       - wdisplays-git
-      - tiny-irc-client-git
+      #- tiny-irc-client-git
       - zoom
