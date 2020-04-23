@@ -7,6 +7,8 @@
 
 - name: Install AUR packages
   aur:
+    use: trizen
+    skip_installed: true
     name:
       - adb-sync-git
       - connman-gtk
@@ -36,5 +38,3 @@
       - wdisplays-git
       - tiny-irc-client-git
       - zoom
-    use: trizen
-    skip_installed: true
