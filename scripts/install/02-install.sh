@@ -13,7 +13,7 @@ reflector --country France --country Germany --latest 6 --protocol https --sort 
 
 # Install
 print "Install Archlinux"
-pacstrap /mnt base base-devel linux linux-firmware btrfs-progs vim git ansible snapper
+pacstrap /mnt base base-devel linux linux-firmware intel-ucode btrfs-progs grub efibootmgr grub-btrfs vim git ansible snapper connman wpa_supplicant
 
 # Generate fstab
 print "Generate fstab"
@@ -66,15 +66,16 @@ arch-chroot /mnt /bin/bash -xe <<"EOF"
   # Sync clock
   hwclock --systohc
 
+  # Set date
+  timedatectl set-ntp true
+  timedatectl set-timezone Europe/Paris
+
   # Generate locale
   locale-gen
   source /etc/locale.conf
 
   # Generate Initramfs
   mkinitcpio -p linux
-
-  # Install packages
-  pacman -S grub efibootmgr grub-btrfs --noconfirm
 
   # Prepare grub2
   #sed -i 's/#\(GRUB_ENABLE_CRYPTODISK=y\)/\1/' /etc/default/grubA
@@ -101,6 +102,45 @@ arch-chroot /mnt /bin/passwd
 # Set user passwd
 print "Set user password"
 arch-chroot /mnt /bin/passwd user
+
+# Configure network
+cat > /etc/systemd/network/br0.netdev <<"EOF"
+[NetDev]
+Name=br0
+Kind=bridge
+EOF
+cat > /etc/systemd/network/br0.network <<"EOF"
+[Match]
+Name=br0
+
+[Network]
+DHCP=ipv4
+IPForward=kernel
+
+[DHCP]
+UseDNS=true
+RouteMetric=10
+EOF
+cat > /etc/systemd/network/enoX.network <<"EOF"
+[Match]
+Name=en*
+
+[Network]
+Bridge=br0
+IPForward=kernel
+
+[DHCP]
+RouteMetric=10
+EOF
+cat > /etc/systemd/network/wlX.network <<"EOF"
+[Match]
+Name=wl*
+
+[DHCP]
+RouteMetric=20
+EOF
+systemctl enable systemd-networkd --root=/mnt
+systemctl enable systemd-resolved --root=/mnt
 
 # Umount all parts
 umount -R /mnt
