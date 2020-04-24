@@ -26,7 +26,7 @@ cat > /mnt/etc/crypttab <<EOF
 swap	/dev/sda2   	/dev/urandom	swap,cipher=aes-xts-plain64,size=256
 EOF
 cat > /mnt/etc/crypttab.initramfs <<EOF
-universe   /dev/sda3
+universe   /dev/sda3  none  discard
 EOF
 
 # Set hostname
