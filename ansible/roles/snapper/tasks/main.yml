@@ -1,7 +1,9 @@
 ---
 - name: install snapper
   pacman:
-    name: snapper
+    name:
+      - snapper
+      - snap-pac
     state: present
   notify: init btrfs grub config
 
