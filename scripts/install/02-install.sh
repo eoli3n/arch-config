@@ -153,6 +153,9 @@ rm /mnt/etc/resolv.conf
 arch-chroot /mnt ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 systemctl enable systemd-resolved --root=/mnt
 
+# Configure TRIM
+systemctl enable fstrim.timer --root=/mnt
+
 # Umount all parts
 umount -R /mnt
 
