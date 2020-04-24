@@ -1,6 +1,4 @@
 - solve locale grub : https://forums.archlinux.fr/viewtopic.php?t=13830
-- intel microcode : verify that grub load it as first initramfs
-- discards in fstab
+- periodic trim with timer when host is down ? https://unix.stackexchange.com/a/352596
 - test resume in GRUB_CMDLINE_LINUX
 - reflector systemd timer
-- configure snapper
