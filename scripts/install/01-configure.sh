@@ -79,6 +79,7 @@ btrfs subvolume create /mnt/@snapshots
 mkdir -p /mnt/var
 btrfs subvolume create /mnt/var/tmp
 btrfs subvolume create /mnt/var/cache
+btrfs subvolume create /mnt/var/log
 umount /mnt
 
 # Mount filesystems
