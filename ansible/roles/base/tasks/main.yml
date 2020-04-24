@@ -32,4 +32,5 @@
       - fish
       - weechat
       - linux-headers
+      - words
     state: present
