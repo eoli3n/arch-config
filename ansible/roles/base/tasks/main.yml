@@ -17,6 +17,7 @@
       - htop
       - nmap
       - nethogs
+      - iotop
       - openbsd-netcat
       - tcpdump
       - whois
