@@ -3,6 +3,7 @@
   pacman:
     name:
       - ttf-hack
+      - noto-fonts
       - bc
       - wget
       - jq

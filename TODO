@@ -1,2 +1,4 @@
 - configure snapper frequency to 7 dayli
 - RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
+- test package snap-pac : pacman hook pre/post snapshots
+- configure TRIM

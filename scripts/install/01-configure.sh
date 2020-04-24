@@ -78,11 +78,13 @@ btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@snapshots
 
 # Exclude some path from / subvolume
-mkdir -p /mnt/var/lib
-btrfs subvolume create /mnt/var/tmp
-btrfs subvolume create /mnt/var/cache
-btrfs subvolume create /mnt/var/log
-btrfs subvolume create /mnt/var/lib/docker
+# https://en.opensuse.org/SDB:BTRFS#Default_Subvolumes
+mkdir -p /mnt/var
+btrfs subvolume create /mnt/var
+btrfs subvolume create /mnt/tmp
+btrfs subvolume create /mnt/root
+btrfs subvolume create /mnt/opt
+btrfs subvolume create /mnt/srv
 
 # Mount filesystems
 umount /mnt
