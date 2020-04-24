@@ -76,13 +76,16 @@ mount -t btrfs $BTRFS /mnt
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@snapshots
-mkdir -p /mnt/var
+
+# Exclude some path from / subvolume
+mkdir -p /mnt/var/lib
 btrfs subvolume create /mnt/var/tmp
 btrfs subvolume create /mnt/var/cache
 btrfs subvolume create /mnt/var/log
-umount /mnt
+btrfs subvolume create /mnt/var/lib/docker
 
 # Mount filesystems
+umount /mnt
 print "Mount parts"
 mount -o subvol=@ $BTRFS /mnt
 mkdir /mnt/home
