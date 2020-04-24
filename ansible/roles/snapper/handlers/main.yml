@@ -5,4 +5,19 @@
 - name: enable grub-btrfs
   systemd:
     name: grub-btrfs.path
+    state: restarted
+    enabled: yes
+
+- name: enable timeline
+  systemd:
+    name: snapper-timeline.timer
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+
+- name: enable cleaner
+  systemd:
+    name: snapper-cleanup.timer
+    state: restarted
+    daemon_reload: yes
     enabled: yes

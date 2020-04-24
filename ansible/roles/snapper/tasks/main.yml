@@ -9,9 +9,12 @@
   copy:
     src: root
     dest: /etc/snapper/configs/
-  notify: enable grub-btrfs
+  notify:
+    - enable grub-btrfs
+    - enable timeline
+    - enable cleaner
 
-- name: configure snapper
+- name: activate snapper configuration
   copy:
     src: snapper
     dest: /etc/conf.d
