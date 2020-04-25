@@ -17,6 +17,7 @@
       - gnome-ssh-askpass2
       - google-chrome
       - gtk-theme-minwaita #https://github.com/Alexays/Waybar/issues/515
+      - ipxe-netboot
       - kazam
       - kernel-modules-hook
       - laptop-mode-tools
