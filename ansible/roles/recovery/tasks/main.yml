@@ -1,0 +1,17 @@
+---
+dependencies:
+  - role: aur
+
+- name: create efi netboot dir
+  file:
+    path: /boot/EFI/netboot
+
+- name: copy efi netboot file
+  copy:
+    src: /usr/share/ipxe-netboot/ipxe.efi
+    dest: /boot/EFI/netboot/
+
+- name: create custom grub entry
+  copy:
+    src: 40_custom
+    dest: /etc/grub.d
