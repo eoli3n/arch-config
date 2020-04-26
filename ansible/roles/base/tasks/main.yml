@@ -11,6 +11,7 @@
       - fzf
       - rsync
       - git
+      - vi
       - neovim
       - screen
       - tree
