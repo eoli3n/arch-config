@@ -1,7 +1,6 @@
 ---
-- name: Install AUR package manager
+- name: install AUR helper
   aur:
-    become_user: aur
     name: trizen
     use: makepkg
     skip_installed: true
