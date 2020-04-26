@@ -79,7 +79,6 @@ btrfs subvolume create /mnt/@snapshots
 
 # Exclude some path from / subvolume
 # https://en.opensuse.org/SDB:BTRFS#Default_Subvolumes
-mkdir -p /mnt/var
 btrfs subvolume create /mnt/var
 btrfs subvolume create /mnt/tmp
 btrfs subvolume create /mnt/root
