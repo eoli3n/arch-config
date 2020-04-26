@@ -1,5 +1,6 @@
 ---
 - name: install AUR helper
+  become: no
   aur:
     name: trizen
     use: makepkg
