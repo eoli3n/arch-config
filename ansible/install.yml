@@ -5,9 +5,11 @@
   pre_tasks:
 
     - name: temp increase /tmp size
+      tags: always
       shell: mount -o remount,size=5G,noatime /tmp
 
     - name: add sudo conf for aur
+      tags: always
       lineinfile:
         path: /etc/sudoers
         line: 'user ALL=(ALL) NOPASSWD: /usr/bin/pacman'
@@ -20,6 +22,7 @@
     - { role: snapper, tags: snapper }
     - { role: virtualization, tags: virtualization }
     - { role: containers, tags: containers }
+    - { role: recovery, tags: recovery }
 
   tasks:
     - name: Configure user
@@ -32,4 +35,5 @@
   post_tasks:
 
     - name: tmp size to default
+      tags: always
       shell: mount -o remount,noatime /tmp
