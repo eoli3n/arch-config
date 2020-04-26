@@ -1,5 +1,5 @@
-- configure snapper frequency to 7 dayli
 - RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
 - netboot archlinux : https://bugs.archlinux.org/task/66407
-- test package snap-pac : pacman hook pre/post snapshots
 - autodefrag,noatime btrfs options
+- separate test/prod
+- find a way to install AUR without prompting for sudo password
