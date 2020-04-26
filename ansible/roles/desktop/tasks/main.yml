@@ -61,3 +61,34 @@
       - x2goclient
       - youtube-dl
     state: present
+
+- name: install aur packages
+  become: no
+  aur:
+    skip_installed: true
+    name:
+      - gtk-theme-minwaita #https://github.com/Alexays/Waybar/issues/515
+      - connman-gtk
+      - equilux-theme
+      - gnome-ssh-askpass2
+      - google-chrome
+      - kazam
+      - laptop-mode-tools
+      - adb-sync-git
+      - downgrade
+      - lf
+      - light-git
+      - mindustry-git
+      - minecraft-launcher
+      - molotov
+      - openvpn-update-systemd-resolved
+      - otf-font-awesome
+      - paper-icon-theme
+      - pastel
+      - pokerth
+      - spotify
+      - starleaf-breeze
+      - swaylock-fancy-git
+      - wdisplays-git
+      #- tiny-irc-client-git
+      - zoom

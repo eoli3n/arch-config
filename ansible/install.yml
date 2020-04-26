@@ -1,14 +1,24 @@
 ---
 - hosts: all
   become: yes
+
+  pretasks:
+    - name: add sudo conf for aur
+      lineinfile:
+        path: /etc/sudoers.d/11-aur
+        line: 'user ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+        create: yes
+        validate: 'visudo -cf %s'
+
   roles:
     - { role: pacman, tags: pacman }
+    - { role: aur, tags: aur }
     - { role: base, tags: base }
     - { role: desktop, tags: desktop }
-    - { role: aur, tags: aur, become: no }
     - { role: snapper, tags: snapper }
     - { role: virtualization, tags: virtualization }
     - { role: containers, tags: containers }
+
   tasks:
     - name: Configure user
       user:

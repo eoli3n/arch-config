@@ -1,16 +1,18 @@
 ---
-dependencies:
-  - role: aur
+- name: install ipxe-netboot
+  become: no
+  aur:
+    name: ipxe-netboot
+    skip_installed: true
 
 - name: create efi netboot dir
   file:
     path: /boot/EFI/netboot
 
-- name: hardlink efi netboot file
-  file:
+- name: copy efi netboot file
+  copy:
     src: /usr/share/ipxe-netboot/ipxe.efi
     dest: /boot/EFI/netboot/
-    state: hard
 
 - name: create custom grub entry
   copy:

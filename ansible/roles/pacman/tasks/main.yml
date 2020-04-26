@@ -27,7 +27,16 @@
         block: |
           [multilib]
           Include = /etc/pacman.d/mirrorlist
-    - pacman:
-        update_cache: yes
-        upgrade: yes
 
+- name: update list and upgrade all packages
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: install pacman hooks
+  become: no
+  aur:
+    name:
+      - kernel-modules-hook
+      - overdue
+    skip_installed: true

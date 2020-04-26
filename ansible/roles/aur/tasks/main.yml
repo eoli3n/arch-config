@@ -1,41 +1,7 @@
 ---
 - name: Install AUR package manager
   aur:
+    become_user: aur
     name: trizen
     use: makepkg
     skip_installed: true
-
-- name: Install AUR packages
-  aur:
-    use: trizen
-    skip_installed: true
-    name:
-      - adb-sync-git
-      - connman-gtk
-      - downgrade
-      - equilux-theme
-      - gnome-ssh-askpass2
-      - google-chrome
-      - gtk-theme-minwaita #https://github.com/Alexays/Waybar/issues/515
-      - ipxe-netboot
-      - kazam
-      - kernel-modules-hook
-      - laptop-mode-tools
-      - lf
-      - light-git
-      - mindustry-git
-      - minecraft-launcher
-      - molotov
-      - openvpn-update-systemd-resolved
-      - overdue
-      - otf-font-awesome
-      - paper-icon-theme
-      - pastel
-      - podman-compose
-      - pokerth
-      - spotify
-      - starleaf-breeze
-      - swaylock-fancy-git
-      - wdisplays-git
-      #- tiny-irc-client-git
-      - zoom
