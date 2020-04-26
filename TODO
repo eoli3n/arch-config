@@ -1,5 +1,2 @@
 - RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
-- netboot archlinux : https://bugs.archlinux.org/task/66407
 - autodefrag,noatime btrfs options
-- separate test/prod
-- test submodule in library

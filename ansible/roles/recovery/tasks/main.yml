@@ -1,4 +1,8 @@
 ---
+###
+# https://bugs.archlinux.org/task/66407
+###
+
 - name: install ipxe-netboot
   become: no
   aur:
