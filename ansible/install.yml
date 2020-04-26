@@ -2,7 +2,7 @@
 - hosts: all
   become: yes
 
-  pretasks:
+  pre_tasks:
     - name: add sudo conf for aur
       lineinfile:
         path: /etc/sudoers.d/11-aur
