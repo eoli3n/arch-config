@@ -72,7 +72,7 @@ mkfs.btrfs -L "Sun" $BTRFS
 
 # Create BTRFS subvolumes
 print "Create subvolumes"
-mount -t btrfs $BTRFS /mnt
+mount -t btrfs -o autodefrag,noatime $BTRFS /mnt
 btrfs subvolume create /mnt/@
 btrfs subvolume create /mnt/@home
 btrfs subvolume create /mnt/@snapshots
@@ -88,11 +88,11 @@ btrfs subvolume create /mnt/srv
 # Mount filesystems
 umount /mnt
 print "Mount parts"
-mount -o subvol=@ $BTRFS /mnt
+mount -o autodefrag,noatime,subvol=@ $BTRFS /mnt
 mkdir /mnt/home
-mount -o subvol=@home $BTRFS /mnt/home
+mount -o autodefrag,noatime,subvol=@home $BTRFS /mnt/home
 mkdir /mnt/.snapshots
-mount -o subvol=@snapshots $BTRFS /mnt/.snapshots
+mount -o autodefrag,noatime,subvol=@snapshots $BTRFS /mnt/.snapshots
 mkdir /mnt/boot
 mount $EFI /mnt/boot
 
