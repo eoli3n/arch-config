@@ -18,6 +18,7 @@
 
     # PCI-passthrough configuration for VM
     - name: include boot role for guest
+      tags: boot
       include_role:
         name: boot
       vars:
@@ -29,6 +30,7 @@
 
     # PCI-passthrough configuration for host
     - name: include boot role for host
+      tags: boot
       include_role:
         name: boot
       vars:
