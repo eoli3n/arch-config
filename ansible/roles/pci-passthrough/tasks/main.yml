@@ -8,3 +8,4 @@
       - xf86-video-nouveau
     state: present
   when: ansible_virtualization_role == "guest"
+  notify: generates initramfs
