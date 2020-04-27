@@ -1,3 +1,4 @@
 - RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
 - test genfstab autodetect btrfs mount options 
 - kernel upgrade then try to boot a snapshot
+- OVMF install and configure : https://wiki.archlinux.org/index.php/libvirt#UEFI_Support
