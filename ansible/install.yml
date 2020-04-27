@@ -61,5 +61,5 @@
       user:
         name: user
         shell: /usr/bin/fish
-        groups: docker,bumblebee,libvirt
+        groups: docker,libvirt
         append: yes

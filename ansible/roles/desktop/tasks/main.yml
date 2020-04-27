@@ -17,18 +17,10 @@
 - name: install video packages
   pacman:
     name:
-      - nvidia
-      - nvidia-settings
-      - nvidia-utils
-      - libvdpau
-      - bumblebee
-      - primus
       - mesa
       - mesa-demos
-      - lib32-nvidia-utils
       - lib32-virtualgl
     state: present
-  notify: restart bumblebee
 
 - name: install audio packages
   pacman:
