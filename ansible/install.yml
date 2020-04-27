@@ -15,6 +15,10 @@
         line: 'user ALL=(ALL) NOPASSWD: /usr/bin/pacman'
 
   roles:
+    - role: boot
+      tags: boot
+      vars:
+        cmdline: resume=/dev/mapper/swap intel_iommu=on iommu=pt vfio-pci.ids=10de:1341
     - { role: pacman, tags: pacman }
     - { role: aur, tags: aur }
     - { role: base, tags: base }

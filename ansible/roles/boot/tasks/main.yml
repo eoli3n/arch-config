@@ -1,0 +1,14 @@
+---
+- name: configure grub
+  lineinfile:
+    path: /etc/default/grub
+    regexp: 'GRUB_CMDLINE_LINUX=.*'
+    line: 'GRUB_CMDLINE_LINUX="{{cmdline}}"'
+    state: present
+  when: ansible_virtualization_role == "host"
+
+- name: configure mkinitcpio
+  copy:
+    src: mkinitcpio.conf
+    dest: /etc
+  notify: generates initramfs

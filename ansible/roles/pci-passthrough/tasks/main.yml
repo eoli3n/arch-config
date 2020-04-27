@@ -1,0 +1,10 @@
+---
+dependencies:
+  - role: boot
+
+# Guest
+- name: install nouveau on guest
+  pacman:
+    name: nouveau
+    state: present
+  when: ansible_virtualization_role == "guest"

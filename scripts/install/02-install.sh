@@ -78,9 +78,7 @@ arch-chroot /mnt /bin/bash -xe <<"EOF"
   mkinitcpio -p linux
 
   # Prepare grub2
-  #sed -i 's/#\(GRUB_ENABLE_CRYPTODISK=y\)/\1/' /etc/default/grubA
-  cmdline="resume=/dev/mapper/swap"
-  sed -i 's:\(GRUB_CMDLINE_LINUX=\).*:\1"$cmdline":' /etc/default/grub
+  #sed -i 's/#\(GRUB_ENABLE_CRYPTODISK=y\)/\1/' /etc/default/grub
 
   # Install grub2
   grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
