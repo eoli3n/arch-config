@@ -9,3 +9,10 @@
     state: present
   when: ansible_virtualization_role == "guest"
   notify: generates initramfs
+
+# Host
+- name: install bbswitch
+  pacman:
+    name: bbswitch
+    state: present
+  when: ansible_virtualization_role == "host"
