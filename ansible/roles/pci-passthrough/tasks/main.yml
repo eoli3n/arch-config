@@ -2,6 +2,9 @@
 # Guest
 - name: install nouveau on guest
   pacman:
-    name: nouveau
+    name: 
+      - mesa
+      - lib32-mesa 
+      - xf86-video-nouveau
     state: present
   when: ansible_virtualization_role == "guest"

@@ -4,26 +4,30 @@
 
   pre_tasks:
 
+    # Fix full /tmp when installing lots of AUR
     - name: temp increase /tmp size
       tags: always
       shell: mount -o remount,size=5G,noatime /tmp
 
+    # Fix AUR helper asking for sudo password
     - name: add sudo conf for aur
       tags: always
       lineinfile:
         path: /etc/sudoers
         line: 'user ALL=(ALL) NOPASSWD: /usr/bin/pacman'
 
+    # PCI-passthrough configuration for VM
     - name: include boot role for guest
       include_role:
         name: boot
       vars:
         cmdline: resume=/dev/mapper/swap
-        cpiomodules: ""
+        cpiomodules: "nouveau"
         cpiobinaries: "/usr/bin/btrfs"
         cpiohooks: "base systemd autodetect modconf block sd-vconsole sd-encrypt sd-lvm2 filesystems keyboard resume fsck"
       when: ansible_virtualization_role == "guest"
 
+    # PCI-passthrough configuration for host
     - name: include boot role for host
       include_role:
         name: boot
