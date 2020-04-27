@@ -25,6 +25,11 @@
     - { role: recovery, tags: recovery }
 
   tasks:
+    - name: Configure root
+      user:
+        name: root
+        shell: /usr/bin/fish
+
     - name: Configure user
       user:
         name: user
