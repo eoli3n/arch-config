@@ -63,9 +63,3 @@
         shell: /usr/bin/fish
         groups: docker,bumblebee,libvirt
         append: yes
-
-  post_tasks:
-
-    - name: tmp size to default
-      tags: always
-      shell: mount -o remount,noatime /tmp
