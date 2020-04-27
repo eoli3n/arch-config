@@ -1,2 +1,3 @@
 - RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
 - autodefrag,noatime btrfs options
+- kernel upgrade : try to boot a snapshot

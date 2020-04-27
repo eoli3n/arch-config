@@ -14,5 +14,5 @@
 
 - name: copy subgid files
   copy:
-    src: subuid
+    src: subgid
     dest: /etc
