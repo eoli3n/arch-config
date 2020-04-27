@@ -1,7 +1,4 @@
 ---
-dependencies:
-  - role: boot
-
 # Guest
 - name: install nouveau on guest
   pacman:

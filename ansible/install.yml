@@ -43,6 +43,7 @@
     - { role: virtualization, tags: virtualization }
     - { role: containers, tags: containers }
     - { role: recovery, tags: recovery }
+    - { role: pci-passthrough, tags: pci-passthrough }
 
   tasks:
     - name: Configure root
