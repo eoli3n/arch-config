@@ -19,7 +19,7 @@
     # PCI-passthrough configuration for VM
     - name: include boot role for guest
       tags: boot
-      include_role:
+      import_role:
         name: boot
       vars:
         cmdline: resume=/dev/mapper/swap
@@ -31,7 +31,7 @@
     # PCI-passthrough configuration for host
     - name: include boot role for host
       tags: boot
-      include_role:
+      import_role:
         name: boot
       vars:
         cmdline: resume=/dev/mapper/swap intel_iommu=on iommu=pt vfio-pci.ids=10de:1341
