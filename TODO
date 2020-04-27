@@ -5,3 +5,4 @@ Issues :
 - test genfstab autodetect btrfs mount options 
 - kernel upgrade then try to boot a snapshot
 - OVMF install and configure : https://wiki.archlinux.org/index.php/libvirt#UEFI_Support
+- fix alacritty scroll up after clear
