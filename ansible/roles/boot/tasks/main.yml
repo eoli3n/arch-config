@@ -8,7 +8,7 @@
   when: ansible_virtualization_role == "host"
 
 - name: configure mkinitcpio
-  copy:
-    src: mkinitcpio.conf
-    dest: /etc
+  template:
+    src: mkinitcpio.j2
+    dest: /etc/mkinitcpio.conf
   notify: generates initramfs

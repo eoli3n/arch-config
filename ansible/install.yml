@@ -14,11 +14,27 @@
         path: /etc/sudoers
         line: 'user ALL=(ALL) NOPASSWD: /usr/bin/pacman'
 
-  roles:
-    - role: boot
-      tags: boot
+    - name: include boot role for guest
+      include_role:
+        name: boot
+      vars:
+        cmdline: resume=/dev/mapper/swap
+        cpiomodules: ""
+        cpiobinaries: "/usr/bin/btrfs"
+        cpiohooks: "base systemd autodetect modconf block sd-vconsole sd-encrypt sd-lvm2 filesystems keyboard resume fsck"
+      when: ansible_virtualization_role == "guest"
+
+    - name: include boot role for host
+      include_role:
+        name: boot
       vars:
         cmdline: resume=/dev/mapper/swap intel_iommu=on iommu=pt vfio-pci.ids=10de:1341
+        cpiomodules: "vfio_pci vfio vfio_iommu_type1 vfio_virqfd intel_agp i915"
+        cpiobinaries: "/usr/bin/btrfs"
+        cpiohooks: "base systemd autodetect modconf block sd-vconsole sd-encrypt sd-lvm2 filesystems keyboard resume fsck"
+      when: ansible_virtualization_role == "host"
+
+  roles:
     - { role: pacman, tags: pacman }
     - { role: aur, tags: aur }
     - { role: base, tags: base }
