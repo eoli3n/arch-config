@@ -1,4 +1,15 @@
 ---
+
+- name: create locale grub dir
+  file:
+    path: /boot/grub/locale
+    state: directory
+
+- name: copy fr locale grub
+  copy:
+    src: /usr/share/locale/fr/LC_MESSAGES/grub.mo
+    dest: /boot/grub/locale/fr.gmo
+
 - name: configure grub
   lineinfile:
     path: /etc/default/grub
