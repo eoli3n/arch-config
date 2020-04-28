@@ -35,4 +35,5 @@
       - weechat
       - linux-headers
       - words
+      - fwupd
     state: present
