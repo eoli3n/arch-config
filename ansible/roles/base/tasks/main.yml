@@ -36,4 +36,5 @@
       - linux-headers
       - words
       - fwupd
+      - compsize
     state: present
