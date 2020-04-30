@@ -54,6 +54,11 @@
       - youtube-dl
     state: present
 
+- name: add missing gpg keys for aur
+  shell: gpg --recv '{{item}}'
+  loop:
+    - 4773BD5E130D1D45
+
 - name: install aur packages
   become: no
   aur:
