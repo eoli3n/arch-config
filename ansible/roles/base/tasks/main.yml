@@ -42,9 +42,9 @@
 - name: Configure root
   user:
     name: root
-    shell: {{shell}}    
+    shell: '{{shell}}'
 
 - name: Configure user
   user:
-    name: {{user}}
-    shell: {{shell}}    
+    name: '{{user}}'
+    shell: '{{shell}}'

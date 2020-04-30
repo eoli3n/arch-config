@@ -17,7 +17,7 @@
 
 - name: Configure user
   user:
-    name: {{user}}
+    name: '{{user}}'
     groups: docker,libvirt
     append: yes
 
