@@ -56,6 +56,7 @@ Server = http://mirror.sum7.eu/archlinux/archzfs/archzfs/x86_64
 Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
 EOF
 pacman-key --recv-keys F75D9D76
+pacman-key --lsign-key F75D9D76
 pacman -Sy archzfs-archiso-linux
 modprobe zfs
 

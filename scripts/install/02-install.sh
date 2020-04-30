@@ -61,6 +61,7 @@ Server = http://mirror.sum7.eu/archlinux/archzfs/archzfs/x86_64
 Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
 EOSF
   pacman-key --recv-keys F75D9D76
+  pacman-key --lsign-key F75D9D76
   pacman -Syu zfs-linux-lts zfs-utils
 
   # Sync clock
