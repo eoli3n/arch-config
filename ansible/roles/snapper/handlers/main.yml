@@ -1,5 +1,5 @@
 ---
-- name: init btrfs grub config
+- name: update grub
   shell: grub-mkconfig -o /boot/grub/grub.cfg
 
 - name: enable grub-btrfs

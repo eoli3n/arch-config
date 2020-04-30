@@ -4,8 +4,9 @@
     name:
       - snapper
       - snap-pac
+      - grub-btrfs
     state: present
-  notify: init btrfs grub config
+  notify: update grub
 
 - name: configure snapper
   copy:
