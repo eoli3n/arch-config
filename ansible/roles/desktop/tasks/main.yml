@@ -55,9 +55,11 @@
     state: present
 
 - name: add missing gpg keys for aur
+  become: no
   shell: gpg --recv '{{item}}'
   loop:
     - 4773BD5E130D1D45
+  changed_when: false
 
 - name: install aur packages
   become: no
