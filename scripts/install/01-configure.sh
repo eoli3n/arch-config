@@ -57,8 +57,8 @@ Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
 EOF
 pacman-key --recv-keys F75D9D76
 pacman-key --lsign-key F75D9D76
-mount -o remount,size=5G,noatime /tmp
-pacman -Sy zfs-dkms
+mount -o remount,size=6G /run/archiso/cowspace
+pacman -Syu zfs-linux
 modprobe zfs
 
 # Create ZFS pool
