@@ -57,8 +57,14 @@ Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
 EOF
 pacman-key --recv-keys F75D9D76
 pacman-key --lsign-key F75D9D76
+
+# Increase slash on live
 mount -o remount,size=6G /run/archiso/cowspace
-pacman -Syu zfs-linux
+
+# Temp fix
+# https://www.archlinux.org/news/nss3511-1-and-lib32-nss3511-1-updates-require-manual-intervention/
+pacman -Syu --overwrite /usr/lib\*/p11-kit-trust.so zfs-linux
+#pacman -Syu zfs-linux
 modprobe zfs
 
 # Create ZFS pool
