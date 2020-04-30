@@ -15,6 +15,7 @@
       shell: mount -o remount,size=5G,noatime /tmp
 
   roles:
+    - { role: boot, tags: boot }
     - { role: pacman, tags: pacman }
     - { role: aur, tags: aur }
     - { role: base, tags: base }
