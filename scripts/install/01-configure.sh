@@ -49,7 +49,7 @@ mkfs.vfat $EFI
 
 # Install ZFS tools
 # https://wiki.archlinux.org/index.php/ZFS#Emergency_chroot_repair_with_archzfs
-cat >> /etc/pacman.conf <"EOF"
+cat >> /etc/pacman.conf <<"EOF"
 [archzfs]
 Server = http://archzfs.com/archzfs/x86_64
 Server = http://mirror.sum7.eu/archlinux/archzfs/archzfs/x86_64
