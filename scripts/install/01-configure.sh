@@ -58,7 +58,7 @@ EOF
 pacman-key --recv-keys F75D9D76
 pacman-key --lsign-key F75D9D76
 mount -o remount,size=5G,noatime /tmp
-pacman -Syu archzfs-archiso-linux
+pacman -Syu zfs-dkms
 modprobe zfs
 
 # Create ZFS pool
