@@ -34,7 +34,6 @@
       - cifs-utils
       - fish
       - weechat
-      - linux-headers
       - words
       - fwupd
       - compsize

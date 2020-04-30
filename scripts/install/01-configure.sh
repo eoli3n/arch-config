@@ -34,15 +34,10 @@ print "Creating EFI part"
 sgdisk -n1:1M:+512M -t1:EF00 $DISK
 EFI=$DISK-part1
 
-# SWAP part
-print "Creating encrypted SWAP part"
-sgdisk -n2:0:+8G -t2:8308 $DISK
-SWAP=$DISK-part2
-
-# LUKS part
-print "Creating LUKS part"
-sgdisk -n3:0:0 -t3:8309 $DISK
-LUKS=$DISK-part3
+# ZFS part
+print "Creating ZFS part"
+sgdisk -n3:0:0 -t3:bf01 $DISK
+ZFS=$DISK-part3
 
 # Inform kernel
 partprobe $DISK
@@ -52,48 +47,59 @@ sleep 1
 print "Format EFI part"
 mkfs.vfat $EFI
 
-# Create plain encrypted SWAP
-print "Create encrypted SWAP"
-cryptsetup open --type plain $SWAP swap
-ESWAP=/dev/mapper/swap
-mkswap $ESWAP
-swapon $ESWAP
+# Install ZFS tools
+# https://wiki.archlinux.org/index.php/ZFS#Emergency_chroot_repair_with_archzfs
+cat >> /etc/pacman.conf <"EOF"
+[archzfs]
+Server = http://archzfs.com/archzfs/x86_64
+Server = http://mirror.sum7.eu/archlinux/archzfs/archzfs/x86_64
+Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
+EOF
+pacman -Sy archzfs-archiso-linux
+modprobe zfs
 
-# Create LUKS
-print "Create LUKS"
-# https://savannah.gnu.org/bugs/?55093
-cryptsetup -v --type luks1 --cipher aes-xts-plain64 --key-size 256 --hash sha256 --iter-time 2000 --use-urandom --verify-passphrase luksFormat $LUKS
-cryptsetup luksOpen $LUKS universe
-BTRFS=/dev/mapper/universe
+# Create ZFS pool
+print "Create ZFS pool"
+zpool create -f -o ashift=12 -R /mnt zroot $ZFS
+zfs create -o encryption=aes-256-gcm -o keyformat=passphrase -o keyformat=passphrase -o mountpoint=none zroot/encr
 
-# Format BTRFS part
-print "Format BTRFS"
-mkfs.btrfs -L "Sun" $BTRFS
+# Slash dataset
+print "Create slash dataset"
+zfs create -o mountpoint=none zroot/encr/ROOT
+zfs create -o compression=lz4        \
+           -o mountpoint=/           \
+           -o acltype=posixacl       \
+           -o xattr=sa               \
+           -o atime=off              \
+           zroot/encr/ROOT/default
 
-# Create BTRFS subvolumes
-print "Create subvolumes"
-mount -t btrfs -o autodefrag,noatime $BTRFS /mnt
-btrfs subvolume create /mnt/@
-btrfs subvolume create /mnt/@home
-btrfs subvolume create /mnt/@snapshots
+# Home dataset
+print "Create home dataset"
+zfs create -o mountpoint=none zroot/encr/data
+zfs create -o compression=lz4        \
+           -o mountpoint=/home       \
+           -o xattr=sa               \
+           -o atime=off              \
+           zroot/encr/data/home
 
-# Exclude some path from / subvolume
-# https://en.opensuse.org/SDB:BTRFS#Default_Subvolumes
-btrfs subvolume create /mnt/var
-btrfs subvolume create /mnt/tmp
-btrfs subvolume create /mnt/root
-btrfs subvolume create /mnt/opt
-btrfs subvolume create /mnt/srv
+# SWAP
+print "Create swap dataset"
+zfs create -V 8G -b $(getconf PAGESIZE)         \
+           -o logbias=throughput -o sync=always \
+           -o primarycache=metadata             \
+           -o com.sun:auto-snapshot=false       \
+           zroot/swap
 
-# Mount filesystems
-# https://docs.google.com/spreadsheets/d/1x9-3OQF4ev1fOCrYuYWt1QmxYRmPilw_nLik5H_2_qA/edit#gid=0
-umount /mnt
-print "Mount parts"
-mount -o autodefrag,noatime,subvol=@,compress=zstd:1 $BTRFS /mnt
-mkdir /mnt/home
-mount -o autodefrag,noatime,subvol=@home,compress=zstd:1 $BTRFS /mnt/home
-mkdir /mnt/.snapshots
-mount -o autodefrag,noatime,subvol=@snapshots,compress=zstd:1 $BTRFS /mnt/.snapshots
+# tmp
+print "Create tmp dataset"
+zfs create -o setuid=off -o devices=off -o sync=disabled -o mountpoint=/tmp zroot/tmp
+# TODO Should i encrypt tmp ?
+
+# Enable SWAP
+mkswap -f /dev/zvol/zroot/swap
+swapon /dev/zvol/zroot/swap
+
+# Mount EFI part
 mkdir /mnt/boot
 mount $EFI /mnt/boot
 

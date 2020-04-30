@@ -13,21 +13,11 @@ reflector --country France --country Germany --latest 6 --protocol https --sort 
 
 # Install
 print "Install Archlinux"
-pacstrap /mnt base base-devel linux linux-firmware intel-ucode btrfs-progs grub efibootmgr grub-btrfs vim git ansible snapper connman wpa_supplicant
+pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware intel-ucode efibootmgr vim git ansible connman wpa_supplicant zfs-linux-lts zfs-utils
 
 # Generate fstab
 print "Generate fstab"
-genfstab /mnt >> /mnt/etc/fstab
-
-# Generate crypttab
-print "Generate crypttab"
-cat > /mnt/etc/crypttab <<EOF
-# Mount swap re-encrypting it with a fresh key each reboot
-swap	/dev/sda2   	/dev/urandom	swap,cipher=aes-xts-plain64,size=256
-EOF
-cat > /mnt/etc/crypttab.initramfs <<EOF
-universe   /dev/sda3  none  discard
-EOF
+genfstab -U -p /mnt >> /mnt/etc/fstab
 
 # Set hostname
 echo "Please enter hostname :"
@@ -52,9 +42,9 @@ echo 'LANG="fr_FR.UTF-8"' > /mnt/etc/locale.conf
 print "Prepare initramfs"
 cat > /mnt/etc/mkinitcpio.conf <<"EOF"
 MODULES=(i915 intel_agp)
-BINARIES=(/usr/bin/btrfs)
+BINARIES=()
 FILES=()
-HOOKS=(base systemd autodetect modconf block keyboard sd-vconsole sd-encrypt fsck filesystems)
+HOOKS="base udev autodetect modconf block keyboard keymap zfs filesystems")
 COMPRESSION="lz4"
 EOF
 
@@ -75,18 +65,26 @@ arch-chroot /mnt /bin/bash -xe <<"EOF"
   source /etc/locale.conf
 
   # Generate Initramfs
-  mkinitcpio -p linux
+  mkinitcpio -P
 
-  # Prepare grub2
-  #sed -i 's/#\(GRUB_ENABLE_CRYPTODISK=y\)/\1/' /etc/default/grub
+  # Install bootloader
+  bootctl --path=/boot install
 
-  # Install grub2
-  grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+  # Generates boot entries
+  mkdir -p /boot/loader/entries
+  cat > /boot/loader/loader.conf <"EOSF"
+default archlinux
+timeout 10
+EOSF
+  cat > /boot/loader/entries/archlinux.conf <"EOSF"
+Title "ZFS Archlinux"
+linux   /vmlinuz-linux
+initrd	/intel-ucode.img
+initrd  /initramfs-linux.img
+EOSF
 
-  # Configure EFI and grub2
-  mkdir -p /boot/EFI/boot
-  cp /boot/EFI/GRUB/grubx64.efi /boot/EFI/boot/bootx64.efi
-  grub-mkconfig -o /boot/grub/grub.cfg
+  # Update bootloader configuration
+  bootctl --path=/boot update
 
   # Create user
   useradd -m user
@@ -154,8 +152,14 @@ systemctl enable systemd-resolved --root=/mnt
 # Configure TRIM
 systemctl enable fstrim.timer --root=/mnt
 
+# Configure tmp
+# https://wiki.archlinux.org/index.php/ZFS#/tmp
+systemctl mask tmp.mount --root=/mnt
+
 # Umount all parts
-umount -R /mnt
+umount /mnt/boot
+zfs umount -a
+zpool export zroot
 
 # Finish
 echo -e "\e[32mAll OK"

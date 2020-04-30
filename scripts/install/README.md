@@ -4,11 +4,7 @@
   /boot
   FAT used as esp
 - sda2
-  swap
-  reencrypted at each boot
-- sda3
-  /
-  BTRFS over LUKS
+  ZFS pool
 
 
 ##### Boot latest arch iso
