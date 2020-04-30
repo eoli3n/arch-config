@@ -13,7 +13,7 @@ reflector --country France --country Germany --latest 6 --protocol https --sort 
 
 # Install
 print "Install Archlinux"
-pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware intel-ucode efibootmgr vim git ansible connman wpa_supplicant zfs-linux-lts zfs-utils
+pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware intel-ucode efibootmgr vim git ansible connman wpa_supplicant
 
 # Generate fstab
 print "Generate fstab"
@@ -52,6 +52,16 @@ EOF
 print "Chroot and configure system"
 
 arch-chroot /mnt /bin/bash -xe <<"EOF"
+
+  # ZFS deps
+  cat >> /etc/pacman.conf <<"EOSF"
+[archzfs]
+Server = http://archzfs.com/archzfs/x86_64
+Server = http://mirror.sum7.eu/archlinux/archzfs/archzfs/x86_64
+Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
+EOSF
+  pacman-key --recv-keys F75D9D76
+  pacman -Syu zfs-linux-lts zfs-utils
 
   # Sync clock
   hwclock --systohc
