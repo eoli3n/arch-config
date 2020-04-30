@@ -14,6 +14,12 @@
       tags: always
       shell: mount -o remount,size=5G,noatime /tmp
 
+    - name: include guest role
+      tags: guest
+      include_role:
+        name: guest
+      when: ansible_virtualization_role == "guest"
+
   roles:
     - { role: boot, tags: boot }
     - { role: pacman, tags: pacman }
@@ -25,9 +31,3 @@
     - { role: containers, tags: containers }
     - { role: recovery, tags: recovery }
 
-  post_tasks:
-    - name: include guest role
-      tags: guest
-      include_role:
-        name: guest
-      when: ansible_virtualization_role == "guest"
