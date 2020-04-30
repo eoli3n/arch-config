@@ -4,3 +4,5 @@ Issues :
 
 - test genfstab autodetect btrfs mount options 
 - kernel upgrade then try to boot a snapshot
+- test compsize
+- test suspend/resume
