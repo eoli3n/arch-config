@@ -72,11 +72,11 @@ arch-chroot /mnt /bin/bash -xe <<"EOF"
 
   # Generates boot entries
   mkdir -p /boot/loader/entries
-  cat > /boot/loader/loader.conf <"EOSF"
+  cat > /boot/loader/loader.conf <<"EOSF"
 default archlinux
 timeout 10
 EOSF
-  cat > /boot/loader/entries/archlinux.conf <"EOSF"
+  cat > /boot/loader/entries/archlinux.conf <<"EOSF"
 Title "ZFS Archlinux"
 linux   /vmlinuz-linux
 initrd	/intel-ucode.img
