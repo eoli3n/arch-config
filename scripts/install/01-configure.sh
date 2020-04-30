@@ -57,7 +57,8 @@ Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
 EOF
 pacman-key --recv-keys F75D9D76
 pacman-key --lsign-key F75D9D76
-pacman -Sy archzfs-archiso-linux
+mount -o remount,size=5G,noatime /tmp
+pacman -Syu archzfs-archiso-linux
 modprobe zfs
 
 # Create ZFS pool
@@ -69,6 +70,7 @@ zfs create -o encryption=aes-256-gcm -o keyformat=passphrase -o keyformat=passph
 print "Create slash dataset"
 zfs create -o mountpoint=none zroot/encr/ROOT
 zfs create -o compression=lz4        \
+           -o dedup=on               \
            -o mountpoint=/           \
            -o acltype=posixacl       \
            -o xattr=sa               \
@@ -79,6 +81,7 @@ zfs create -o compression=lz4        \
 print "Create home dataset"
 zfs create -o mountpoint=none zroot/encr/data
 zfs create -o compression=lz4        \
+           -o dedup=off              \
            -o mountpoint=/home       \
            -o xattr=sa               \
            -o atime=off              \
