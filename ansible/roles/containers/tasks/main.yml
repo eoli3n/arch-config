@@ -16,3 +16,9 @@
   template:
     src: subgid.j2
     dest: /etc/subgid
+
+- name: Add user to libvirt group
+  user:
+    name: '{{user}}'
+    groups: docker
+    append: yes

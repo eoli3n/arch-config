@@ -15,9 +15,9 @@
     name: podman-compose
     skip_installed: true
 
-- name: Configure user
+- name: Add user to libvirt group
   user:
     name: '{{user}}'
-    groups: docker,libvirt
+    groups: libvirt
     append: yes
 
