@@ -1,4 +1,13 @@
-### Install Archlinux
+### Features
+
+- BTRFS over LUKS
+  - Zstd compression
+  - Bootable BTRFS snapshots
+- Encrypted swap
+- Separated /boot
+- [Netboot recovery](https://eoli3n.github.io/archlinux/2020/04/25/recovery.html)
+
+### Install
 
 - Clone me and my submodules
 ```
