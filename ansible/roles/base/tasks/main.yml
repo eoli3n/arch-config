@@ -6,6 +6,7 @@
       - noto-fonts
       - bc
       - wget
+      - openssh
       - jq
       - most
       - fzf
