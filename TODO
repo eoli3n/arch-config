@@ -2,10 +2,5 @@ Issues :
 - virtio-gpu : https://bbs.archlinux.org/viewtopic.php?pid=1901266#p1901266
 - RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
 
-- independant roles vfio and bumblebee, with mkinitcpio profiles
-- faire remonter les variables
-
 - test genfstab autodetect btrfs mount options 
 - kernel upgrade then try to boot a snapshot
-- OVMF install and configure : https://wiki.archlinux.org/index.php/libvirt#UEFI_Support
-- fix alacritty scroll up after clear

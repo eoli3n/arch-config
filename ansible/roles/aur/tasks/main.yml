@@ -1,4 +1,10 @@
 ---
+- name: add sudo conf for aur
+  tags: always
+  lineinfile:
+    path: /etc/sudoers
+    line: '{{user}} ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+
 - name: install AUR helper
   become: no
   aur:

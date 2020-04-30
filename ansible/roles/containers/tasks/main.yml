@@ -8,11 +8,11 @@
   notify: restart docker
 
 - name: copy subuid files
-  copy:
-    src: subuid
-    dest: /etc
+  template:
+    src: subuid.j2
+    dest: /etc/subuid
 
 - name: copy subgid files
-  copy:
-    src: subgid
-    dest: /etc
+  template:
+    src: subgid.j2
+    dest: /etc/subgid

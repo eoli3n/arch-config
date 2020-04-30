@@ -38,3 +38,13 @@
       - fwupd
       - compsize
     state: present
+
+- name: Configure root
+  user:
+    name: root
+    shell: {{shell}}    
+
+- name: Configure user
+  user:
+    name: {{user}}
+    shell: {{shell}}    

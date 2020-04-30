@@ -2,43 +2,17 @@
 - hosts: all
   become: yes
 
+  vars:
+    user: user
+    shell: /usr/bin/fish
+    cmdline: "resume=/dev/mapper/swap"
+
   pre_tasks:
 
     # Fix full /tmp when installing lots of AUR
     - name: temp increase /tmp size
       tags: always
       shell: mount -o remount,size=5G,noatime /tmp
-
-    # Fix AUR helper asking for sudo password
-    - name: add sudo conf for aur
-      tags: always
-      lineinfile:
-        path: /etc/sudoers
-        line: 'user ALL=(ALL) NOPASSWD: /usr/bin/pacman'
-
-    # PCI-passthrough configuration for VM
-    - name: include boot role for guest
-      tags: boot
-      import_role:
-        name: boot
-      vars:
-        cmdline: "resume=/dev/mapper/swap"
-        cpiomodules: "nouveau"
-        cpiobinaries: "/usr/bin/btrfs"
-        cpiohooks: "base systemd autodetect modconf block sd-vconsole sd-encrypt sd-lvm2 filesystems keyboard resume fsck"
-      when: ansible_virtualization_role == "guest"
-
-    # PCI-passthrough configuration for host
-    - name: include boot role for host
-      tags: boot
-      include_role:
-        name: boot
-      vars:
-        cmdline: "resume=/dev/mapper/swap intel_iommu=on iommu=pt vfio-pci.ids=10de:1341"
-        cpiomodules: "vfio_pci vfio vfio_iommu_type1 vfio_virqfd intel_agp i915"
-        cpiobinaries: "/usr/bin/btrfs"
-        cpiohooks: "base systemd autodetect modconf block sd-vconsole sd-encrypt sd-lvm2 filesystems keyboard resume fsck"
-      when: ansible_virtualization_role == "host"
 
   roles:
     - { role: pacman, tags: pacman }
@@ -49,17 +23,3 @@
     - { role: virtualization, tags: virtualization }
     - { role: containers, tags: containers }
     - { role: recovery, tags: recovery }
-    - { role: pci-passthrough, tags: pci-passthrough }
-
-  tasks:
-    - name: Configure root
-      user:
-        name: root
-        shell: /usr/bin/fish
-
-    - name: Configure user
-      user:
-        name: user
-        shell: /usr/bin/fish
-        groups: docker,libvirt
-        append: yes

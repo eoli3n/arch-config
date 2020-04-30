@@ -6,6 +6,7 @@
       - virt-manager
       - ebtables
       - dnsmasq
+      - ovmf
   notify: restart libvirt
 
 - name: install podman-compose
@@ -13,3 +14,10 @@
   aur:
     name: podman-compose
     skip_installed: true
+
+- name: Configure user
+  user:
+    name: {{user}}
+    groups: docker,libvirt
+    append: yes
+

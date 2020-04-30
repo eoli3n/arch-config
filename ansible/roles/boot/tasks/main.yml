@@ -19,7 +19,13 @@
   when: ansible_virtualization_role == "host"
 
 - name: configure mkinitcpio
-  template:
-    src: mkinitcpio.j2
-    dest: /etc/mkinitcpio.conf
+  copy:
+    src: mkinitcpio.conf
+    dest: /etc/
+  notify: generates initramfs
+
+- name: configure mkinitcpio preset linux
+  copy:
+    src: linux.preset
+    dest: /etc/mkinitcpio.d/
   notify: generates initramfs

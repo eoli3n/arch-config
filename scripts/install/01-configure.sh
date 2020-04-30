@@ -86,13 +86,14 @@ btrfs subvolume create /mnt/opt
 btrfs subvolume create /mnt/srv
 
 # Mount filesystems
+# https://docs.google.com/spreadsheets/d/1x9-3OQF4ev1fOCrYuYWt1QmxYRmPilw_nLik5H_2_qA/edit#gid=0
 umount /mnt
 print "Mount parts"
-mount -o autodefrag,noatime,subvol=@ $BTRFS /mnt
+mount -o autodefrag,noatime,subvol=@,compress=zstd:1 $BTRFS /mnt
 mkdir /mnt/home
-mount -o autodefrag,noatime,subvol=@home $BTRFS /mnt/home
+mount -o autodefrag,noatime,subvol=@home,compress=zstd:1 $BTRFS /mnt/home
 mkdir /mnt/.snapshots
-mount -o autodefrag,noatime,subvol=@snapshots $BTRFS /mnt/.snapshots
+mount -o autodefrag,noatime,subvol=@snapshots,compress=zstd:1 $BTRFS /mnt/.snapshots
 mkdir /mnt/boot
 mount $EFI /mnt/boot
 
