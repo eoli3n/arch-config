@@ -47,39 +47,9 @@ sleep 1
 print "Format EFI part"
 mkfs.vfat $EFI
 
-# Install ZFS tools
-# https://wiki.archlinux.org/index.php/ZFS#Emergency_chroot_repair_with_archzfs
-print "Add archzfs repo"
-cat >> /etc/pacman.conf <<"EOF"
-[archzfs]
-Server = http://archzfs.com/archzfs/x86_64
-Server = http://mirror.sum7.eu/archlinux/archzfs/archzfs/x86_64
-Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
-EOF
-pacman-key --recv-keys F75D9D76
-pacman-key --lsign-key F75D9D76
-pacman -Sy
-
-# Increase slash on live
-print "Increase live slash to 6G"
-mount -o remount,size=6G /run/archiso/cowspace
-
-# Temp fix
-# https://www.archlinux.org/news/nss3511-1-and-lib32-nss3511-1-updates-require-manual-intervention/
-#pacman -Syu --overwrite /usr/lib\*/p11-kit-trust.so zfs-linux
-#pacman -Syu zfs-linux
-
-# Install current kernel headers
-print "Install current kernel headers"
-kernel=$(pacman -Qi linux | grep 'Version' | awk '{print $3}')
-header=$(curl -s https://archive.archlinux.org/packages/l/linux-headers/ | grep "$kernel" | sed 's/^.*href="\(.*\)".*$/\1/' | grep -v '\.sig$')
-echo "Header found : $header"
-pacman -U https://archive.archlinux.org/packages/l/linux-headers/$header
-pacman -S zfs-dkms
-
-read a
-
-modprobe zfs
+# Load ZFS module
+print "Load ZFS module"
+curl -s https://eoli3n.github.io/archzfs/init | bash
 
 # Create ZFS pool
 print "Create ZFS pool"
