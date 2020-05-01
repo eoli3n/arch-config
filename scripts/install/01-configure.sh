@@ -63,8 +63,17 @@ mount -o remount,size=6G /run/archiso/cowspace
 
 # Temp fix
 # https://www.archlinux.org/news/nss3511-1-and-lib32-nss3511-1-updates-require-manual-intervention/
-pacman -Syu --overwrite /usr/lib\*/p11-kit-trust.so zfs-linux
+#pacman -Syu --overwrite /usr/lib\*/p11-kit-trust.so zfs-linux
 #pacman -Syu zfs-linux
+
+# Install current kernel headers
+kernel=$(pacman -Qi linux | grep 'Version' | awk '{print $3}'
+header=$(curl -s https://archive.archlinux.org/packages/l/linux-headers/ | grep (pacman -Qi linux | grep 'Version' | awk '{print $3}') | sed 's/^.*>\(.*\)<.*$/\1/' | grep -v '\.sig$')
+pacman -U https://archive.archlinux.org/packages/l/linux-headers/$header
+pacman -S zfs-dkms
+
+read a
+
 modprobe zfs
 
 # Create ZFS pool
