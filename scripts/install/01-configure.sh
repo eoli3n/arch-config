@@ -57,6 +57,7 @@ Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
 EOF
 pacman-key --recv-keys F75D9D76
 pacman-key --lsign-key F75D9D76
+pacman -Sy
 
 # Increase slash on live
 mount -o remount,size=6G /run/archiso/cowspace
