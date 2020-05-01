@@ -49,6 +49,7 @@ mkfs.vfat $EFI
 
 # Install ZFS tools
 # https://wiki.archlinux.org/index.php/ZFS#Emergency_chroot_repair_with_archzfs
+print "Add archzfs repo"
 cat >> /etc/pacman.conf <<"EOF"
 [archzfs]
 Server = http://archzfs.com/archzfs/x86_64
@@ -60,6 +61,7 @@ pacman-key --lsign-key F75D9D76
 pacman -Sy
 
 # Increase slash on live
+print "Increase live slash to 6G"
 mount -o remount,size=6G /run/archiso/cowspace
 
 # Temp fix
@@ -68,9 +70,10 @@ mount -o remount,size=6G /run/archiso/cowspace
 #pacman -Syu zfs-linux
 
 # Install current kernel headers
+print "Install current kernel headers"
 kernel=$(pacman -Qi linux | grep 'Version' | awk '{print $3}')
 header=$(curl -s https://archive.archlinux.org/packages/l/linux-headers/ | grep (pacman -Qi linux | grep 'Version' | awk '{print $3}') | sed 's/^.*>\(.*\)<.*$/\1/' | grep -v '\.sig$')
-pacman -U https://archive.archlinux.org/packages/l/linux-headers/$header
+pacman -U "https://archive.archlinux.org/packages/l/linux-headers/$header"
 pacman -S zfs-dkms
 
 read a
