@@ -73,6 +73,7 @@ mount -o remount,size=6G /run/archiso/cowspace
 print "Install current kernel headers"
 kernel=$(pacman -Qi linux | grep 'Version' | awk '{print $3}')
 header=$(curl -s https://archive.archlinux.org/packages/l/linux-headers/ | grep (pacman -Qi linux | grep 'Version' | awk '{print $3}') | sed 's/^.*>\(.*\)<.*$/\1/' | grep -v '\.sig$')
+echo "$header"
 pacman -U "https://archive.archlinux.org/packages/l/linux-headers/$header"
 pacman -S zfs-dkms
 
