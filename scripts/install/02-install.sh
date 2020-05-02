@@ -186,7 +186,7 @@ sudo systemctl enable zfs.target --root=/mnt
 # Umount all parts
 print "Umount all parts"
 umount /mnt/boot
-swapoff
+swapoff /dev/zvol/zroot/swap
 zfs umount -a
 
 # Export zpool

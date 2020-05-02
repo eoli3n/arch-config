@@ -120,7 +120,5 @@ mount $EFI /mnt/boot
 # Copy ZFS cache
 cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
 
-
-
 # Finish
 echo -e "\e[32mAll OK"
