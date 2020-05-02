@@ -74,7 +74,7 @@ zfs create -o dedup=on -o mountpoint=/ zroot/ROOT/default
 print "Create home dataset"
 zfs create -o mountpoint=none zroot/data
 zfs create -o dedup=on -o mountpoint=/home zroot/data/home
-zfs create -o dedup=on -o mountpoint=/root zpool/data/home/root
+zfs create -o dedup=on -o mountpoint=/root zroot/data/home/root
 
 # SWAP
 print "Create swap dataset"
