@@ -54,7 +54,7 @@ curl -s https://eoli3n.github.io/archzfs/init | bash
 # Create ZFS pool
 print "Create ZFS pool"
 zpool create -f -o ashift=12 -R /mnt zroot $ZFS
-zfs create -o encryption=aes-256-gcm -o keyformat=passphrase -o keyformat=passphrase -o mountpoint=none zroot/encr
+zfs create -o encryption=aes-256-gcm -o keyformat=passphrase -o mountpoint=none zroot/encr
 
 # Slash dataset
 print "Create slash dataset"
