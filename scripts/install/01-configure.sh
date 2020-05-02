@@ -74,7 +74,7 @@ zfs create -o dedup=on -o mountpoint=/ zroot/ROOT/default
 # Home dataset
 print "Create home dataset"
 zfs create -o mountpoint=none zroot/data
-zfs create -o dedup=on -o mountpoint=/home zroot/data/home
+zfs create -o dedup=on -o mountpoint=legacy zroot/data/home
 zfs create -o dedup=on -o mountpoint=/root zroot/data/home/root
 
 # SWAP
@@ -97,7 +97,7 @@ zfs create -o setuid=off                  \
 # chmod 1777 /tmp ?
 
 # /var
-print "Create datasets snapshot free"
+print "Create specific datasets excluded from snapshots"
 zfs create -o canmount=off -o mountpoint=/var zroot/ROOT/var
 zfs create -o canmount=off -o mountpoint=/usr zroot/ROOT/usr
 zfs create -o canmount=off -o mountpoint=/srv zroot/ROOT/srv
@@ -117,7 +117,13 @@ print "Mount EFI part"
 mkdir /mnt/boot
 mount $EFI /mnt/boot
 
+# Mount home part
+print "Mount EFI part"
+mkdir /mnt/home
+mount -t zfs ${SYS_ROOT}/${SYSTEM_NAME}/home /mnt/home
+
 # Copy ZFS cache
+print "Generate and copy zfs cache"
 mkdir -p /mnt/etc/zfs
 zpool set cachefile=/etc/zfs/zpool.cache zroot
 cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
