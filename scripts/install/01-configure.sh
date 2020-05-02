@@ -58,10 +58,11 @@ zpool create -f -o ashift=12           \
              -O compression=lz4        \
              -O relatime=on            \
              -O xattr=sa               \
-             -O dnodesize=auto         \
+             -O dnodesize=legacy       \
              -O encryption=aes-256-gcm \
              -O keyformat=passphrase   \
              -O keylocation=prompt     \
+             -O normalization=formD    \
              -O mountpoint=/ -R /mnt   \
              zroot $ZFS
 
@@ -103,6 +104,7 @@ zfs create -o canmount=off -o mountpoint=/srv zroot/ROOT/srv
 zfs create                                    zroot/ROOT/var/log
 
 # Set bootfs 
+print "Set bootfs"
 zpool set bootfs=zroot/ROOT/default zroot
 
 # Export zpool
