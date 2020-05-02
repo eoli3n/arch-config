@@ -47,10 +47,6 @@ sleep 1
 print "Format EFI part"
 mkfs.vfat $EFI
 
-# Load ZFS module
-print "Load ZFS module"
-curl -s https://eoli3n.github.io/archzfs/init | bash
-
 # Create ZFS pool
 print "Create ZFS pool"
 zpool create -f -o ashift=12           \
