@@ -37,6 +37,7 @@
       - words
       - fwupd
       - compsize
+      - shellcheck
     state: present
 
 - name: Configure root
