@@ -6,6 +6,9 @@ print () {
     echo -e "\n\033[1m> $1\033[0m\n"
 }
 
+# Configure /tmp
+#chmod 1777 /mnt/tmp
+
 # Sort mirrors
 print "Sort mirrors"
 pacman -Sy reflector --noconfirm
@@ -89,7 +92,8 @@ timeout 10
 EOSF
   cat > /boot/loader/entries/archlinux.conf <<"EOSF"
 Title "ZFS Archlinux"
-linux   /vmlinuz-linux
+search -u UUID
+linux   /vmlinuz-linux zfs=zroot/ROOT/default rw
 initrd	/intel-ucode.img
 initrd  /initramfs-linux.img
 EOSF
