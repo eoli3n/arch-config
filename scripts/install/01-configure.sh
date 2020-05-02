@@ -107,18 +107,13 @@ zfs create                                    zroot/ROOT/var/log
 print "Set bootfs"
 zpool set bootfs=zroot/ROOT/default zroot
 
-# Export zpool
-zfs umount -a
-zpool export zroot
-
-# Import zpool under /mnt
-zpool import -l -R /mnt zroot
-
 # Enable SWAP
+print "Enable SWAP"
 mkswap -f /dev/zvol/zroot/swap
 swapon /dev/zvol/zroot/swap
 
 # Mount EFI part
+print "Mount EFI part"
 mkdir /mnt/boot
 mount $EFI /mnt/boot
 
