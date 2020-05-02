@@ -119,6 +119,7 @@ mount $EFI /mnt/boot
 
 # Copy ZFS cache
 mkdir -p /mnt/etc/zfs
+zpool set cachefile=/etc/zfs/zpool.cache zroot
 cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
 
 # Finish
