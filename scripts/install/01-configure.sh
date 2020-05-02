@@ -62,6 +62,7 @@ zpool create -f -o ashift=12           \
              -O encryption=aes-256-gcm \
              -O keyformat=passphrase   \
              -O keylocation=prompt     \
+             -O mountpoint=/ -R /mnt   \
              zroot $ZFS
 
 # Slash dataset
@@ -100,6 +101,9 @@ zfs create -o canmount=off -o mountpoint=/var zroot/ROOT/var
 zfs create -o canmount=off -o mountpoint=/usr zroot/ROOT/usr
 zfs create -o canmount=off -o mountpoint=/srv zroot/ROOT/srv
 zfs create                                    zroot/ROOT/var/log
+
+# Set bootfs 
+zpool set bootfs=zroot/ROOT/default zroot
 
 # Export zpool
 zfs umount -a
