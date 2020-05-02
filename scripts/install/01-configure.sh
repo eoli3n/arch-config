@@ -53,7 +53,7 @@ curl -s https://eoli3n.github.io/archzfs/init | bash
 
 # Create ZFS pool
 print "Create ZFS pool"
-zpool create -f -o ashift=12 -R /mnt zroot $ZFS
+zpool create -f -o ashift=12 zroot $ZFS
 zfs create -o encryption=aes-256-gcm -o keyformat=passphrase -o mountpoint=none zroot/encr
 
 # Slash dataset
@@ -85,10 +85,16 @@ zfs create -V 8G -b $(getconf PAGESIZE)         \
            -o com.sun:auto-snapshot=false       \
            zroot/swap
 
-# tmp
-print "Create tmp dataset"
+# /tmp
+print "Create /tmp dataset"
 zfs create -o setuid=off -o devices=off -o sync=disabled -o mountpoint=/tmp zroot/tmp
 # TODO Should i encrypt tmp ?
+
+# /var
+print "Create datasets snapshot free"
+zfs create -o canmount=off -o mountpoint=/var zroot/encr/ROOT/var
+zfs create -o canmount=off -o mountpoint=/var zroot/encr/ROOT/usr
+zfs create -o canmount=off -o mountpoint=/var zroot/encr/ROOT/srv
 
 # Enable SWAP
 mkswap -f /dev/zvol/zroot/swap
