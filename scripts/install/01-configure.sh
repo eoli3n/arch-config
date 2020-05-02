@@ -104,8 +104,14 @@ zfs create -o canmount=off -o mountpoint=/srv zroot/ROOT/srv
 zfs create                                    zroot/ROOT/var/log
 
 # Set bootfs 
-print "Set bootfs"
+print "Set ZFS bootfs"
 zpool set bootfs=zroot/ROOT/default zroot
+
+# Export and reimport zpool
+print "Export and reimport zpool"
+zfs umount -a
+zpool export zroot
+zpool import -d /dev/disk/by-id -R /mnt zroot
 
 # Enable SWAP
 print "Enable SWAP"
