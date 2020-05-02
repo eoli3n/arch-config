@@ -53,32 +53,27 @@ curl -s https://eoli3n.github.io/archzfs/init | bash
 
 # Create ZFS pool
 print "Create ZFS pool"
-zpool create -f -o ashift=12 zroot $ZFS
+zpool create -f -o ashift=12           \
+             -O acltype=posixacl       \
+             -O compression=lz4        \
+             -O relatime=on            \
+             -O xattr=sa               \
+             -O dnodesize=auto         \
+             -O encryption=aes-256-gcm \
+             -O keyformat=passphrase   \
+             -O keylocation=prompt     \
+             zroot $ZFS
 
 # Slash dataset
 print "Create slash dataset"
 zfs create -o mountpoint=none zroot/ROOT
-zfs create -o compression=lz4        \
-           -o dedup=on               \
-           -o mountpoint=/           \
-           -o acltype=posixacl       \
-           -o xattr=sa               \
-           -o atime=off              \
-           -o encryption=aes-256-gcm \
-           -o keyformat=passphrase   \
-           zroot/encr/ROOT/default
+zfs create -o dedup=on -o mountpoint=/ zroot/ROOT/default
 
 # Home dataset
 print "Create home dataset"
 zfs create -o mountpoint=none zroot/data
-zfs create -o compression=lz4        \
-           -o dedup=off              \
-           -o mountpoint=/home       \
-           -o xattr=sa               \
-           -o atime=off              \
-           -o encryption=aes-256-gcm \
-           -o keyformat=passphrase   \
-           zroot/encr/data/home
+zfs create -o dedup=on -o mountpoint=/home zroot/data/home
+zfs create -o dedup=on -o mountpoint=/root zpool/data/home/root
 
 # SWAP
 print "Create swap dataset"
@@ -90,14 +85,28 @@ zfs create -V 8G -b $(getconf PAGESIZE)         \
 
 # /tmp
 print "Create /tmp dataset"
-zfs create -o setuid=off -o devices=off -o sync=disabled -o mountpoint=/tmp zroot/tmp
-# TODO Should i encrypt tmp ?
+zfs create -o setuid=off                  \
+           -o devices=off                 \
+           -o sync=disabled               \
+           -o mountpoint=/tmp             \
+           -o com.sun:auto-snapshot=false \
+           zroot/tmp
+
+# chmod 1777 /tmp ?
 
 # /var
 print "Create datasets snapshot free"
-zfs create -o canmount=off -o mountpoint=/var zroot/encr/ROOT/var
-zfs create -o canmount=off -o mountpoint=/var zroot/encr/ROOT/usr
-zfs create -o canmount=off -o mountpoint=/var zroot/encr/ROOT/srv
+zfs create -o canmount=off -o mountpoint=/var zroot/ROOT/var
+zfs create -o canmount=off -o mountpoint=/usr zroot/ROOT/usr
+zfs create -o canmount=off -o mountpoint=/srv zroot/ROOT/srv
+zfs create                                    zroot/ROOT/var/log
+
+# Export zpool
+zfs umount -a
+zpool export zroot
+
+# Import zpool under /mnt
+zpool import -l -R /mnt zroot
 
 # Enable SWAP
 mkswap -f /dev/zvol/zroot/swap
