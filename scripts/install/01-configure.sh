@@ -113,8 +113,6 @@ zfs umount -a
 zpool export zroot
 zpool import -d /dev/disk/by-id -R /mnt -l zroot
 
-# Mount zpool
-
 # Enable SWAP
 print "Enable SWAP"
 mkswap -f /dev/zvol/zroot/swap
