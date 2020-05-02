@@ -54,27 +54,30 @@ curl -s https://eoli3n.github.io/archzfs/init | bash
 # Create ZFS pool
 print "Create ZFS pool"
 zpool create -f -o ashift=12 zroot $ZFS
-zfs create -o encryption=aes-256-gcm -o keyformat=passphrase -o mountpoint=none zroot/encr
 
 # Slash dataset
 print "Create slash dataset"
-zfs create -o mountpoint=none zroot/encr/ROOT
+zfs create -o mountpoint=none zroot/ROOT
 zfs create -o compression=lz4        \
            -o dedup=on               \
            -o mountpoint=/           \
            -o acltype=posixacl       \
            -o xattr=sa               \
            -o atime=off              \
+           -o encryption=aes-256-gcm \
+           -o keyformat=passphrase   \
            zroot/encr/ROOT/default
 
 # Home dataset
 print "Create home dataset"
-zfs create -o mountpoint=none zroot/encr/data
+zfs create -o mountpoint=none zroot/data
 zfs create -o compression=lz4        \
            -o dedup=off              \
            -o mountpoint=/home       \
            -o xattr=sa               \
            -o atime=off              \
+           -o encryption=aes-256-gcm \
+           -o keyformat=passphrase   \
            zroot/encr/data/home
 
 # SWAP
