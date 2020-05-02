@@ -63,17 +63,21 @@ zpool create -f -o ashift=12           \
              -O keyformat=passphrase   \
              -O keylocation=prompt     \
              -O normalization=formD    \
+             -O mountpoint=/           \
              -R /mnt                   \
              zroot $ZFS
 
 # Slash dataset
 print "Create slash dataset"
-zfs create -o mountpoint=none zroot/ROOT
-zfs create -o dedup=on -o mountpoint=/ zroot/ROOT/default
+zfs create -o canmount=off zroot/ROOT
+zfs create -o dedup=on                 \
+           -o mountpoint=/             \
+           -o canmount=noauto          \
+           zroot/ROOT/default 
 
 # Home dataset
 print "Create home dataset"
-zfs create -o mountpoint=none zroot/data
+zfs create -o canmount=off zroot/data
 zfs create -o dedup=on -o mountpoint=legacy zroot/data/home
 zfs create -o dedup=on -o mountpoint=/root zroot/data/home/root
 
