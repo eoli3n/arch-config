@@ -6,3 +6,4 @@ Issues :
 - kernel upgrade then try to boot a snapshot
 - test compsize
 - test suspend/resume
+- reflector as a timer
