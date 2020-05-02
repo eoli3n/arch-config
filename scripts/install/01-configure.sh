@@ -63,7 +63,7 @@ zpool create -f -o ashift=12           \
              -O keyformat=passphrase   \
              -O keylocation=prompt     \
              -O normalization=formD    \
-             -O mountpoint=/ -R /mnt   \
+             -R /mnt                   \
              zroot $ZFS
 
 # Slash dataset
