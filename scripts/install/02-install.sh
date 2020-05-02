@@ -47,7 +47,7 @@ cat > /mnt/etc/mkinitcpio.conf <<"EOF"
 MODULES=(i915 intel_agp)
 BINARIES=()
 FILES=()
-HOOKS="base udev autodetect modconf block keyboard keymap zfs filesystems")
+HOOKS=("base udev autodetect modconf block keyboard keymap zfs filesystems")
 COMPRESSION="lz4"
 EOF
 
@@ -115,6 +115,7 @@ print "Set user password"
 arch-chroot /mnt /bin/passwd user
 
 # Configure sudo
+print "Configure sudo"
 cat > /mnt/etc/sudoers <<"EOF"
 root ALL=(ALL) ALL
 user ALL=(ALL) ALL
@@ -122,6 +123,7 @@ Defaults rootpw
 EOF
 
 # Configure network
+print "Configure networking"
 cat > /mnt/etc/systemd/network/br0.netdev <<"EOF"
 [NetDev]
 Name=br0
@@ -160,20 +162,35 @@ EOF
 systemctl enable systemd-networkd --root=/mnt
 
 # Configure DNS
+print "Configure DNS"
 rm /mnt/etc/resolv.conf
 arch-chroot /mnt ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 systemctl enable systemd-resolved --root=/mnt
 
 # Configure TRIM
+print "Configure TRIM"
 systemctl enable fstrim.timer --root=/mnt
 
 # Configure tmp
+print "Configure /tmp"
 # https://wiki.archlinux.org/index.php/ZFS#/tmp
 systemctl mask tmp.mount --root=/mnt
 
+# Activate zfs
+print "Configure ZFS"
+sudo systemctl enable zfs-import-cache --root=/mnt
+sudo systemctl enable zfs-mount --root=/mnt
+sudo systemctl enable zfs-import.target --root=/mnt
+sudo systemctl enable zfs.target --root=/mnt
+
 # Umount all parts
+print "Umount all parts"
 umount /mnt/boot
+swapoff
 zfs umount -a
+
+# Export zpool
+print "Export zpool"
 zpool export zroot
 
 # Finish
