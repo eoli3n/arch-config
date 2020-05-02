@@ -128,7 +128,7 @@ mount $EFI /mnt/boot
 # Mount home part
 print "Mount EFI part"
 mkdir /mnt/home
-mount -t zfs ${SYS_ROOT}/${SYSTEM_NAME}/home /mnt/home
+mount -t zfs zroot/data/home /mnt/home
 
 # Copy ZFS cache
 print "Generate and copy zfs cache"
