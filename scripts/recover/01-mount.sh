@@ -21,9 +21,6 @@ zfs mount zroot/ROOT/default
 print "Mount other datasets"
 zfs mount -a
 
-print "Enable SWAP"
-swapon /dev/zvol/zroot/swap
-
 print "Mount EFI part"
 mount /dev/sda1 /mnt/boot
 
