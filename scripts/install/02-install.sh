@@ -92,9 +92,10 @@ timeout 10
 EOSF
   cat > /boot/loader/entries/archlinux.conf <<"EOSF"
 Title "ZFS Archlinux"
-linux   /vmlinuz-linux zfs=zroot/ROOT/default rw
+linux   /vmlinuz-linux-lts
 initrd	/intel-ucode.img
-initrd  /initramfs-linux.img
+initrd  /initramfs-linux-lts.img
+options zfs=zroot/ROOT/default rw
 EOSF
 
   # Update bootloader configuration
