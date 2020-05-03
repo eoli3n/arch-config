@@ -16,7 +16,7 @@ print "Mount slash dataset"
 zfs mount zroot/ROOT/default
 
 print "Mount other datasets"
-zfs mount -a
+zfs mount -l -a
 
 print "Enable SWAP"
 swapon /dev/zvol/zroot/swap
