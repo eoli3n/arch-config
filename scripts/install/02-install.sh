@@ -161,7 +161,7 @@ systemctl enable systemd-networkd --root=/mnt
 # Configure DNS
 print "Configure DNS"
 rm /mnt/etc/resolv.conf
-arch-chroot /mnt ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+ln -s /run/systemd/resolve/resolv.conf /mnt/etc/resolv.conf
 systemctl enable systemd-resolved --root=/mnt
 
 # Configure TRIM
@@ -179,8 +179,8 @@ sudo systemctl enable zfs.target --root=/mnt
 print "Configure zfs-mount-generator"
 mkdir -p /mnt/etc/zfs/zfs-list.cache
 touch /mnt/etc/zfs/zfs-list.cache/zroot
-zfs list -H -o name,mountpoint,canmount,atime,relatime,devices,exec,readonly,setuid,nbmand > /etc/zfs/zfs-list.cache/zroot 
-arch-chroot /mnt ln -s /usr/lib/zfs/zfs/zed.d/history_event-zfs-list-cacher.sh /etc/zfs/zed.d
+zfs list -H -o name,mountpoint,canmount,atime,relatime,devices,exec,readonly,setuid,nbmand > /mnt/etc/zfs/zfs-list.cache/zroot
+ln -s /usr/lib/zfs/zfs/zed.d/history_event-zfs-list-cacher.sh /mnt/etc/zfs/zed.d
 systemctl enable zfs-zed.service --root=/mnt
 systemctl enable zfs.target --root=/mnt
 
