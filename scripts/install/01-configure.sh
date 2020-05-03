@@ -60,7 +60,8 @@ zpool create -f -o ashift=12           \
              -O keyformat=passphrase   \
              -O keylocation=prompt     \
              -O normalization=formD    \
-             -O mountpoint=none        \
+             -O mountpoint=/           \
+             -O canmount=off           \
              -O devices=off            \
              -R /mnt                   \
              zroot $ZFS
@@ -72,32 +73,25 @@ zfs create -o mountpoint=/ -o devices=on zroot/ROOT/default
 
 # Home dataset
 print "Create home dataset"
-zfs create -o mountpoint=none   zroot/data
-zfs create -o mountpoint=/home  zroot/data/home
-zfs create -o mountpoint=/root  zroot/data/root
+zfs create -o mountpoint=/ -o canmount=off zroot/data
+zfs create                                 zroot/data/home
+zfs create                                 zroot/data/root
 
 # SWAP
-print "Create swap dataset"
-zfs create -V 8G -b $(getconf PAGESIZE)         \
-           -o logbias=throughput -o sync=always \
-           -o primarycache=metadata             \
-           -o com.sun:auto-snapshot=false       \
-           zroot/swap
-
-# /tmp
-print "Create /tmp dataset"
-zfs create -o setuid=off                  \
-           -o sync=disabled               \
-           -o mountpoint=/tmp             \
-           -o com.sun:auto-snapshot=false \
-           zroot/tmp
+#print "Create swap dataset"
+#zfs create -V 8G -b $(getconf PAGESIZE)         \
+#           -o logbias=throughput -o sync=always \
+#           -o primarycache=metadata             \
+#           -o com.sun:auto-snapshot=false       \
+#           zroot/swap
 
 # Specific datasets
 print "Create specific datasets excluded from snapshots"
-zfs create -o mountpoint=/var -o canmount=off zroot/var
-zfs create -o mountpoint=/var/log             zroot/var/log
-zfs create -o mountpoint=/var/lib/libvirt     zroot/var/lib/libvirt
-zfs create -o mountpoint=/var/lib/docker      zroot/var/lib/docker
+zfs create -o mountpoint=/var -o canmount=off     zroot/var
+zfs create -o                                     zroot/var/log
+zfs create -o mountpoint=/var/lib -o canmount=off zroot/var/lib
+zfs create -o                                     zroot/var/lib/libvirt
+zfs create -o                                     zroot/var/lib/docker
 
 # Set bootfs 
 print "Set ZFS bootfs"
@@ -110,9 +104,9 @@ zpool export zroot
 zpool import -d /dev/disk/by-id -R /mnt -l zroot
 
 # Enable SWAP
-print "Enable SWAP"
-mkswap -f /dev/zvol/zroot/swap
-swapon /dev/zvol/zroot/swap
+#print "Enable SWAP"
+#mkswap -f /dev/zvol/zroot/swap
+#swapon /dev/zvol/zroot/swap
 
 # Mount EFI part
 print "Mount EFI part"

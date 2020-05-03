@@ -171,11 +171,6 @@ systemctl enable systemd-resolved --root=/mnt
 print "Configure TRIM"
 systemctl enable fstrim.timer --root=/mnt
 
-# Configure tmp
-print "Configure /tmp"
-# https://wiki.archlinux.org/index.php/ZFS#/tmp
-systemctl mask tmp.mount --root=/mnt
-
 # Activate zfs
 print "Configure ZFS"
 sudo systemctl enable zfs-import-cache --root=/mnt
