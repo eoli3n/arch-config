@@ -15,10 +15,10 @@ reflector --country France --country Germany --latest 6 --protocol https --sort 
 print "Install Archlinux"
 pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware intel-ucode efibootmgr vim git ansible connman wpa_supplicant
 
-# Generate fstab
-print "Generate fstab"
-genfstab -U -p /mnt >> /mnt/etc/fstab
-
+# Generate fstab excluding ZFS entries
+print "Generate fstab excluding ZFS entries"
+genfstab -U | grep -v zroot > /mnt/etc/fstab
+ 
 # Set hostname
 echo "Please enter hostname :"
 read hostname
