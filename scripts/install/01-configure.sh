@@ -60,7 +60,7 @@ zpool create -f -o ashift=12           \
              -O keyformat=passphrase   \
              -O keylocation=prompt     \
              -O normalization=formD    \
-             -O mountpoint=/           \
+             -O mountpoint=non         \
              -O canmount=off           \
              -O devices=off            \
              -R /mnt                   \
@@ -68,14 +68,17 @@ zpool create -f -o ashift=12           \
 
 # Slash dataset
 print "Create slash dataset"
-zfs create -o mountpoint=none            zroot/ROOT
-zfs create -o mountpoint=/ -o devices=on zroot/ROOT/default 
+zfs create -o mountpoint=none                               zroot/ROOT
+zfs create -o mountpoint=/ -o devices=on -o canmount=noauto zroot/ROOT/default 
+
+# Manually mount slash dataset
+zfs mount zroot/ROOT/default
 
 # Home dataset
 print "Create home dataset"
 zfs create -o mountpoint=/ -o canmount=off zroot/data
 zfs create                                 zroot/data/home
-zfs create                                 zroot/data/root
+zfs create -o mountpoint=/root             zroot/data/home/root
 
 # SWAP
 #print "Create swap dataset"
@@ -99,9 +102,11 @@ zpool set bootfs=zroot/ROOT/default zroot
 
 # Export and reimport zpool
 print "Export and reimport zpool"
+zfs umount zroot/ROOT/default
 zfs umount -a
 zpool export zroot
 zpool import -d /dev/disk/by-id -R /mnt -l zroot
+zfs mount zroot/ROOT/default
 
 # Enable SWAP
 #print "Enable SWAP"

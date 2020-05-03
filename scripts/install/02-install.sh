@@ -6,9 +6,6 @@ print () {
     echo -e "\n\033[1m> $1\033[0m\n"
 }
 
-# Configure /tmp
-#chmod 1777 /mnt/tmp
-
 # Sort mirrors
 print "Sort mirrors"
 pacman -Sy reflector --noconfirm
@@ -181,8 +178,6 @@ sudo systemctl enable zfs.target --root=/mnt
 # Umount all parts
 print "Umount all parts"
 umount /mnt/boot
-umount /mnt/home
-swapoff /dev/zvol/zroot/swap
 zfs umount -a
 
 # Export zpool

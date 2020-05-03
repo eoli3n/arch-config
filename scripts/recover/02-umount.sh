@@ -10,6 +10,9 @@ swapoff /dev/zvol/zroot/swap
 print "Umount /boot"
 umount /mnt/boot
 
+print "Umount slash dataset"
+zfs zroot/ROOT/default
+
 print "Umount zfs"
 zfs umount -a
 
