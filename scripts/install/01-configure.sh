@@ -60,7 +60,7 @@ zpool create -f -o ashift=12           \
              -O keyformat=passphrase   \
              -O keylocation=prompt     \
              -O normalization=formD    \
-             -O mountpoint=non         \
+             -O mountpoint=none        \
              -O canmount=off           \
              -O devices=off            \
              -R /mnt                   \
@@ -102,8 +102,6 @@ zpool set bootfs=zroot/ROOT/default zroot
 
 # Export and reimport zpool
 print "Export and reimport zpool"
-zfs umount zroot/ROOT/default
-zfs umount -a
 zpool export zroot
 zpool import -d /dev/disk/by-id -R /mnt -l zroot
 zfs mount zroot/ROOT/default
