@@ -15,9 +15,6 @@ zpool import -d /dev/disk/by-id -R /mnt -l zroot
 print "Enable SWAP"
 swapon /dev/zvol/zroot/swap
 
-print "Mount home part"
-mount -t zfs zroot/data/home /mnt/home
-
 print "Mount EFI part"
 mount /dev/sda1 /mnt/boot
 
