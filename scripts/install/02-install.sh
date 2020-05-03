@@ -17,7 +17,7 @@ pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware intel-u
 
 # Generate fstab excluding ZFS entries
 print "Generate fstab excluding ZFS entries"
-genfstab -U | grep -v zroot > /mnt/etc/fstab
+genfstab -U /mnt | grep -v "zroot" | tr -s '\n'  > /mnt/etc/fstab
  
 # Set hostname
 echo "Please enter hostname :"
