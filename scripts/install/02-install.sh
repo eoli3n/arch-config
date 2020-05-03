@@ -175,6 +175,15 @@ sudo systemctl enable zfs-mount --root=/mnt
 sudo systemctl enable zfs-import.target --root=/mnt
 sudo systemctl enable zfs.target --root=/mnt
 
+# Configure zfs-mount-generator
+print "Configure zfs-mount-generator"
+mkdir -p /mnt/etc/zfs/zfs-list.cache
+touch /mnt/etc/zfs/zfs-list.cache/zroot
+zfs list -H -o name,mountpoint,canmount,atime,relatime,devices,exec,readonly,setuid,nbmand > /etc/zfs/zfs-list.cache/zroot 
+arch-chroot /mnt ln -s /usr/lib/zfs/zfs/zed.d/history_event-zfs-list-cacher.sh /etc/zfs/zed.d
+systemctl enable zfs-zed.service --root=/mnt
+systemctl enable zfs.target --root=/mnt
+
 # Umount all parts
 print "Umount all parts"
 umount /mnt/boot
