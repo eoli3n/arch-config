@@ -71,6 +71,10 @@ zfs create -o dedup=on                 \
            -o canmount=noauto          \
            zroot/ROOT/default 
 
+# Mount slash dataset manually
+print "Mount slash dataset"
+zfs mount zroot/ROOT/default
+
 # Home dataset
 print "Create home dataset"
 zfs create -o canmount=off zroot/data
@@ -115,10 +119,6 @@ zpool import -d /dev/disk/by-id -R /mnt -l zroot
 print "Enable SWAP"
 mkswap -f /dev/zvol/zroot/swap
 swapon /dev/zvol/zroot/swap
-
-# Mount slash dataset
-print "Mount slash dataset"
-zfs mount zroot/ROOT/default
 
 # Mount EFI part
 print "Mount EFI part"
