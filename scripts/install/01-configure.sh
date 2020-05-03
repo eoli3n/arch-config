@@ -94,8 +94,6 @@ zfs create -o setuid=off                  \
 
 # Specific datasets
 print "Create specific datasets excluded from snapshots"
-zfs create -o mountpoint=/usr zroot/usr
-zfs create -o mountpoint=/srv zroot/srv
 zfs create -o mountpoint=/var zroot/var
 zfs create                    zroot/var/log
 

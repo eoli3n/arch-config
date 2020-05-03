@@ -47,7 +47,7 @@ cat > /mnt/etc/mkinitcpio.conf <<"EOF"
 MODULES=(i915 intel_agp)
 BINARIES=()
 FILES=()
-HOOKS=(base udev autodetect modconf block keyboard keymap zfs usr filesystems)
+HOOKS=(base udev autodetect modconf block keyboard keymap zfs filesystems)
 COMPRESSION="lz4"
 EOF
 
