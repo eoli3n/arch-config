@@ -184,6 +184,10 @@ ln -s /usr/lib/zfs/zfs/zed.d/history_event-zfs-list-cacher.sh /mnt/etc/zfs/zed.d
 systemctl enable zfs-zed.service --root=/mnt
 systemctl enable zfs.target --root=/mnt
 
+# Generate hostid
+print "Generate hostid"
+arch-chroot /mnt zgenhostid $(hostid)
+
 # Umount all parts
 print "Umount all parts"
 umount /mnt/boot
