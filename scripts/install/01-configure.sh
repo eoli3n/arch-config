@@ -91,10 +91,10 @@ zfs create -o mountpoint=/root             zroot/data/home/root
 # Specific datasets
 print "Create specific datasets excluded from snapshots"
 zfs create -o mountpoint=/var -o canmount=off     zroot/var
-zfs create -o                                     zroot/var/log
+zfs create                                        zroot/var/log
 zfs create -o mountpoint=/var/lib -o canmount=off zroot/var/lib
-zfs create -o                                     zroot/var/lib/libvirt
-zfs create -o                                     zroot/var/lib/docker
+zfs create                                        zroot/var/lib/libvirt
+zfs create                                        zroot/var/lib/docker
 
 # Set bootfs 
 print "Set ZFS bootfs"
