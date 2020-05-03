@@ -94,8 +94,10 @@ zfs create -o setuid=off                  \
 
 # Specific datasets
 print "Create specific datasets excluded from snapshots"
-zfs create -o mountpoint=/var zroot/var
-zfs create                    zroot/var/log
+zfs create -o mountpoint=/var -o canmount=off zroot/var
+zfs create -o mountpoint=/var/log             zroot/var/log
+zfs create -o mountpoint=/var/lib/libvirt     zroot/var/lib/libvirt
+zfs create -o mountpoint=/var/lib/docker      zroot/var/lib/docker
 
 # Set bootfs 
 print "Set ZFS bootfs"
