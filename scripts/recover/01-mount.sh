@@ -13,7 +13,7 @@ print "Import zpool"
 zpool import -d /dev/disk/by-id -R /mnt zroot -N
 
 print "Mount slash dataset"
-zfs mount zroot/ROOT/default
+zfs mount -l zroot/ROOT/default
 
 print "Mount other datasets"
 zfs mount -l -a

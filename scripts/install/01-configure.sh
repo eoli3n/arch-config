@@ -104,7 +104,7 @@ zpool set bootfs=zroot/ROOT/default zroot
 print "Export and reimport zpool"
 zpool export zroot
 zpool import -d /dev/disk/by-id -R /mnt zroot -N
-zfs mount zroot/ROOT/default
+zfs mount -l zroot/ROOT/default
 zfs mount -l -a
 
 # Enable SWAP
