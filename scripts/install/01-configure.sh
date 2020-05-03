@@ -61,13 +61,14 @@ zpool create -f -o ashift=12           \
              -O keylocation=prompt     \
              -O normalization=formD    \
              -O mountpoint=none        \
+             -O devices=off            \
              -R /mnt                   \
              zroot $ZFS
 
 # Slash dataset
 print "Create slash dataset"
-zfs create -o mountpoint=none zroot/ROOT
-zfs create -o mountpoint=/    zroot/ROOT/default 
+zfs create -o mountpoint=none            zroot/ROOT
+zfs create -o mountpoint=/ -o devices=on zroot/ROOT/default 
 
 # Home dataset
 print "Create home dataset"
@@ -86,7 +87,6 @@ zfs create -V 8G -b $(getconf PAGESIZE)         \
 # /tmp
 print "Create /tmp dataset"
 zfs create -o setuid=off                  \
-           -o devices=off                 \
            -o sync=disabled               \
            -o mountpoint=/tmp             \
            -o com.sun:auto-snapshot=false \
