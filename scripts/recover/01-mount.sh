@@ -10,7 +10,7 @@ print "Load ZFS module"
 modprobe zfs
 
 print "Import zpool"
-zpool import -d /dev/disk/by-id -R /mnt -l zroot -N
+zpool import -d /dev/disk/by-id -R /mnt zroot -N
 
 print "Mount slash dataset"
 zfs mount zroot/ROOT/default
