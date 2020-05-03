@@ -25,6 +25,7 @@ echo # move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     # Clear disk
+    mdadm --zero-superblock --force $DISK
     wipefs -af $DISK
     sgdisk -Zo $DISK
 fi
