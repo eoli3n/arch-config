@@ -92,12 +92,12 @@ zfs create -o setuid=off                  \
            -o com.sun:auto-snapshot=false \
            zroot/tmp
 
-# /var
+# Specific datasets
 print "Create specific datasets excluded from snapshots"
-zfs create -o canmount=off -o mountpoint=/var zroot/ROOT/var
-zfs create -o canmount=off -o mountpoint=/usr zroot/ROOT/usr
-zfs create -o canmount=off -o mountpoint=/srv zroot/ROOT/srv
-zfs create                                    zroot/ROOT/var/log
+zfs create -o mountpoint=/usr zroot/usr
+zfs create -o mountpoint=/srv zroot/srv
+zfs create -o mountpoint=/var zroot/var
+zfs create                    zroot/var/log
 
 # Set bootfs 
 print "Set ZFS bootfs"
