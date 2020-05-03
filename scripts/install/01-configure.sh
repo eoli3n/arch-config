@@ -94,8 +94,6 @@ zfs create -o setuid=off                  \
            -o com.sun:auto-snapshot=false \
            zroot/tmp
 
-# chmod 1777 /tmp ?
-
 # /var
 print "Create specific datasets excluded from snapshots"
 zfs create -o canmount=off -o mountpoint=/var zroot/ROOT/var
@@ -117,6 +115,10 @@ zpool import -d /dev/disk/by-id -R /mnt -l zroot
 print "Enable SWAP"
 mkswap -f /dev/zvol/zroot/swap
 swapon /dev/zvol/zroot/swap
+
+# Mount slash dataset
+print "Mount slash dataset"
+zfs mount zroot/ROOT/default
 
 # Mount EFI part
 print "Mount EFI part"
