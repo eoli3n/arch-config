@@ -191,6 +191,7 @@ arch-chroot /mnt zgenhostid $(hostid)
 # Umount all parts
 print "Umount all parts"
 umount /mnt/boot
+umount /mnt/efi
 zfs umount -a
 
 # Export zpool

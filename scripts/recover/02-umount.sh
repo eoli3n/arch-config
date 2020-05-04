@@ -6,6 +6,7 @@ print () {
 
 print "Umount /boot"
 umount /mnt/boot
+umount /mnt/efi
 
 print "Export zpool"
 zpool export zroot

@@ -22,7 +22,8 @@ print "Mount other datasets"
 zfs mount -a
 
 print "Mount EFI part"
-mount /dev/sda1 /mnt/boot
+mount /dev/sda1 /mnt/efi
+mount --bind /mnt/efi/env/org.zectl-default /mnt/boot
 
 # Finish
 echo -e "\e[32mAll OK"
