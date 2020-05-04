@@ -98,7 +98,7 @@ zfs create                                        zroot/var/lib/docker
 
 # Set bootfs 
 print "Set ZFS bootfs"
-zpool set bootfs=zroot/ROOT/default zroot
+zpool set bootfs="zroot/ROOT/default" zroot
 
 # Export and reimport zpool
 print "Export and reimport zpool"
@@ -115,8 +115,14 @@ zfs mount -a
 
 # Mount EFI part
 print "Mount EFI part"
+mkdir /mnt/efi
+mount $EFI /mnt/efi
+
+# Prepare zectl
+print "Prepare zectl"
+mkdir -p /mnt/efi/env/org.zectl-default
 mkdir /mnt/boot
-mount $EFI /mnt/boot
+mount --bind /mnt/efi/env/org.zectl-default /mnt/boot
 
 # Copy ZFS cache
 print "Generate and copy zfs cache"

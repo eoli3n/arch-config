@@ -84,15 +84,15 @@ EOSF
   # Generates boot entries
   mkdir -p /boot/loader/entries
   cat > /boot/loader/loader.conf <<"EOSF"
-default archlinux
+default org.zectl-default
 timeout 10
 EOSF
-  cat > /boot/loader/entries/archlinux.conf <<"EOSF"
-Title "ZFS Archlinux"
-linux   /vmlinuz-linux-lts
-initrd	/intel-ucode.img
-initrd  /initramfs-linux-lts.img
-options zfs=zroot/ROOT/default rw
+  cat > /boot/loader/entries/org.zectl-default.conf <<"EOSF"
+title           Arch Linux ZFS Default
+linux           /env/org.zectl-default/vmlinuz-linux-lts
+initrd          /env/org.zectl-default/intel-ucode.img
+initrd          /env/org.zectl-default/initramfs-linux-lts.img
+options         zfs=zpool/ROOT/default rw
 EOSF
 
   # Update bootloader configuration
