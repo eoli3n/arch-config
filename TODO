@@ -7,3 +7,5 @@ Issues :
 - test compsize
 - suspend/resume with zfs
 - reflector as a timer
+
+- test zfs: install reboot write on /var/log/test.log reboot recover / 01-mount
