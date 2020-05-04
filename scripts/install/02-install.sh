@@ -92,7 +92,7 @@ title           Arch Linux ZFS Default
 linux           /env/org.zectl-default/vmlinuz-linux-lts
 initrd          /env/org.zectl-default/intel-ucode.img
 initrd          /env/org.zectl-default/initramfs-linux-lts.img
-options         zfs=zpool/ROOT/default rw
+options         zfs=zroot/ROOT/default rw
 EOSF
 
   # Update bootloader configuration
