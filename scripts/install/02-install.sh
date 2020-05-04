@@ -79,15 +79,15 @@ EOSF
   mkinitcpio -P
 
   # Install bootloader
-  bootctl --path=/boot install
+  bootctl --path=/efi install
 
   # Generates boot entries
-  mkdir -p /boot/loader/entries
-  cat > /boot/loader/loader.conf <<"EOSF"
+  mkdir -p /efi/loader/entries
+  cat > /efi/loader/loader.conf <<"EOSF"
 default org.zectl-default
 timeout 10
 EOSF
-  cat > /boot/loader/entries/org.zectl-default.conf <<"EOSF"
+  cat > /efi/loader/entries/org.zectl-default.conf <<"EOSF"
 title           Arch Linux ZFS Default
 linux           /env/org.zectl-default/vmlinuz-linux-lts
 initrd          /env/org.zectl-default/intel-ucode.img
@@ -96,7 +96,7 @@ options         zfs=zpool/ROOT/default rw
 EOSF
 
   # Update bootloader configuration
-  bootctl --path=/boot update
+  bootctl --path=/efi update
 
   # Create user
   useradd -m user
