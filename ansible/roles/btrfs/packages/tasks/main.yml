@@ -1,0 +1,5 @@
+---
+- name: install compsize
+  pacman:
+    name: compsize
+    state: present
