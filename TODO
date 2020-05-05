@@ -15,3 +15,5 @@ Issues :
 - periodic trim with timer when host is down ? https://unix.stackexchange.com/a/352596
 - test resume in GRUB_CMDLINE_LINUX
 - reflector systemd timer
+
+- mpv --speed=1.33 'https://www.youtube.com/watch?v=mLbtJQmfumI'
