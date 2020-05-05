@@ -1,10 +1,11 @@
 ### Features
 
-- BTRFS over LUKS
-  - Zstd compression
-  - Bootable BTRFS snapshots
-- Encrypted swap
-- Separated /boot
+- ZFS root 
+  - native encryption
+  - lz4 compression on all datasets
+  - Boot Environments managed with [zectl](https://github.com/johnramsden/zectl)
+- No swap
+- Separated VFAT /boot
 - [Netboot recovery](https://eoli3n.github.io/archlinux/2020/04/25/recovery.html)
 
 ### Install
@@ -13,6 +14,6 @@
 ```
 git clone --recursive https://github.com/eoli3n/arch-config
 ```
-- Run OS installer at [scripts/install/](scripts/install/)
+- Run OS installer at [scripts/{zfs,btrfs}/install/](scripts/)
 - Install packages and configurations with [ansible](ansible)
 - Use [dotfiles](https://github.com/eoli3n/dotfiles)
