@@ -1,0 +1,34 @@
+---
+- hosts: all
+  become: yes
+
+  vars:
+    user: user
+    shell: /usr/bin/fish
+    cmdline: ""
+
+  pre_tasks:
+
+    # Fix full /tmp when installing lots of AUR
+    - name: temp increase /tmp size
+      tags: always
+      shell: mount -o remount,size=5G,noatime /tmp
+
+    - name: include guest role
+      tags: guest
+      include_role:
+        name: guest
+      when: ansible_virtualization_role == "guest"
+
+  roles:
+    - { role: btrfs/grub, tags: boot }
+    - { role: btrfs/packages, tags: btrfs }
+    - { role: btrfs/snapper, tags: snapper }
+    - { role: pacman, tags: pacman }
+    - { role: aur, tags: aur }
+    - { role: base, tags: base }
+    - { role: desktop, tags: desktop }
+    - { role: virtualization, tags: virtualization }
+    - { role: containers, tags: containers }
+    - { role: recovery, tags: recovery }
+
