@@ -21,12 +21,11 @@
       when: ansible_virtualization_role == "guest"
 
   roles:
-    - { role: boot, tags: boot }
+    - { role: zfs/systemd-boot, tags: boot }
     - { role: pacman, tags: pacman }
     - { role: aur, tags: aur }
     - { role: base, tags: base }
     - { role: desktop, tags: desktop }
-    - { role: snapper, tags: snapper }
     - { role: virtualization, tags: virtualization }
     - { role: containers, tags: containers }
     - { role: recovery, tags: recovery }
