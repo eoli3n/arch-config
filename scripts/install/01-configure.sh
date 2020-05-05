@@ -76,9 +76,9 @@ zfs mount zroot/ROOT/default
 
 # Home dataset
 print "Create home dataset"
-zfs create -o mountpoint=/     zroot/data
-zfs create                     zroot/data/home
-zfs create -o mountpoint=/root zroot/data/home/root
+zfs create -o mountpoint=/ -o canmount=off zroot/data
+zfs create                                 zroot/data/home
+zfs create -o mountpoint=/root             zroot/data/home/root
 
 # SWAP
 #print "Create swap dataset"
