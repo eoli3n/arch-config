@@ -14,6 +14,7 @@
 - Bootable BTRFS snapshot managed with [snapper](https://github.com/openSUSE/snapper) and [grub-btrfs](https://github.com/Antynea/grub-btrfs)
 - Encrypted swap
 - Separated VFAT /boot
+- [Netboot recovery](https://eoli3n.github.io/archlinux/2020/04/25/recovery.html)
 
 ### Install
 
