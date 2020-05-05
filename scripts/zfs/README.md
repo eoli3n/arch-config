@@ -6,6 +6,8 @@
 - sda2
   ZFS pool
 
+No swap
+
 ### Install
 
 Boot latest archlinux iso.

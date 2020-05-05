@@ -5,7 +5,7 @@
   vars:
     user: user
     shell: /usr/bin/fish
-    cmdline: "resume=/dev/mapper/swap"
+    cmdline: ""
 
   pre_tasks:
 
@@ -21,7 +21,7 @@
       when: ansible_virtualization_role == "guest"
 
   roles:
-    - { role: zfs/systemd-boot, tags: boot }
+    - { role: zfs/systemd-boot-zectl, tags: boot }
     - { role: pacman, tags: pacman }
     - { role: aur, tags: aur }
     - { role: base, tags: base }

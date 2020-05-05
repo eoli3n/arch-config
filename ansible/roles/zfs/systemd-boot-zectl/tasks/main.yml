@@ -1,0 +1,10 @@
+---
+- name: systemd-boot loader
+  copy:
+    src: loader.conf
+    dest: /efi/loader/
+
+- name: systemd-boot entry
+  template:
+    src: org.zectl-default.j2
+    dest: /efi/loader/entries/org.zectl-default.conf
