@@ -179,7 +179,7 @@ sudo systemctl enable zfs.target --root=/mnt
 print "Configure zfs-mount-generator"
 mkdir -p /mnt/etc/zfs/zfs-list.cache
 touch /mnt/etc/zfs/zfs-list.cache/zroot
-zfs list -H -o name,mountpoint,canmount,atime,relatime,devices,exec,readonly,setuid,nbmand > /mnt/etc/zfs/zfs-list.cache/zroot
+zfs list -H -o name,mountpoint,canmount,atime,relatime,devices,exec,readonly,setuid,nbmand | sed 's/\/mnt//' > /mnt/etc/zfs/zfs-list.cache/zroot
 ln -s /usr/lib/zfs/zfs/zed.d/history_event-zfs-list-cacher.sh /mnt/etc/zfs/zed.d
 systemctl enable zfs-zed.service --root=/mnt
 systemctl enable zfs.target --root=/mnt
