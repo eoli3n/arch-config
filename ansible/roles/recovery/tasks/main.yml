@@ -11,13 +11,13 @@
 
 - name: create efi netboot dir
   file:
-    path: /boot/EFI/netboot
+    path: /efi/EFI/netboot
     state: directory
 
 - name: copy efi netboot file
   copy:
     src: /usr/share/ipxe-netboot/ipxe.efi
-    dest: /boot/EFI/netboot/
+    dest: /efi/EFI/netboot/
 
 - name: create custom grub entry
   copy:

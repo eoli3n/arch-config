@@ -3,3 +3,10 @@
   pacman:
     name: compsize
     state: present
+
+- name: create /efi /boot bind mount
+  lineinfile:
+    path: /etc/fstab
+    regexp: '/efi.*'
+    line: '/efi	/boot     	none      	rw,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro,bind	0 0'
+    state: present
