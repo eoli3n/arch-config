@@ -77,7 +77,7 @@
       - downgrade
       - lf
       - light-git
-      - mindustry-git
+      - mindustry-bin
       - minecraft-launcher
       - molotov
       - openvpn-update-systemd-resolved
