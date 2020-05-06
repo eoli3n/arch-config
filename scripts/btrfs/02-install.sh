@@ -145,6 +145,7 @@ Name=wl*
 RouteMetric=20
 EOF
 systemctl enable systemd-networkd --root=/mnt
+systemctl enable connman --root=/mnt
 
 # Configure DNS
 rm /mnt/etc/resolv.conf
