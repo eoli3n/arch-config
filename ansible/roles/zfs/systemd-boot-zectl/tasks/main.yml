@@ -1,4 +1,10 @@
 ---
+- name: install zectl
+  become: no
+  aur:
+    name: zectl
+    skip_installed: true
+
 - name: systemd-boot loader
   copy:
     src: loader.conf

@@ -21,11 +21,11 @@
       when: ansible_virtualization_role == "guest"
 
   roles:
+    - { role: pacman, tags: pacman }
+    - { role: aur, tags: aur }
     - { role: btrfs/grub, tags: boot }
     - { role: btrfs/packages, tags: btrfs }
     - { role: btrfs/snapper, tags: snapper }
-    - { role: pacman, tags: pacman }
-    - { role: aur, tags: aur }
     - { role: base, tags: base }
     - { role: desktop, tags: desktop }
     - { role: virtualization, tags: virtualization }
