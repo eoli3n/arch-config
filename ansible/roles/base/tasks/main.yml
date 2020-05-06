@@ -13,6 +13,7 @@
       - rsync
       - git
       - vi
+      - man
       - neovim
       - screen
       - tree
