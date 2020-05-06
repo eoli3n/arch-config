@@ -50,3 +50,6 @@
   user:
     name: '{{user}}'
     shell: '{{shell}}'
+
+- name: set timezone
+  shell: timedatectl set-timezone Europe/Paris
