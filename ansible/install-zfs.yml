@@ -23,10 +23,10 @@
   roles:
     - { role: pacman, tags: pacman }
     - { role: aur, tags: aur }
-    - { role: zfs/systemd-boot-zectl, tags: boot }
     - { role: base, tags: base }
     - { role: desktop, tags: desktop }
     - { role: virtualization, tags: virtualization }
     - { role: containers, tags: containers }
     - { role: recovery, tags: recovery }
+    - { role: zfs/systemd-boot-zectl, tags: boot }
 

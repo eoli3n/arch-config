@@ -23,7 +23,6 @@
   roles:
     - { role: pacman, tags: pacman }
     - { role: aur, tags: aur }
-    - { role: btrfs/grub, tags: boot }
     - { role: btrfs/packages, tags: btrfs }
     - { role: btrfs/snapper, tags: snapper }
     - { role: base, tags: base }
@@ -31,4 +30,4 @@
     - { role: virtualization, tags: virtualization }
     - { role: containers, tags: containers }
     - { role: recovery, tags: recovery }
-
+    - { role: btrfs/grub, tags: boot }

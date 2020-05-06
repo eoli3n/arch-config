@@ -28,3 +28,9 @@
     src: linux.preset
     dest: /etc/mkinitcpio.d/
   notify: generates initramfs
+
+- name: create custom grub entry
+  copy:
+    src: 40_custom
+    dest: /etc/grub.d
+  notify: update grub
