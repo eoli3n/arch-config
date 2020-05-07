@@ -30,6 +30,7 @@
       - pulseaudio-alsa
       - pavucontrol
       - pamixer
+      - alsa-utils
     state: present
 
 - name: install applications packages
