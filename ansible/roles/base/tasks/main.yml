@@ -39,6 +39,7 @@
       - fwupd
       - compsize
       - shellcheck
+      - oath-toolkit
     state: present
 
 - name: Configure root
