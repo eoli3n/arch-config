@@ -33,6 +33,7 @@
 - name: install applications packages
   pacman:
     name:
+      - feh
       - alacritty
       - code
       - evince
