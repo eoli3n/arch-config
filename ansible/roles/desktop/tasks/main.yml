@@ -7,11 +7,12 @@
       - xorg-server-xwayland
       - waybar
       - mako
-      - kanshi
-      - grim
-      - slurp
-      - wl-clipboard
-      - wofi
+      - kanshi # autorandr for wayland
+      - grim # screenshots
+      - slurp # region selector
+      - wl-clipboard # clipboard manager
+      - wofi # rofi for wayland
+      - xdg-user-dirs
     state: present
 
 - name: install video packages
@@ -33,25 +34,25 @@
 - name: install applications packages
   pacman:
     name:
-      - feh
-      - alacritty
-      - code
-      - evince
+      - feh # img visualizer
+      - alacritty # terminal emulator
+      - code # code editor
+      - evince # pdf viewer
       - firefox
       - firefox-i18n-fr
-      - gimp
-      - kolourpaint
-      - lollypop
-      - lxappearance
-      - mpv
-      - thunar
+      - gimp # img editor
+      - kolourpaint # img editor
+      - lollypop # music player
+      - lxappearance # theme manager
+      - mpv # video player
+      - thunar # file manager
       - openvpn
-      - playerctl
-      - rdesktop
-      - steam
-      - transmission-gtk
-      - variety
-      - x2goclient
+      - playerctl # music player cli controller
+      - rdesktop # remote desktop client
+      - steam # games manager
+      - transmission-gtk # torrent downloader
+      - variety # random backgrounds
+      - x2goclient 
       - youtube-dl
     state: present
 
@@ -67,30 +68,29 @@
   aur:
     skip_installed: true
     name:
-      # Sway tools
-      - wdisplays-git
-      - wf-recorder-git
-      - wob
       - adapta-gtk-theme #https://github.com/Alexays/Waybar/issues/515
-      - connman-gtk
-      - equilux-theme
-      - gnome-ssh-askpass2
+      - equilux-theme 
+      - paper-icon-theme
+      - wdisplays-git # arandr for wayland
+      - wf-recorder-git # screen recorder for wayland
+      - swaylock-fancy-git # locker for wayland
+      - wob # bars for wayland
+      - connman-gtk # connman gtk gui
+      - gnome-ssh-askpass2 # ssh askpass gui
       - google-chrome
       - laptop-mode-tools
-      - adb-sync-git
-      - downgrade
-      - lf
-      - light-git
-      - mindustry-bin
-      - minecraft-launcher
-      - molotov
-      - openvpn-update-systemd-resolved
+      - adb-sync-git # android dir sync
+      - downgrade # package downgrader
+      - lf # cli file manager
+      - light-git # brightness manager
+      - mindustry-bin # game
+      - minecraft-launcher # game
+      - pokerth # game
+      - molotov # french tv wrapper
+      - openvpn-update-systemd-resolved # TORM ?
       - otf-font-awesome
-      - paper-icon-theme
-      - pastel
-      - pokerth
-      - spotify
-      - starleaf-breeze
-      - swaylock-fancy-git
+      - pastel # color viewer
+      - spotify # music player
       #- tiny-irc-client-git
+      - starleaf-breeze
       - zoom
