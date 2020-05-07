@@ -73,6 +73,7 @@
       - paper-icon-theme
       - wdisplays-git # arandr for wayland
       - wf-recorder-git # screen recorder for wayland
+      - grimshot-git # grim+slurp wrapper
       - swaylock-fancy-git # locker for wayland
       - wob # bars for wayland
       - connman-gtk # connman gtk gui
