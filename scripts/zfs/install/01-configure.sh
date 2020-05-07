@@ -68,8 +68,8 @@ zpool create -f -o ashift=12           \
 
 # Slash dataset
 print "Create slash dataset"
-zfs create -o mountpoint=none                               zroot/ROOT
-zfs create -o mountpoint=/ -o canmount=noauto zroot/ROOT/default 
+zfs create -o mountpoint=none -o canmount=off    zroot/ROOT
+zfs create -o mountpoint=/    -o canmount=noauto zroot/ROOT/default 
 
 # Manually mount slash dataset
 zfs mount zroot/ROOT/default
