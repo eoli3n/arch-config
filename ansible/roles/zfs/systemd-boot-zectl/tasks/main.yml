@@ -2,7 +2,7 @@
 - name: install zectl
   become: no
   aur:
-    name: zectl
+    name: zectl-git
     skip_installed: true
 
 - name: systemd-boot loader
