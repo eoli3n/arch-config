@@ -53,6 +53,7 @@
       - steam # games manager
       - transmission-gtk # torrent downloader
       - variety # random backgrounds
+      - papirus-icon-theme # icon theme
       - x2goclient 
       - youtube-dl
     state: present
@@ -71,7 +72,6 @@
     name:
       - adapta-gtk-theme #https://github.com/Alexays/Waybar/issues/515
       - equilux-theme 
-      - paper-icon-theme
       - wdisplays-git # arandr for wayland
       - wf-recorder-git # screen recorder for wayland
       - grimshot-git # grim+slurp wrapper
