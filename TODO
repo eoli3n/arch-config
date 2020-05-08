@@ -16,4 +16,4 @@ Issues :
 - test resume in GRUB_CMDLINE_LINUX
 - reflector systemd timer
 
-- mpv --speed=1.33 'https://www.youtube.com/watch?v=mLbtJQmfumI'
+- zectl not working : see https://github.com/johnramsden/zectl/issues/14

@@ -36,7 +36,7 @@
 - name: install applications packages
   pacman:
     name:
-      - feh # img visualizer
+      - imv # img visualizer
       - alacritty # terminal emulator
       - code # code editor
       - evince # pdf viewer
