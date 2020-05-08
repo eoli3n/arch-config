@@ -9,7 +9,7 @@ For each:
 
 ``02-install.sh`` will
 - Configure mirrors
-- Install archlinux and kernel
+- Install Arch Linux and kernel
 - Generate initramfs
 - Configure hostname, locales, keymap, network
 - Install and configure bootloader

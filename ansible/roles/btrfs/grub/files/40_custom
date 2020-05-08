@@ -7,7 +7,7 @@ if [ ${grub_platform} == "efi" ]; then
 	menuentry "Firmware setup" {
 		fwsetup
 	}
-	menuentry "Archlinux Netboot" {
+	menuentry "Arch Linux Netboot" {
 		insmod fat
 		insmod chain
 		search --no-floppy --set=root --file /EFI/netboot/ipxe.efi
