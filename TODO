@@ -1,19 +1,16 @@
-Issues : 
+# VIRT
 - virtio-gpu : https://bbs.archlinux.org/viewtopic.php?pid=1901266#p1901266
+
+# BTRFS
 - RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
 
-- zectl
-- hardware acceleration packages
-- test compsize
-- suspend/resume with zfs
-- reflector as a timer
-
-- test zfs: install reboot write on /var/log/test.log reboot recover / 01-mount
-
-
-- solve locale grub : https://forums.archlinux.fr/viewtopic.php?t=13830
-- periodic trim with timer when host is down ? https://unix.stackexchange.com/a/352596
-- test resume in GRUB_CMDLINE_LINUX
-- reflector systemd timer
-
+# ZFS
 - zectl not working : see https://github.com/johnramsden/zectl/issues/14
+- periodic trim with timer when host is down ? https://unix.stackexchange.com/a/352596
+- zfs autotrim ?
+- zfs autoscrub ?
+- zfs hibernate without swap ?
+
+# SERVICES
+- hardware acceleration packages
+- reflector as a systemd timer
