@@ -5,6 +5,11 @@
     name: zectl-git
     skip_installed: true
 
+- name: set zectl bootloader
+  shell: zectl set bootloader=systemdboot
+  args:
+    creates: /efi/loader/entries/org.zectl-default.conf
+
 - name: systemd-boot loader
   copy:
     src: loader.conf
