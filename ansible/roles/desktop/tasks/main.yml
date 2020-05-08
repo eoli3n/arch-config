@@ -11,7 +11,6 @@
       - grim # screenshots
       - slurp # region selector
       - wl-clipboard # clipboard manager
-      - wofi-hg # rofi for wayland
       - xdg-user-dirs
     state: present
 
@@ -76,6 +75,7 @@
       - wdisplays-git # arandr for wayland
       - wf-recorder-git # screen recorder for wayland
       - grimshot-git # grim+slurp wrapper
+      - wofi-hg # rofi for wayland
       - swaylock-fancy-git # locker for wayland
       - wob # bars for wayland
       - connman-gtk # connman gtk gui
