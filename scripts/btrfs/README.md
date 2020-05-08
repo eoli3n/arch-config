@@ -12,7 +12,7 @@
 
 ### Install
 
-Boot latest archlinux iso.
+Boot latest archiso.
 
 ```
 loadkeys fr

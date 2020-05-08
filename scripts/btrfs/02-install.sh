@@ -12,7 +12,7 @@ pacman -Sy reflector --noconfirm
 reflector --country France --country Germany --latest 6 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
 # Install
-print "Install Archlinux"
+print "Install Arch Linux"
 pacstrap /mnt base base-devel linux linux-firmware intel-ucode btrfs-progs grub efibootmgr grub-btrfs vim git ansible snapper connman wpa_supplicant
 
 # Generate fstab
