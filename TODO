@@ -11,6 +11,9 @@
 - zfs autoscrub ?
 - zfs hibernate without swap ?
 
+# BOOTLOADER
+- lock systemd-boot edit at boot with password
+
 # SERVICES
 - hardware acceleration packages
 - reflector as a systemd timer
