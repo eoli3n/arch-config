@@ -11,6 +11,7 @@
       - grim # screenshots
       - slurp # region selector
       - wl-clipboard # clipboard manager
+      - sway-idle
       - xdg-user-dirs
     state: present
 
