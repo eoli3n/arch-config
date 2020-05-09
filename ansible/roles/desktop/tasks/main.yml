@@ -37,7 +37,7 @@
   pacman:
     name:
       - imv # img visualizer
-      - alacritty # terminal emulator
+      - kitty # terminal emulator
       - code # code editor
       - evince # pdf viewer
       - firefox
