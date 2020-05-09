@@ -63,7 +63,11 @@
   become: no
   shell: gpg --recv '{{item}}'
   loop:
+    # spotify
     - 4773BD5E130D1D45
+    # wob
+    - F4B432D5D67990E3
+
   changed_when: false
 
 - name: install aur packages
