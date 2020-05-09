@@ -7,8 +7,7 @@
 
 - name: set zectl bootloader
   shell: zectl set bootloader=systemdboot
-  args:
-    creates: /efi/loader/entries/org.zectl-default.conf
+  changed_when: false
 
 - name: systemd-boot loader
   copy:
