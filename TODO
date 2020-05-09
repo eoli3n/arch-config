@@ -11,6 +11,9 @@
 - zfs autoscrub ?
 - zfs hibernate without swap ?
 
+# PACKAGE
+- wdisplays-git is broken : https://aur.archlinux.org/packages/wdisplays-git/
+
 # BOOTLOADER
 - lock systemd-boot edit at boot with password
 
