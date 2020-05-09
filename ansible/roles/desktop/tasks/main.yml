@@ -95,6 +95,6 @@
       - otf-font-awesome
       - pastel # color viewer
       - spotify # music player
-      #- tiny-irc-client-git
+      - tiny-irc-client-git
       - starleaf-breeze
       - zoom
