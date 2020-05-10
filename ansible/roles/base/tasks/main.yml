@@ -2,7 +2,7 @@
 - name: install base packages
   pacman:
     name:
-      - ttf-hack
+      - ttf-jetbrains-mono
       - noto-fonts
       - bc
       - wget
