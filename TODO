@@ -20,3 +20,6 @@
 # SERVICES
 - hardware acceleration packages
 - reflector as a systemd timer
+
+# TESTS
+- zectl activate boot env : write something then reboot to previous env
