@@ -2,7 +2,9 @@
 - name: install zectl
   become: no
   aur:
-    name: zectl-git
+    name:
+      - zectl-git
+      - zectl-pacman-hook
     skip_installed: true
 
 - name: set zectl bootloader

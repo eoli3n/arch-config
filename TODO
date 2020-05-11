@@ -6,7 +6,6 @@
 
 # ZFS
 - remove periodic trim with timer 
-- zfs trim + zfs autoscrub systemd timer
 - zfs hibernate without swap ?
 
 # PACKAGE
@@ -20,4 +19,4 @@
 - reflector as a systemd timer
 
 # TESTS
-- zectl activate boot env : write something then reboot to previous env
+- zfs trim + zfs autoscrub systemd timer
