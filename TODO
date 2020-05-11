@@ -7,8 +7,8 @@
 # ZFS
 - zectl not working : see https://github.com/johnramsden/zectl/issues/14
 - periodic trim with timer when host is down ? https://unix.stackexchange.com/a/352596
-- zfs autotrim ?
-- zfs autoscrub ?
+- zfs trim + zfs autoscrub systemd timer
+- zfs autotrim
 - zfs hibernate without swap ?
 
 # PACKAGE
