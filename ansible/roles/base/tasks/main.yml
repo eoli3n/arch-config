@@ -2,45 +2,50 @@
 - name: install base packages
   pacman:
     name:
-      - ttf-jetbrains-mono
-      - noto-fonts
-      - bc
-      - wget
-      - openssh
-      - jq
-      - most
-      - fzf
-      - rsync
-      - git
-      - vi
-      - man
-      - bat
-      - neovim
-      - screen
-      - tree
-      - htop
-      - nmap
-      - nethogs
-      - iotop
-      - openbsd-netcat
-      - tcpdump
-      - whois
-      - ncdu
-      - asciinema
-      - speedtest-cli
-      - rclone
-      - neofetch
-      - unzip
-      - stress
-      - bind-tools
-      - cifs-utils
-      - fish
-      - weechat
-      - words
-      - fwupd
-      - compsize
-      - shellcheck
-      - oath-toolkit
+      # Main
+      - ttf-jetbrains-mono # main font
+      - noto-fonts         # unicode font
+      # Shell
+      - fish               # powerful shell
+      - git                #
+      - exa                # powerful ls
+      - bc                 # maths
+      - jq                 # json processor
+      - most               # colorized pager
+      - bat                # colorized cat
+      - neovim             # futur of vim
+      - tree               #
+      - vi                 #
+      - man                #
+      - screen             # terminal multiplexer
+      - asciinema          # term recorder
+      # System
+      - htop               # system monitor
+      - fwupd              # dell firmware updater
+      - nmap               # port scanner
+      - tcpdump            # packet analyzer
+      - whois              # query registry
+      - stress             # stress test tool
+      # Disk
+      - iotop              # disk "top"
+      - ncdu               # disk usage analyzer
+      # Network
+      - nethogs            # net "top"
+      - openssh            #
+      - wget               # downloader
+      - bind-tools         # dns tools
+      - openbsd-netcat     # network utility
+      - speedtest-cli      # 
+      # Utils
+      - rsync              #
+      - rclone             # 
+      - words              # dictionnaries
+      - fzf                # fuzzy finder
+      - neofetch           #
+      - unzip              # uncompress zip
+      - cifs-utils         #
+      - shellcheck         # sh linter
+      - oath-toolkit       # otp tool
     state: present
 
 - name: Configure root
