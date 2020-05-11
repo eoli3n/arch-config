@@ -5,10 +5,8 @@
 - RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
 
 # ZFS
-- zectl not working : see https://github.com/johnramsden/zectl/issues/14
-- periodic trim with timer when host is down ? https://unix.stackexchange.com/a/352596
+- remove periodic trim with timer 
 - zfs trim + zfs autoscrub systemd timer
-- zfs autotrim
 - zfs hibernate without swap ?
 
 # PACKAGE
