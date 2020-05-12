@@ -26,7 +26,7 @@ echo $hostname > /mnt/etc/hostname
 
 # Configure /etc/hosts
 print "Configure hosts file"
-cat > /etc/hosts <<EOF
+cat > /mnt/etc/hosts <<EOF
 #<ip-address>	<hostname.domain.org>	<hostname>
 127.0.0.1	    localhost   	        $hostname
 ::1   		    localhost              	$hostname
