@@ -12,6 +12,9 @@ ls /sys/firmware/efi/efivars > /dev/null && \
   timedatectl set-ntp true > /dev/null &&   \
   print "Tests ok"
 
+# Test to load zfs module
+modprobe zfs
+
 # Set DISK
 select ENTRY in $(ls /dev/disk/by-id/);
 do
