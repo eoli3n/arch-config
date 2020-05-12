@@ -54,7 +54,7 @@ mkfs.vfat $EFI
 # Create ZFS pool
 print "Create ZFS pool"
 zpool create -f -o ashift=12           \
-             -o autotrim=yes           \
+             -o autotrim=on            \
              -O acltype=posixacl       \
              -O compression=lz4        \
              -O relatime=on            \
