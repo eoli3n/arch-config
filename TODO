@@ -5,7 +5,6 @@
 - RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
 
 # ZFS
-- remove periodic trim with timer 
 - zfs hibernate without swap ?
 - smart test timer ?
 

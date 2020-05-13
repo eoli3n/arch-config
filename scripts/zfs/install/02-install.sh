@@ -166,10 +166,6 @@ rm /mnt/etc/resolv.conf
 ln -s /run/systemd/resolve/resolv.conf /mnt/etc/resolv.conf
 systemctl enable systemd-resolved --root=/mnt
 
-# Configure TRIM
-print "Configure TRIM"
-systemctl enable fstrim.timer --root=/mnt
-
 # Activate zfs
 print "Configure ZFS"
 sudo systemctl enable zfs-import-cache --root=/mnt
