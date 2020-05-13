@@ -19,6 +19,7 @@
       - man                #
       - screen             # terminal multiplexer
       - asciinema          # term recorder
+      - expect             # automation tool
       # System
       - htop               # system monitor
       - fwupd              # dell firmware updater
