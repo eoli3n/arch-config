@@ -23,9 +23,6 @@
 - reflector as a systemd timer
 - disable ipv6
 
-# FIX
-- docker has no network
-
 # TESTS
 - zfs trim + zfs autoscrub systemd timer
 - libvirt zfs pool storage : how to use a subdataset ?

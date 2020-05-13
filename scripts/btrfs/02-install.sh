@@ -120,7 +120,7 @@ Name=br0
 
 [Network]
 DHCP=ipv4
-IPForward=kernel
+IPForward=yes
 
 [DHCP]
 UseDNS=true
