@@ -77,7 +77,7 @@
     name:
       - adapta-gtk-theme #https://github.com/Alexays/Waybar/issues/515
       - equilux-theme 
-      #- wdisplays-git # arandr for wayland
+      - wdisplays-git # arandr for wayland
       - wf-recorder-git # screen recorder for wayland
       - grimshot-git # grim+slurp wrapper
       - wofi-hg # rofi for wayland

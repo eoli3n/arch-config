@@ -8,9 +8,6 @@
 - zfs hibernate without swap ?
 - smart test timer ?
 
-# PACKAGE
-- wdisplays-git is broken : https://aur.archlinux.org/packages/wdisplays-git/
-
 # DNS
 - fix DNS per interface ? as https://github.com/jonathanio/update-systemd-resolved#preventing-leakage-to-corporate-networks
 
