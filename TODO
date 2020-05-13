@@ -11,6 +11,9 @@
 # PACKAGE
 - wdisplays-git is broken : https://aur.archlinux.org/packages/wdisplays-git/
 
+# DNS
+- fix DNS per interface ? as https://github.com/jonathanio/update-systemd-resolved#preventing-leakage-to-corporate-networks
+
 # BOOTLOADER
 - lock systemd-boot edit at boot with password
 
