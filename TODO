@@ -21,6 +21,7 @@
 # SERVICES
 - hardware acceleration packages
 - reflector as a systemd timer
+- disable ipv6
 
 # TESTS
 - zfs trim + zfs autoscrub systemd timer
