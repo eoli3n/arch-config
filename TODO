@@ -22,3 +22,4 @@
 # TESTS
 - zfs trim + zfs autoscrub systemd timer
 - libvirt zfs pool storage : how to use a subdataset ?
+- docker with zfs pool storage
