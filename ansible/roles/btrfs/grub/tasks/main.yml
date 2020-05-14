@@ -16,9 +16,3 @@
     regexp: 'GRUB_CMDLINE_LINUX=.*'
     line: 'GRUB_CMDLINE_LINUX="{{cmdline}}"'
     state: present
-
-- name: create custom grub entry
-  copy:
-    src: 40_custom
-    dest: /etc/grub.d
-  notify: update grub
