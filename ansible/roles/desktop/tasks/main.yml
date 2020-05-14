@@ -44,6 +44,7 @@
       - firefox-i18n-fr
       - gimp # img editor
       - kolourpaint # img editor
+      - shotwell # photo manager
       - lollypop # music player
       - lxappearance # theme manager
       - mpv # video player
