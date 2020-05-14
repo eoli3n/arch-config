@@ -44,7 +44,6 @@
   aur:
     name:
       - kernel-modules-hook # keep kernel modules dir after an upgrade
-      - systemd-boot-pacman-hook # bootctl update at every systemd updates
     skip_installed: true
 
 - name: Install archaudit hook
