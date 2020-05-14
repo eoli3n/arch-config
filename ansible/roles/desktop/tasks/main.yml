@@ -21,6 +21,8 @@
       - mesa
       - mesa-demos
       - lib32-virtualgl
+      - vulkan-intel
+      - lib32-vulkan-intel
     state: present
 
 - name: install audio packages
