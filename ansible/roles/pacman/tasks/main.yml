@@ -45,3 +45,8 @@
     name:
       - kernel-modules-hook # keep kernel modules dir after an upgrade
     skip_installed: true
+
+- name: Install archaudit hook
+  copy:
+    src: arch-audit.hook
+    dest: /usr/share/libalpm/hooks

@@ -16,10 +16,11 @@
 
 # SERVICES
 - hardware acceleration packages
-- reflector as a systemd timer
 - disable ipv6
 
 # TESTS
 - zfs trim + zfs autoscrub systemd timer
 - libvirt zfs pool storage : how to use a subdataset ?
 - docker with zfs pool storage
+- arch-audit hook
+- reflector service at startup
