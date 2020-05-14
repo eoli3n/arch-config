@@ -94,7 +94,6 @@
       - mindustry-bin # game
       - minecraft-launcher # game
       - molotov # french tv wrapper
-      - openvpn-update-systemd-resolved # TORM ?
       - otf-font-awesome
       - pastel # color viewer
       - spotify # music player
