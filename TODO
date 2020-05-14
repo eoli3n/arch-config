@@ -13,6 +13,9 @@
 - virtio-gpu : https://bbs.archlinux.org/viewtopic.php?pid=1901266#p1901266
 - RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
 
+# IMPROVMENTS
+- notify-send : scrub, trim, and backup
+
 # TESTS
 - zfs trim + zfs autoscrub systemd timer
 - libvirt zfs pool storage : how to use a subdataset ?
