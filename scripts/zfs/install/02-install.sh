@@ -26,7 +26,7 @@ echo $hostname > /mnt/etc/hostname
 
 # Configure /etc/hosts
 print "Configure hosts file"
-cat > /etc/hosts <<EOF
+cat > /mnt/etc/hosts <<EOF
 #<ip-address>	<hostname.domain.org>	<hostname>
 127.0.0.1	    localhost   	        $hostname
 ::1   		    localhost              	$hostname
@@ -132,7 +132,7 @@ Name=br0
 
 [Network]
 DHCP=ipv4
-IPForward=kernel
+IPForward=yes
 
 [DHCP]
 UseDNS=true
@@ -157,6 +157,7 @@ Name=wl*
 RouteMetric=20
 EOF
 systemctl enable systemd-networkd --root=/mnt
+systemctl disable systemd-networkd-wait-online --root=/mnt
 systemctl enable connman --root=/mnt
 
 # Configure DNS
@@ -164,10 +165,6 @@ print "Configure DNS"
 rm /mnt/etc/resolv.conf
 ln -s /run/systemd/resolve/resolv.conf /mnt/etc/resolv.conf
 systemctl enable systemd-resolved --root=/mnt
-
-# Configure TRIM
-print "Configure TRIM"
-systemctl enable fstrim.timer --root=/mnt
 
 # Activate zfs
 print "Configure ZFS"

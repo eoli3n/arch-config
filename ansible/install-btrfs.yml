@@ -31,3 +31,4 @@
     - { role: containers, tags: containers }
     - { role: recovery, tags: recovery }
     - { role: btrfs/grub, tags: boot }
+    - { role: btrfs/initramfs, tags: boot }

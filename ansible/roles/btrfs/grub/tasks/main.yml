@@ -16,21 +16,3 @@
     regexp: 'GRUB_CMDLINE_LINUX=.*'
     line: 'GRUB_CMDLINE_LINUX="{{cmdline}}"'
     state: present
-
-- name: configure mkinitcpio
-  copy:
-    src: mkinitcpio.conf
-    dest: /etc/
-  notify: generates initramfs
-
-- name: configure mkinitcpio preset linux
-  copy:
-    src: linux.preset
-    dest: /etc/mkinitcpio.d/
-  notify: generates initramfs
-
-- name: create custom grub entry
-  copy:
-    src: 40_custom
-    dest: /etc/grub.d
-  notify: update grub

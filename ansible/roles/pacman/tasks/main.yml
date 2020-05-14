@@ -28,15 +28,25 @@
           [multilib]
           Include = /etc/pacman.d/mirrorlist
 
-- name: update list and upgrade all packages
+- name: Update lists and upgrade
   pacman:
     update_cache: yes
     upgrade: yes
 
-- name: install pacman hooks
+- name: Install reflector service
+  copy:
+    src: reflector.service
+    dest: /etc/systemd/system/
+  notify: enable reflector
+
+- name: Install pacman hooks
   become: no
   aur:
     name:
-      - kernel-modules-hook
-      - overdue
+      - kernel-modules-hook # keep kernel modules dir after an upgrade
     skip_installed: true
+
+- name: Install archaudit hook
+  copy:
+    src: arch-audit.hook
+    dest: /usr/share/libalpm/hooks

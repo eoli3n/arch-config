@@ -1,0 +1,4 @@
+---
+
+- name: generates initramfs
+  shell: mkinitcpio -P

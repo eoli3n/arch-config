@@ -20,8 +20,3 @@
   template:
     src: org.zectl-default.j2
     dest: /efi/loader/entries/org.zectl-default.conf
-
-- name: copy recovery entry
-  copy:
-    src: recovery.conf
-    dest: /efi/loader/entries/
