@@ -1,9 +1,3 @@
-# VIRT
-- virtio-gpu : https://bbs.archlinux.org/viewtopic.php?pid=1901266#p1901266
-
-# BTRFS
-- RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
-
 # ZFS
 - zfs hibernate without swap ?
 - smart test timer ?
@@ -11,12 +5,13 @@
 # DNS
 - fix DNS per interface ? as https://github.com/jonathanio/update-systemd-resolved#preventing-leakage-to-corporate-networks
 
-# BOOTLOADER
-- lock systemd-boot edit at boot with password
-
 # SERVICES
 - hardware acceleration packages
 - disable ipv6
+
+# ISSUES
+- virtio-gpu : https://bbs.archlinux.org/viewtopic.php?pid=1901266#p1901266
+- RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
 
 # TESTS
 - zfs trim + zfs autoscrub systemd timer
