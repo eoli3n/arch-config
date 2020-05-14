@@ -14,7 +14,7 @@
 - RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
 
 # IMPROVMENTS
-- notify-send : scrub, trim, and backup
+- notify-send : scrub, trim, and backup : root cannot send send notification to user
 
 # TESTS
 - zfs trim + zfs autoscrub systemd timer
