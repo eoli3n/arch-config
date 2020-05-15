@@ -26,3 +26,4 @@
 - docker with zfs pool storage
 - arch-audit hook
 - reflector service at startup
+- restest brightnest with light instead of light-git

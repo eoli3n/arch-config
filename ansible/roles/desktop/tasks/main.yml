@@ -11,6 +11,7 @@
       - grim # screenshots
       - slurp # region selector
       - wl-clipboard # clipboard manager
+      - light # brightness manager
       - swayidle
       - xdg-user-dirs
     state: present
@@ -93,7 +94,6 @@
       - adb-sync-git # android dir sync
       - downgrade # package downgrader
       - lf # cli file manager
-      - light-git # brightness manager
       - mindustry-bin # game
       - minecraft-launcher # game
       - molotov # french tv wrapper
