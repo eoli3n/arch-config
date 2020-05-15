@@ -109,6 +109,18 @@ Defaults rootpw
 EOF
 
 # Configure network
+print "Configure network"
+cat > /mnt/etc/systemd/network/ethX.network <<"EOF"
+[Match]
+Name=eth*
+
+[Network]
+DHCP=ipv4
+IPForward=yes
+
+[DHCP]
+RouteMetric=10
+EOF
 cat > /mnt/etc/systemd/network/enoX.network <<"EOF"
 [Match]
 Name=en*
@@ -124,8 +136,8 @@ cat > /mnt/etc/systemd/network/wlX.network <<"EOF"
 [Match]
 Name=wl*
 
-[Network]                                                                                                                                                               
-DHCP=ipv4                                                                                                                                                               
+[Network]
+DHCP=ipv4
 IPForward=yes
 
 [DHCP]

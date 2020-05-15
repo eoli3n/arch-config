@@ -121,7 +121,17 @@ EOF
 
 # Configure network
 print "Configure networking"
+cat > /mnt/etc/systemd/network/ethX.network <<"EOF"
+[Match]
+Name=eth*
 
+[Network]
+DHCP=ipv4
+IPForward=yes
+
+[DHCP]
+RouteMetric=10
+EOF
 cat > /mnt/etc/systemd/network/enoX.network <<"EOF"
 [Match]
 Name=en*
