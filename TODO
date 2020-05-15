@@ -19,6 +19,7 @@
 
 # IMPROVMENTS
 - notify-send : scrub, trim, and backup : root cannot send send notification to user
+- move max aur package to community equivalents
 
 # TESTS
 - zfs trim + zfs autoscrub systemd timer
