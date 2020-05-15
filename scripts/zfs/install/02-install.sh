@@ -54,14 +54,14 @@ print "Chroot and configure system"
 arch-chroot /mnt /bin/bash -xe <<"EOF"
 
   # ZFS deps
+  pacman-key --recv-keys F75D9D76 --keyserver hkp://pool.sks-keyservers.net:80
+  pacman-key --lsign-key F75D9D76
   cat >> /etc/pacman.conf <<"EOSF"
 [archzfs]
 Server = http://archzfs.com/archzfs/x86_64
 Server = http://mirror.sum7.eu/archlinux/archzfs/archzfs/x86_64
 Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
 EOSF
-  pacman-key --recv-keys F75D9D76 --keyserver hkp://pool.sks-keyservers.net:80
-  pacman-key --lsign-key F75D9D76
   pacman -Syu zfs-dkms zfs-utils
 
   # Sync clock
