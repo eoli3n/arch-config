@@ -11,9 +11,9 @@
 - name: install ipxe-netboot
   block:
     - aur:
-      become: no
         name: ipxe-netboot
         skip_installed: true
+      become: no
     - copy:
         src: /usr/share/ipxe-netboot/ipxe.efi
         dest: /efi/EFI/netboot/
