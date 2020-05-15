@@ -39,6 +39,7 @@
       - openbsd-netcat     # network utility
       - speedtest-cli      # 
       # Utils
+      - borgbackup         # backup utility
       - rsync              #
       - rclone             # 
       - words              # dictionnaries
