@@ -3,18 +3,21 @@
 # https://bugs.archlinux.org/task/66407
 ###
 
-- name: install ipxe-netboot
-  become: no
-  aur:
-    name: ipxe-netboot
-    skip_installed: true
-
 - name: create efi netboot dir
   file:
     path: /efi/EFI/netboot
     state: directory
 
-- name: copy efi netboot file
-  copy:
-    src: /usr/share/ipxe-netboot/ipxe.efi
-    dest: /efi/EFI/netboot/
+- name: install ipxe-netboot
+  become: no
+  block:
+    - aur:
+        name: ipxe-netboot
+        skip_installed: true
+    - copy:
+        src: /usr/share/ipxe-netboot/ipxe.efi
+        dest: /efi/EFI/netboot/
+  rescue:
+    - get_url:
+        url: https://www.archlinux.org/static/netboot/ipxe.176077d7fccb.efi
+        dest: /efi/EFI/netboot
