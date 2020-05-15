@@ -4,6 +4,10 @@
 
 # DNS
 - fix DNS per interface ? as https://github.com/jonathanio/update-systemd-resolved#preventing-leakage-to-corporate-networks
+- fix DNS to 1.1.1.1 and fallback to 9.9.9.9
+
+# NETWORK
+- try to remove ip forward on enX.network and change wlp2s0.network to IPForward=yes: test containers networking
 
 # SERVICES
 - hardware acceleration packages
