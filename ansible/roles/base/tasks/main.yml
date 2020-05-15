@@ -48,6 +48,8 @@
       - cifs-utils         #
       - shellcheck         # sh linter
       - oath-toolkit       # otp tool
+      - python2-pip        # python2 package manager
+      - python-pip        # python3 package manager
     state: present
 
 - name: Configure root
