@@ -9,9 +9,9 @@
     state: directory
 
 - name: install ipxe-netboot
-  become: no
   block:
     - aur:
+      become: no
         name: ipxe-netboot
         skip_installed: true
     - copy:
@@ -20,4 +20,4 @@
   rescue:
     - get_url:
         url: https://www.archlinux.org/static/netboot/ipxe.176077d7fccb.efi
-        dest: /efi/EFI/netboot
+        dest: /efi/EFI/netboot/ipxe.efi
