@@ -23,6 +23,7 @@
       - arch-audit         # list vulnerabilities
       # System
       - htop               # system monitor
+      - reflector          # mirror sorter
       - fwupd              # dell firmware updater
       - nmap               # port scanner
       - tcpdump            # packet analyzer

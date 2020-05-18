@@ -4,14 +4,10 @@
 
 # DNS
 - fix DNS per interface ? as https://github.com/jonathanio/update-systemd-resolved#preventing-leakage-to-corporate-networks
-- fix DNS to 1.1.1.1 and fallback to 9.9.9.9
 
 # FIX
 - ipxe-netboot aur package broken
 - zfs-scrub, zfs-trim, backup service popup without reason ??
-
-# NETWORK
-- try to remove ip forward on enX.network and change wlp2s0.network to IPForward=yes: test containers networking
 
 # SERVICES
 - hardware acceleration packages
@@ -29,6 +25,4 @@
 - zfs trim + zfs autoscrub systemd timer
 - libvirt zfs pool storage : how to use a subdataset ?
 - docker with zfs pool storage
-- arch-audit hook
-- reflector service at startup
-- restest brightnest with light instead of light-git
+- reflector at startup
