@@ -88,7 +88,6 @@
       - connman-gtk # connman gtk gui
       - gnome-ssh-askpass2 # ssh askpass gui
       - google-chrome
-      - laptop-mode-tools
       - adb-sync-git # android dir sync
       - downgrade # package downgrader
       - lf # cli file manager

@@ -8,9 +8,6 @@
 # FIX
 - ipxe-netboot aur package broken
 - zfs-scrub, zfs-trim, backup service popup without reason ??
-- remove or tweak laptop-mode-tools
-- configure connman in 02-install
-- remove eth0 config in 02-install
 
 # SERVICES
 - hardware acceleration packages
