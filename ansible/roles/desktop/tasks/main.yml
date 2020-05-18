@@ -57,6 +57,9 @@
       - rdesktop # remote desktop client
       - steam # games manager
       - transmission-gtk # torrent downloader
+      - texlive-bin # latex
+      - texlive-core # latex
+      - texlive-latexextra # latex
       - variety # random backgrounds
       - papirus-icon-theme # icon theme
       - x2goclient 
@@ -95,6 +98,7 @@
       - minecraft-launcher # game
       - molotov # french tv wrapper
       - otf-font-awesome
+      - ttf-impallari-cabin-font # xelatex cv
       - pastel # color viewer
       - spotify # music player
       - tiny-irc-client-git
