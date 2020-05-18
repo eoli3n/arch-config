@@ -67,10 +67,8 @@
   become: no
   shell: gpg --recv '{{item}}'
   loop:
-    # spotify
-    - 4773BD5E130D1D45
-    # wob
-    - F4B432D5D67990E3
+    - 4773BD5E130D1D45 # spotify
+    - F4B432D5D67990E3 # wob
 
   changed_when: false
 
