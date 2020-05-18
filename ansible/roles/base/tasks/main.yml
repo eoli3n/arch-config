@@ -1,4 +1,11 @@
 ---
+- name: install aur packages
+  become: no
+  aur:
+    skip_installed: true
+    name:
+      - starship-bin
+
 - name: install base packages
   pacman:
     name:
