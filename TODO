@@ -8,6 +8,7 @@
 # FIX
 - ipxe-netboot aur package broken
 - zfs-scrub, zfs-trim, backup service popup without reason ??
+- remove or tweak laptop-mode-tools
 
 # SERVICES
 - hardware acceleration packages
