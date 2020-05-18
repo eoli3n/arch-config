@@ -11,7 +11,7 @@
       - grim # screenshots
       - slurp # region selector
       - wl-clipboard # clipboard manager
-      - light # brightness manager
+      - brightnessctl # brightness manager
       - swayidle
       - xdg-user-dirs
     state: present
