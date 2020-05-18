@@ -109,21 +109,16 @@ Defaults rootpw
 EOF
 
 # Configure network
-cat > /mnt/etc/systemd/network/br0.netdev <<"EOF"
-[NetDev]
-Name=br0
-Kind=bridge
-EOF
-cat > /mnt/etc/systemd/network/br0.network <<"EOF"
+print "Configure network"
+cat > /mnt/etc/systemd/network/ethX.network <<"EOF"
 [Match]
-Name=br0
+Name=eth*
 
 [Network]
 DHCP=ipv4
 IPForward=yes
 
 [DHCP]
-UseDNS=true
 RouteMetric=10
 EOF
 cat > /mnt/etc/systemd/network/enoX.network <<"EOF"
@@ -131,8 +126,8 @@ cat > /mnt/etc/systemd/network/enoX.network <<"EOF"
 Name=en*
 
 [Network]
-Bridge=br0
-IPForward=kernel
+DHCP=ipv4
+IPForward=yes
 
 [DHCP]
 RouteMetric=10
@@ -140,6 +135,10 @@ EOF
 cat > /mnt/etc/systemd/network/wlX.network <<"EOF"
 [Match]
 Name=wl*
+
+[Network]
+DHCP=ipv4
+IPForward=yes
 
 [DHCP]
 RouteMetric=20
