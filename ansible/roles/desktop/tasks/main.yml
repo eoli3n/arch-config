@@ -24,6 +24,8 @@
       - lib32-virtualgl
       - vulkan-intel
       - lib32-vulkan-intel
+      - intel-media-driver
+      - libva-utils
     state: present
 
 - name: install audio packages
