@@ -50,6 +50,7 @@
       - gimp # img editor
       - kolourpaint # img editor
       - shotwell # photo manager
+      - libreoffice-still-fr # libreoffice suite fr
       - lollypop # music player
       - lxappearance # theme manager
       - mpv # video player
