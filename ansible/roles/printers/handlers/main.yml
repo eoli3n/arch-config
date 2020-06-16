@@ -1,0 +1,7 @@
+---
+- name: enable cups
+  systemd:
+    name: org.cups.cupsd.service
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
