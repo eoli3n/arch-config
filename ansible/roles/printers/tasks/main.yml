@@ -1,0 +1,8 @@
+---
+
+- name: install cups
+  pacman:
+    name:
+      - cups
+      - hplip
+  notify: enable cups
