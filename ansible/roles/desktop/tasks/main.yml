@@ -101,7 +101,7 @@
       - minecraft-launcher # game
       - molotov # french tv wrapper
       - otf-font-awesome
-      - ttf-impallari-cabin-font # xelatex cv
+      #- ttf-impallari-cabin-font # xelatex cv
       - pastel # color viewer
       - spotify # music player
       - tiny-irc-client-git
