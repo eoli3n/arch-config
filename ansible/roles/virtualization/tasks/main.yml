@@ -2,6 +2,7 @@
 - name: install virt packages
   pacman:
     name:
+      - qemu
       - libvirt
       - virt-manager
       - ebtables
