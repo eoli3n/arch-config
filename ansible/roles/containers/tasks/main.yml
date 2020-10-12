@@ -5,6 +5,8 @@
       - docker
       - docker-compose
       - podman
+      - kubectl
+      - minikube
   notify: restart docker
 
 - name: copy subuid files
