@@ -140,7 +140,7 @@ systemctl disable systemd-networkd-wait-online --root=/mnt
 cat > /mnt/etc/connman/main.conf <<"EOF"
 [General]
 PreferredTechnologies=ethernet,wifi
-NetworkInterfaceBlacklist = vmnet,vboxnet,virbr,ifb,ve-,vb-,docker,veth,eth,wlan
+NetworkInterfaceBlacklist = vmnet,vboxnet,virbr,ifb,ve-,vb-,docker,veth,eth,wlan,vnet
 AllowHostnameUpdates = false
 AllowDomainnameUpdates = false
 SingleConnectedTechnology = true
