@@ -42,6 +42,7 @@
       # Network
       - nethogs            # net "top"
       - openssh            #
+      - sshpass            # allow ansible -k
       - wget               # downloader
       - bind-tools         # dns tools
       - openbsd-netcat     # network utility
