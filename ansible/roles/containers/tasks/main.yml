@@ -6,6 +6,7 @@
       - docker-compose
       - podman
       - kubectl
+      - kubectx
       - minikube
   notify: restart docker
 
