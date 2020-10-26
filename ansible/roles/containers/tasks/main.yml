@@ -10,6 +10,18 @@
       - minikube
   notify: restart docker
 
+- name: install containers aur packages
+  become: no
+  aur:
+    skip_installed: true
+    name:
+      - kompose-bin
+
+- name: install pip3 containers packages
+  pip:
+    name:
+      - podman-compose
+
 - name: copy subuid files
   template:
     src: subuid.j2

@@ -10,12 +10,6 @@
       - ovmf
   notify: restart libvirt
 
-- name: install podman-compose
-  become: no
-  aur:
-    name: podman-compose
-    skip_installed: true
-
 - name: Add user to libvirt group
   user:
     name: '{{user}}'
