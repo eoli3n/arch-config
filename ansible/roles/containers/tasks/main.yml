@@ -2,12 +2,13 @@
 - name: install containers packages
   pacman:
     name:
-      - docker
-      - docker-compose
-      - podman
-      - kubectl
-      - kubectx
-      - minikube
+      - docker          # high level container runtime
+      - docker-compose  # multi-container docker apps
+      - podman          # docker alternative without dockerd
+      - kubectl         # kubernetes api cli client
+      - kubectx         # switch clusters/namespaces
+      - kustomize       # yaml templator
+      - minikube        # virtualized local kubernetes cluster
   notify: restart docker
 
 - name: install containers aur packages
@@ -15,25 +16,26 @@
   aur:
     skip_installed: true
     name:
-      - kompose-bin
+      - kompose-bin     # docker-compose to manifest convertor
+      - k3s-bin         # Lightweight Kubernetes in a signle binary 
 
 - name: install pip3 containers packages
   pip:
     name:
-      - podman-compose
+      - podman-compose  # mutli-container podman apps
 
-- name: copy subuid files
+- name: copy subuid files for podman rootless
   template:
     src: subuid.j2
     dest: /etc/subuid
 
-- name: copy subgid files
+- name: copy subgid files for podman rootless
   template:
     src: subgid.j2
     dest: /etc/subgid
 
-- name: Add user to libvirt group
+- name: Add user to docker group
   user:
-    name: '{{user}}'
+    name: '{{ user }}'
     groups: docker
     append: yes
