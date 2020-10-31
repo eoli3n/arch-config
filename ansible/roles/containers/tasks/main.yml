@@ -9,7 +9,6 @@
       - kubectx         # switch clusters/namespaces
       - kustomize       # yaml templator
       - minikube        # virtualized local kubernetes cluster
-  notify: restart docker
 
 - name: install containers aur packages
   become: no
@@ -18,6 +17,7 @@
     name:
       - kompose-bin     # docker-compose to manifest convertor
       - k3s-bin         # Lightweight Kubernetes in a signle binary 
+      - stern           # tail multiple pods on Kubernetes
 
 - name: install pip3 containers packages
   pip:
