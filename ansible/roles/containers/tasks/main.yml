@@ -10,6 +10,7 @@
       - kustomize       # yaml templator
       - minikube        # virtualized local kubernetes cluster
       - k9s             # UI to interact with Kubernetes clusters
+      - helm            # kubernetes package manager
       # https://github.com/kubernetes-sigs/krew
 
 - name: install containers aur packages
