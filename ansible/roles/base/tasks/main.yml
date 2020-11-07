@@ -5,6 +5,7 @@
     skip_installed: true
     name:
       - starship-bin
+      - ttf-impallari-cabin-font # cv font
 
 - name: install base packages
   pacman:
