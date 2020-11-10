@@ -47,6 +47,7 @@
       - sshpass            # allow ansible -k
       - wget               # downloader
       - bind-tools         # dns tools
+      - dnsmasq            # for qemu/minikube
       - openbsd-netcat     # network utility
       - speedtest-cli      # 
       # Utils
@@ -61,7 +62,8 @@
       - shellcheck         # sh linter
       - oath-toolkit       # otp tool
       - python2-pip        # python2 package manager
-      - python-pip        # python3 package manager
+      - python-pip         # python3 package manager
+      - dmidecode          # dump dmi table content
     state: present
 
 - name: Configure root
