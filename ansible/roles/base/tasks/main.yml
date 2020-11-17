@@ -47,7 +47,6 @@
       - sshpass            # allow ansible -k
       - wget               # downloader
       - bind-tools         # dns tools
-      - dnsmasq            # for qemu/minikube
       - openbsd-netcat     # network utility
       - speedtest-cli      # 
       # Utils

@@ -8,6 +8,7 @@
       - ebtables
       - dnsmasq
       - ovmf
+      - vagrant
   notify: restart libvirt
 
 - name: add user to libvirt group
