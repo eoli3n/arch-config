@@ -56,7 +56,7 @@ print "Create ZFS pool"
 zpool create -f -o ashift=12           \
              -o autotrim=on            \
              -O acltype=posixacl       \
-             -O compression=lz4        \
+             -O compression=zstd       \
              -O relatime=on            \
              -O xattr=sa               \
              -O dnodesize=legacy       \
