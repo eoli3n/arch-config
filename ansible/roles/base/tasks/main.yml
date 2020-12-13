@@ -63,6 +63,7 @@
       - python2-pip        # python2 package manager
       - python-pip         # python3 package manager
       - dmidecode          # dump dmi table content
+      - python-pre-commit  # pre-commit hook manager
     state: present
 
 - name: Configure root
