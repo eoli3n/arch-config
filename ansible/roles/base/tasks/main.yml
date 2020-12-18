@@ -52,6 +52,7 @@
       - speedtest-cli      # 
       # Utils
       - borgbackup         # backup utility
+      - borgmatic         # backup utility automation
       - rsync              #
       - rclone             # 
       - words              # dictionnaries
