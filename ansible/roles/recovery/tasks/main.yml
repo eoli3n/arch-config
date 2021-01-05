@@ -21,3 +21,8 @@
     - get_url:
         url: https://www.archlinux.org/static/netboot/ipxe.176077d7fccb.efi
         dest: /efi/EFI/netboot/ipxe.efi
+
+- name: install netboot.xyz
+  get_url:
+    url: https://boot.netboot.xyz/ipxe/netboot.xyz.efi
+    dest: /efi/EFI/netboot/netboot.xyz.efi

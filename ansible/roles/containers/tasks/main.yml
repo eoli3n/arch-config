@@ -40,6 +40,13 @@
     src: subgid.j2
     dest: /etc/subgid
 
+- name: disable zfs overlay storage not supported by podman
+  lineinfile:
+    path: /etc/containers/storage.conf
+    regexp: 'mount_program = "/usr/bin/fuse-overlayfs"'
+    line: 'mount_program = "/usr/bin/fuse-overlayfs"'
+    state: present
+
 - name: Add user to docker group
   user:
     name: '{{ user }}'

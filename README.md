@@ -1,7 +1,7 @@
 ### ZFS root features
 
 - Native encryption aes-256-gcm
-- lz4 compression on all datasets
+- Zstd compression on all datasets
 - Boot Environments managed with [zectl](https://github.com/johnramsden/zectl)
 - No swap
 - Separated VFAT /boot

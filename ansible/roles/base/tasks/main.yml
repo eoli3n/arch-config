@@ -45,12 +45,14 @@
       - nethogs            # net "top"
       - openssh            #
       - sshpass            # allow ansible -k
+      - keychain           # ssh-agent wrapper
       - wget               # downloader
       - bind-tools         # dns tools
       - openbsd-netcat     # network utility
       - speedtest-cli      # 
       # Utils
       - borgbackup         # backup utility
+      - borgmatic         # backup utility automation
       - rsync              #
       - rclone             # 
       - words              # dictionnaries
@@ -63,6 +65,7 @@
       - python2-pip        # python2 package manager
       - python-pip         # python3 package manager
       - dmidecode          # dump dmi table content
+      - python-pre-commit  # pre-commit hook manager
     state: present
 
 - name: Configure root
