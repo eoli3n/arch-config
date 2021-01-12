@@ -6,6 +6,7 @@
     name:
       - starship-bin
       - ttf-impallari-cabin-font # cv font
+      - glow # render markdown cli
 
 - name: install base packages
   pacman:
