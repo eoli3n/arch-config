@@ -56,6 +56,7 @@
       - borgmatic         # backup utility automation
       - rsync              #
       - rclone             # 
+      - syncthing
       - words              # dictionnaries
       - fzf                # fuzzy finder
       - neofetch           #

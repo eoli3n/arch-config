@@ -1,6 +1,0 @@
----
-- name: install netdata
-  pacman:
-    name: netdata
-    state: present
-  notify: restart netdata
