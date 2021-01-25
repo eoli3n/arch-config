@@ -52,8 +52,9 @@
       - openbsd-netcat     # network utility
       - speedtest-cli      # 
       # Utils
+      - cronie             # Scheduler
       - borgbackup         # backup utility
-      - borgmatic         # backup utility automation
+      - borgmatic          # backup utility automation
       - rsync              #
       - rclone             # 
       - syncthing

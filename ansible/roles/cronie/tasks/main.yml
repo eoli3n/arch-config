@@ -1,0 +1,6 @@
+---
+- name: install cronie package
+  pacman:
+    name: cronie
+    state: present
+  notify: enable cronie
