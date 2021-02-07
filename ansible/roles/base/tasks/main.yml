@@ -69,6 +69,7 @@
       - python-pip         # python3 package manager
       - dmidecode          # dump dmi table content
       - python-pre-commit  # pre-commit hook manager
+      - zim                # wiki app
     state: present
 
 - name: Configure root
