@@ -158,6 +158,7 @@ systemctl enable iwd --root=/mnt
 print "Configure DNS"
 rm /mnt/etc/resolv.conf
 ln -s /run/systemd/resolve/resolv.conf /mnt/etc/resolv.conf
+sed -i 's/^#DNS.*/DNS=1.1.1.1/' /mnt/etc/systemd/resolved.conf
 systemctl enable systemd-resolved --root=/mnt
 
 # Activate zfs
