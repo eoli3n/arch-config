@@ -13,7 +13,7 @@ reflector --country France --country Germany --latest 6 --protocol https --sort 
 
 # Install
 print "Install Arch Linux"
-pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware intel-ucode efibootmgr vim git ansible connman wpa_supplicant
+pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware intel-ucode efibootmgr vim git ansible iwd wpa_supplicant
 
 # Generate fstab excluding ZFS entries
 print "Generate fstab excluding ZFS entries"
@@ -148,15 +148,11 @@ EOF
 systemctl enable systemd-networkd --root=/mnt
 systemctl disable systemd-networkd-wait-online --root=/mnt
 
-cat > /mnt/etc/connman/main.conf <<"EOF"
+cat > /mnt/etc/iwd/main.conf <<"EOF"
 [General]
-PreferredTechnologies=ethernet,wifi
-NetworkInterfaceBlacklist = vmnet,vboxnet,virbr,ifb,ve-,vb-,docker,veth,eth,wlan,vnet
-AllowHostnameUpdates = false
-AllowDomainnameUpdates = false
-SingleConnectedTechnology = true
+EnableNetworkConfiguration=true
 EOF
-systemctl enable connman --root=/mnt
+systemctl enable iwd --root=/mnt
 
 # Configure DNS
 print "Configure DNS"
