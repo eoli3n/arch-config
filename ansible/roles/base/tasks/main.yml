@@ -53,6 +53,7 @@
       - speedtest-cli      # 
       # Utils
       - cronie             # Scheduler
+      - at                 # Scheduler
       - borgbackup         # backup utility
       - borgmatic          # backup utility automation
       - rsync              #
