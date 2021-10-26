@@ -4,7 +4,6 @@
   aur:
     skip_installed: true
     name:
-      - starship-bin
       - ttf-impallari-cabin-font # cv font
       - glow # render markdown cli
 
@@ -16,6 +15,7 @@
       - noto-fonts         # unicode font
       # Shell
       - fish               # powerful shell
+      - starship           # cross-shell prompt
       - git                #
       - exa                # powerful ls
       - bc                 # maths
