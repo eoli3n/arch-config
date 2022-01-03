@@ -4,7 +4,6 @@
   aur:
     skip_installed: true
     name:
-      - starship-bin
       - ttf-impallari-cabin-font # cv font
       - glow # render markdown cli
 
@@ -16,6 +15,7 @@
       - noto-fonts         # unicode font
       # Shell
       - fish               # powerful shell
+      - starship           # cross-shell prompt
       - git                #
       - exa                # powerful ls
       - bc                 # maths
@@ -56,9 +56,12 @@
       - at                 # Scheduler
       - borgbackup         # backup utility
       - borgmatic          # backup utility automation
-      - rsync              #
-      - rclone             # 
-      - syncthing
+      - rsync              # sync tool
+      - rclone             # sync tool
+      - syncthing          # sync tool
+      - vdirsyncer         # sync tool
+      - khal               # cli calendar manager
+      - khard              # cli contacts manager
       - words              # dictionnaries
       - fzf                # fuzzy finder
       - neofetch           #

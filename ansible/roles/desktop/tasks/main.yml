@@ -66,6 +66,7 @@
       - texlive-bin # latex
       - texlive-core # latex
       - texlive-latexextra # latex
+      - texlive-fontsextra # latex
       - variety # random backgrounds
       - papirus-icon-theme # icon theme
       - x2goclient 
