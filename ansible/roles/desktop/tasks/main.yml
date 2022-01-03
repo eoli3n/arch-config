@@ -46,6 +46,7 @@
       - kitty # terminal emulator
       - code # code editor
       - evince # pdf viewer
+      - evolution # mail client
       - firefox
       - firefox-i18n-fr
       - gimp # img editor
