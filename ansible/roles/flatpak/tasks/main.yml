@@ -1,6 +1,6 @@
 ---
 - name: install flatpak
-  community.general.xbps:
+  pacman:
     name: flatpak
 
 - name: Add the flathub flatpak repo
