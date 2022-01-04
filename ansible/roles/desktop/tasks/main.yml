@@ -46,6 +46,7 @@
       - kitty # terminal emulator
       - evince # pdf viewer
       - evolution # mail client
+      - gnome-keyring # evolution gnome keyring
       - firefox
       - firefox-i18n-fr
       - flatpak # package manager
