@@ -76,7 +76,7 @@
 
 - name: add missing gpg keys for aur
   become: no
-  shell: gpg --recv --keyserver pool.sks-keyservers.net '{{item}}'
+  shell: gpg --recv --keyserver keyserver.ubuntu.com '{{item}}'
   loop:
     - D1742AD60D811D58 # spotify
     - F4B432D5D67990E3 # wob
