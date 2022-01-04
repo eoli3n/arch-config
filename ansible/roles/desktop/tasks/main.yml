@@ -32,8 +32,9 @@
 - name: install audio packages
   pacman:
     name:
-      - pulseaudio
-      - pulseaudio-alsa
+      - pipewire
+      - pipewire-media-session
+      - pipewire-pulse
       - pavucontrol
       - pamixer
       - alsa-utils
@@ -97,7 +98,7 @@
       - swaylock-fancy-git # locker for wayland
       - wob # bars for wayland
       - connman-gtk # connman gtk gui
-      - gnome-ssh-askpass2 # ssh askpass gui
+      #- gnome-ssh-askpass2 # ssh askpass gui
       - google-chrome
       - adb-sync-git # android dir sync
       - downgrade # package downgrader
