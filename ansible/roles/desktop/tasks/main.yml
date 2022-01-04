@@ -47,6 +47,7 @@
       - evince # pdf viewer
       - evolution # mail client
       - gnome-keyring # evolution gnome keyring
+      - seahorse # keyring manager
       - firefox
       - firefox-i18n-fr
       - flatpak # package manager
