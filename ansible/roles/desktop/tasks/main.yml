@@ -69,6 +69,7 @@
       - texlive-fontsextra # latex
       - variety # random backgrounds
       - papirus-icon-theme # icon theme
+      - gnome-themes-extra # gtk themes
       - x2goclient 
       - youtube-dl
     state: present
