@@ -56,6 +56,7 @@
       - at                 # Scheduler
       - borgbackup         # backup utility
       - borgmatic          # backup utility automation
+      - lsd                # improved ls command
       - rsync              # sync tool
       - rclone             # sync tool
       - syncthing          # sync tool
