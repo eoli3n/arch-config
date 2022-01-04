@@ -44,11 +44,11 @@
     name:
       - imv # img visualizer
       - kitty # terminal emulator
-      - code # code editor
       - evince # pdf viewer
       - evolution # mail client
       - firefox
       - firefox-i18n-fr
+      - flatpak # package manager
       - gimp # img editor
       - kolourpaint # img editor
       - shotwell # photo manager
@@ -78,7 +78,6 @@
   become: no
   shell: gpg --recv --keyserver keyserver.ubuntu.com '{{item}}'
   loop:
-    - D1742AD60D811D58 # spotify
     - F4B432D5D67990E3 # wob
 
   changed_when: false
@@ -101,15 +100,11 @@
       - adb-sync-git # android dir sync
       - downgrade # package downgrader
       - lf # cli file manager
-      - mindustry-bin # game
-      - minecraft-launcher # game
       - molotov # french tv wrapper
       - otf-font-awesome
       #- ttf-impallari-cabin-font # xelatex cv
       - pastel # color viewer
-      - spotify # music player
       - tiny-irc-client-git
       - starleaf-breeze
       - swappy # screenshot editor
       - senpai # irc client for soju
-      - zoom

@@ -25,6 +25,7 @@
     - { role: aur, tags: aur }
     - { role: base, tags: base }
     - { role: desktop, tags: desktop }
+    - { role: flatpak, tags: flatpak }
     - { role: cronie, tags: cronie }
     - { role: virtualization, tags: virtualization }
     - { role: containers, tags: containers }

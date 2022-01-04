@@ -11,10 +11,6 @@
         line: 'UseSyslog'
     - lineinfile:
         path: /etc/pacman.conf
-        regexp: '#TotalDownload'
-        line: 'TotalDownload'
-    - lineinfile:
-        path: /etc/pacman.conf
         regexp: '#CheckSpace'
         line: 'CheckSpace'
     - lineinfile:

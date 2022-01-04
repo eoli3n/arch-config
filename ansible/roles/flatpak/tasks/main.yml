@@ -1,0 +1,30 @@
+---
+- name: install flatpak
+  community.general.xbps:
+    name: flatpak
+
+- name: Add the flathub flatpak repo
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: Install flatpak packages
+  community.general.flatpak:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - com.spotify.Client
+    - com.vscodium.codium
+    - com.mojang.Minecraft
+    - com.github.Anuken.Mindustry
+    - us.zoom.Zoom
+    - com.microsoft.Teams
+
+- name: Override Teams perms
+  shell: |
+    flatpak override com.microsoft.Teams \
+      --filesystem=~/desktop:ro \
+      --filesystem=~/img:ro \
+      --filesystem=~/downloads:ro \
+      --filesystem=~/share:ro
