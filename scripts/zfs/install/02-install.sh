@@ -78,25 +78,8 @@ EOSF
   # Generate Initramfs
   mkinitcpio -P
 
-  # Install bootloader
-  bootctl --path=/efi install
+  # Install ZFSBootMenu
 
-  # Generates boot entries
-  mkdir -p /efi/loader/entries
-  cat > /efi/loader/loader.conf <<"EOSF"
-default org.zectl-default
-timeout 10
-EOSF
-  cat > /efi/loader/entries/org.zectl-default.conf <<"EOSF"
-title           Arch Linux ZFS Default
-linux           /env/org.zectl-default/vmlinuz-linux-lts
-initrd          /env/org.zectl-default/intel-ucode.img
-initrd          /env/org.zectl-default/initramfs-linux-lts.img
-options         zfs=zroot/ROOT/default rw
-EOSF
-
-  # Update bootloader configuration
-  bootctl --path=/efi update
 
   # Create user
   useradd -m user
