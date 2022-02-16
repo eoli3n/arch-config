@@ -70,7 +70,7 @@ print "Prepare initramfs"
 cat > /mnt/etc/mkinitcpio.conf <<"EOF"
 MODULES=(i915 intel_agp)
 BINARIES=()
-FILES=(/etc/zfs/zroot.key)
+FILES=()
 HOOKS=(base udev autodetect modconf block keyboard keymap zfs filesystems)
 COMPRESSION="zstd"
 EOF
@@ -204,10 +204,21 @@ mkdir -p /mnt/efi/EFI/ZBM
 
 # Generate zfsbootmenu efi
 print 'Configure zfsbootmenu'
+
+cat > /mnt/etc/zfsbootmenu/mkinitcpio.conf <<"EOF"
+MODULES=()
+BINARIES=()
+FILES=()
+HOOKS=(base udev autodetect modconf block keyboard keymap)
+COMPRESSION="zstd"
+EOF
+
 cat > /mnt/etc/zfsbootmenu/config.yaml <<EOF
 Global:
   ManageImages: true
   BootMountPoint: /efi
+  InitCPIO: true
+
 Components:
   Enabled: false
 EFI:
