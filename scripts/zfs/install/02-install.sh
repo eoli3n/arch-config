@@ -84,8 +84,8 @@ print "Chroot and configure system"
 arch-chroot /mnt /bin/bash -xe <<EOF
 
   # ZFS deps
-  pacman-key --recv-keys F75D9D76 --keyserver keyserver.ubuntu.com &>/dev/null
-  pacman-key --lsign-key F75D9D76 &>/dev/null
+  pacman-key --recv-keys F75D9D76 --keyserver keyserver.ubuntu.com
+  pacman-key --lsign-key F75D9D76
   cat >> /etc/pacman.conf <<"EOSF"
 [archzfs]
 Server = http://archzfs.com/archzfs/x86_64
