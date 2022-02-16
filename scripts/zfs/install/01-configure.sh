@@ -113,7 +113,7 @@ zpool set bootfs="zroot/ROOT/$slash" zroot
 print "Export and reimport zpool"
 zpool export zroot
 zpool import -d /dev/disk/by-id -R /mnt zroot -N
-zfs load-key -L zroot
+zfs load-key -L prompt zroot
 zfs mount zroot/ROOT/"$slash"
 zfs mount -a
 
@@ -126,7 +126,6 @@ mount "$EFI" /mnt/efi
 print "Generate and copy zfs cache"
 mkdir -p /mnt/etc/zfs
 zpool set cachefile=/etc/zfs/zpool.cache zroot
-#cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
 
 # Finish
 echo -e "\e[32mAll OK"
