@@ -64,21 +64,21 @@ chmod 000 /etc/zfs/zroot.key
 
 # Create ZFS pool
 print "Create ZFS pool"
-zpool create -f -o ashift=12           \
-             -o autotrim=on            \
-             -O acltype=posixacl       \
-             -O compression=zstd       \
-             -O relatime=on            \
-             -O xattr=sa               \
-             -O dnodesize=legacy       \
-             -O encryption=aes-256-gcm \
-             -O keyformat=passphrase   \
-             -O keylocation=prompt     \
-             -O normalization=formD    \
-             -O mountpoint=none        \
-             -O canmount=off           \
-             -O devices=off            \
-             -R /mnt                   \
+zpool create -f -o ashift=12                          \
+             -o autotrim=on                           \
+             -O acltype=posixacl                      \
+             -O compression=zstd                      \
+             -O relatime=on                           \
+             -O xattr=sa                              \
+             -O dnodesize=legacy                      \
+             -O encryption=aes-256-gcm                \
+             -O keyformat=passphrase                  \
+             -O keylocation=file:///etc/zfs/zroot.key \
+             -O normalization=formD                   \
+             -O mountpoint=none                       \
+             -O canmount=off                          \
+             -O devices=off                           \
+             -R /mnt                                  \
              zroot $ZFS
 
 # Slash dataset
