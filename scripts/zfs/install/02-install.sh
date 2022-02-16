@@ -208,7 +208,7 @@ print 'Configure zfsbootmenu'
 cat > /mnt/etc/zfsbootmenu/mkinitcpio.conf <<"EOF"
 MODULES=()
 BINARIES=()
-FILES=()
+FILES=(/etc/zfs/zroot.key)
 HOOKS=(base udev autodetect modconf block keyboard keymap)
 COMPRESSION="zstd"
 EOF
