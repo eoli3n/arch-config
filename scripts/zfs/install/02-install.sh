@@ -166,6 +166,7 @@ EOF
 systemctl enable systemd-networkd --root=/mnt
 systemctl disable systemd-networkd-wait-online --root=/mnt
 
+mkdir /mnt/etc/iwd
 cat > /mnt/etc/iwd/main.conf <<"EOF"
 [General]
 UseDefaultInterface=true
