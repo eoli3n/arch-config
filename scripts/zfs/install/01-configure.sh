@@ -2,6 +2,8 @@
 
 set -e
 
+exec &> >(tee "configure.log")
+
 print () {
     echo -e "\n\033[1m> $1\033[0m\n"
 }
@@ -46,10 +48,19 @@ ZFS=$DISK-part3
 # Inform kernel
 partprobe $DISK
 
-# Format boot part
+# Format efi part
 sleep 1
 print "Format EFI part"
 mkfs.vfat $EFI
+
+# Generate zfs hostid
+zgenhostid
+
+# Generate key
+print "Set ZFS passphrase"
+read -r -p "ZFS passphrase: " -s pass
+echo "$pass" > /etc/zfs/zroot.key
+chmod 000 /etc/zfs/zroot.key
 
 # Create ZFS pool
 print "Create ZFS pool"
@@ -72,25 +83,19 @@ zpool create -f -o ashift=12           \
 
 # Slash dataset
 print "Create slash dataset"
-zfs create -o mountpoint=none                               zroot/ROOT
-zfs create -o mountpoint=/ -o canmount=noauto zroot/ROOT/default 
+zfs create -o mountpoint=none                 zroot/ROOT
+zfs set org.zfsbootmenu:commandline="spl_hostid=$(hostid) ro quiet" zroot/ROOT
+slash="archlinux"
+zfs create -o mountpoint=/ -o canmount=noauto zroot/ROOT/"$slash"
 
 # Manually mount slash dataset
-zfs mount zroot/ROOT/default
+zfs mount zroot/ROOT/"$slash"
 
 # Home dataset
 print "Create home dataset"
 zfs create -o mountpoint=/ -o canmount=off zroot/data
 zfs create                                 zroot/data/home
 zfs create -o mountpoint=/root             zroot/data/home/root
-
-# SWAP
-#print "Create swap dataset"
-#zfs create -V 8G -b $(getconf PAGESIZE)         \
-#           -o logbias=throughput -o sync=always \
-#           -o primarycache=metadata             \
-#           -o com.sun:auto-snapshot=false       \
-#           zroot/swap
 
 # Specific datasets
 print "Create specific datasets excluded from snapshots"
@@ -102,37 +107,26 @@ zfs create                                        zroot/var/lib/docker
 
 # Set bootfs 
 print "Set ZFS bootfs"
-zpool set bootfs="zroot/ROOT/default" zroot
+zpool set bootfs="zroot/ROOT/$slash" zroot
 
 # Export and reimport zpool
 print "Export and reimport zpool"
 zpool export zroot
 zpool import -d /dev/disk/by-id -R /mnt zroot -N
-zfs load-key zroot
-zfs mount zroot/ROOT/default
+zfs load-key -L zroot
+zfs mount zroot/ROOT/"$slash"
 zfs mount -a
-
-# Enable SWAP
-#print "Enable SWAP"
-#mkswap -f /dev/zvol/zroot/swap
-#swapon /dev/zvol/zroot/swap
 
 # Mount EFI part
 print "Mount EFI part"
 mkdir /mnt/efi
-mount $EFI /mnt/efi
-
-# Prepare zectl
-print "Prepare zectl"
-mkdir -p /mnt/efi/env/org.zectl-default
-mkdir /mnt/boot
-mount --bind /mnt/efi/env/org.zectl-default /mnt/boot
+mount "$EFI" /mnt/efi
 
 # Copy ZFS cache
 print "Generate and copy zfs cache"
 mkdir -p /mnt/etc/zfs
 zpool set cachefile=/etc/zfs/zpool.cache zroot
-cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
+#cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
 
 # Finish
 echo -e "\e[32mAll OK"

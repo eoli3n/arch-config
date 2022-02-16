@@ -2,8 +2,21 @@
 
 set -e
 
+exec &> >(tee "install.log")
+
+# Debug
+if [[ "$1" == "debug" ]]
+then
+    set -x
+    debug=1
+fi
+
 print () {
     echo -e "\n\033[1m> $1\033[0m\n"
+    if [[ -n "$debug" ]]
+    then
+      read -rp "press enter to continue"
+    fi
 }
 
 # Sort mirrors
@@ -13,16 +26,30 @@ reflector --country France --country Germany --latest 6 --protocol https --sort 
 
 # Install
 print "Install Arch Linux"
-pacstrap /mnt base base-devel linux-lts linux-lts-headers linux-firmware intel-ucode efibootmgr vim git ansible iwd wpa_supplicant
+pacstrap /mnt       \
+  base              \
+  base-devel        \
+  linux-lts         \
+  linux-lts-headers \
+  linux-firmware    \
+  intel-ucode       \
+  efibootmgr        \
+  vim               \
+  git               \
+  ansible           \
+  iwd               \
+  wpa_supplicant
+
+# Disable gummiboot post install hooks, only installs for generate-zbm
+echo "GUMMIBOOT_DISABLE=1" > /mnt/etc/default/gummiboot
 
 # Generate fstab excluding ZFS entries
 print "Generate fstab excluding ZFS entries"
 genfstab -U /mnt | grep -v "zroot" | tr -s '\n' | sed 's/\/mnt//'  > /mnt/etc/fstab
  
 # Set hostname
-echo "Please enter hostname :"
-read hostname
-echo $hostname > /mnt/etc/hostname
+read -r -p 'Please enter hostname : ' hostname
+echo "$hostname" > /mnt/etc/hostname
 
 # Configure /etc/hosts
 print "Configure hosts file"
@@ -43,15 +70,19 @@ print "Prepare initramfs"
 cat > /mnt/etc/mkinitcpio.conf <<"EOF"
 MODULES=(i915 intel_agp)
 BINARIES=()
-FILES=()
+FILES=(/etc/zfs/zroot.key)
 HOOKS=(base udev autodetect modconf block keyboard keymap zfs filesystems)
-COMPRESSION="lz4"
+COMPRESSION="zstd"
 EOF
+
+### Configure username
+print 'Set your username'
+read -r -p "Username: " user
 
 # Chroot and configure
 print "Chroot and configure system"
 
-arch-chroot /mnt /bin/bash -xe <<"EOF"
+arch-chroot /mnt /bin/bash -xe <<EOF
 
   # ZFS deps
   pacman-key --recv-keys F75D9D76 --keyserver hkp://pool.sks-keyservers.net:80
@@ -79,10 +110,13 @@ EOSF
   mkinitcpio -P
 
   # Install ZFSBootMenu
-
+  git clone https://github.com/zbm-dev/zfsbootmenu/ /tmp/zfsbootmenu
+  cd /tmp/zfsbootmenu
+  make
+  make install
 
   # Create user
-  useradd -m user
+  useradd -m $user
 
 EOF
 
@@ -92,13 +126,13 @@ arch-chroot /mnt /bin/passwd
 
 # Set user passwd
 print "Set user password"
-arch-chroot /mnt /bin/passwd user
+arch-chroot /mnt /bin/passwd "$user"
 
 # Configure sudo
 print "Configure sudo"
-cat > /mnt/etc/sudoers <<"EOF"
+cat > /mnt/etc/sudoers <<EOF
 root ALL=(ALL) ALL
-user ALL=(ALL) ALL
+$user ALL=(ALL) ALL
 Defaults rootpw
 EOF
 
@@ -133,6 +167,7 @@ systemctl disable systemd-networkd-wait-online --root=/mnt
 
 cat > /mnt/etc/iwd/main.conf <<"EOF"
 [General]
+UseDefaultInterface=true
 EnableNetworkConfiguration=true
 EOF
 systemctl enable iwd --root=/mnt
@@ -146,6 +181,10 @@ systemctl enable systemd-resolved --root=/mnt
 
 # Activate zfs
 print "Configure ZFS"
+cp /etc/hostid /mnt/etc/hostid
+cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
+cp /etc/zfs/zroot.key /mnt/etc/zfs
+
 sudo systemctl enable zfs-import-cache --root=/mnt
 sudo systemctl enable zfs-mount --root=/mnt
 sudo systemctl enable zfs-import.target --root=/mnt
@@ -160,9 +199,38 @@ ln -s /usr/lib/zfs/zfs/zed.d/history_event-zfs-list-cacher.sh /mnt/etc/zfs/zed.d
 systemctl enable zfs-zed.service --root=/mnt
 systemctl enable zfs.target --root=/mnt
 
-# Generate hostid
-print "Generate hostid"
-arch-chroot /mnt zgenhostid $(hostid)
+# Configure zfsbootmenu
+mkdir -p /mnt/efi/EFI/ZBM
+
+# Generate zfsbootmenu efi
+print 'Configure zfsbootmenu'
+cat > /mnt/etc/zfsbootmenu/config.yaml <<EOF
+Global:
+  ManageImages: true
+  BootMountPoint: /efi
+Components:
+  Enabled: false
+EFI:
+  ImageDir: /efi/EFI/ZBM
+  Versions: false
+  Enabled: true
+Kernel:
+  CommandLine: ro quiet loglevel=0
+EOF
+
+# Set cmdline
+zfs set org.zfsbootmenu:commandline="ro quiet nowatchdog rd.vconsole.keymap=fr" zroot/ROOT
+
+# Generate ZBM
+print 'Generate zbm'
+chroot /mnt/ /bin/bash -e <<"EOF"
+
+  # Export locale
+  export LANG="fr_FR.UTF-8"
+
+  # Generate zfsbootmenu
+  generate-zbm
+EOF
 
 # Umount all parts
 print "Umount all parts"
