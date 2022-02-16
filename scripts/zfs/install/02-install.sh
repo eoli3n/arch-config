@@ -85,7 +85,7 @@ arch-chroot /mnt /bin/bash -xe <<EOF
 
   # ZFS deps
   pacman-key --init
-  pacman-key --populate archlinux
+  #pacman-key --populate archlinux
   pacman-key --recv-keys F75D9D76 --keyserver keyserver.ubuntu.com
   pacman-key --lsign-key F75D9D76
   cat >> /etc/pacman.conf <<"EOSF"
