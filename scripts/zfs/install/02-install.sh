@@ -21,8 +21,7 @@ print () {
 
 # Sort mirrors
 print "Sort mirrors"
-pacman -Sy reflector --noconfirm
-reflector --country France --country Germany --latest 6 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+systemctl start reflector
 
 # Install
 print "Install Arch Linux"
