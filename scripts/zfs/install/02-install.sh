@@ -117,7 +117,7 @@ EOSF
 
   # Install ZFSBootMenu and deps
   git clone --depth=1 https://github.com/zbm-dev/zfsbootmenu/ /tmp/zfsbootmenu
-  pacman -S cpanminus kexec-tools fzf --noconfirm
+  pacman -S cpanminus kexec-tools fzf util-linux --noconfirm
   cd /tmp/zfsbootmenu
   make
   make install
