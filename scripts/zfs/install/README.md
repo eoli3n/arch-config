@@ -1,24 +1,3 @@
-### EFI install
-
-- sda1  
-  /efi  
-  FAT used as esp
-- sda2  
-  ZFS pool
-
-``01-configure.sh`` will 
-- Create partition scheme
-- Format everything
-- Mount partitions
-
-``02-install.sh`` will
-- Configure mirrors
-- Install Arch Linux and kernel
-- Generate initramfs
-- Configure hostname, locales, keymap, network
-- Install and configure bootloader
-- Generate users and passwords
-
 ### How to Use
 
 Boot latest archiso
@@ -43,3 +22,25 @@ $ pacman -S pastebinit
 $ pastebinit -b sprunge.us configure.log
 $ pastebinit -b sprunge.us install.log
 ```
+
+### EFI install
+
+- sda1  
+  /efi  
+  FAT used as esp
+- sda2  
+  ZFS pool
+
+``01-configure.sh`` will 
+- Create partition scheme
+- Format everything
+- Mount partitions
+
+``02-install.sh`` will
+- Configure mirrors
+- Install Arch Linux and kernel
+- Generate initramfs
+- Configure hostname, locales, keymap, network
+- Install and configure bootloader
+- Generate users and passwords
+
