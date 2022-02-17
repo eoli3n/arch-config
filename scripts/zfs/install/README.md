@@ -15,14 +15,6 @@ $ ./01-configure.sh
 $ ./02-install.sh
 ```
 
-### Debug
-
-```bash
-$ pacman -S pastebinit
-$ pastebinit -b sprunge.us configure.log
-$ pastebinit -b sprunge.us install.log
-```
-
 ### EFI install
 
 - sda1  
@@ -44,3 +36,16 @@ $ pastebinit -b sprunge.us install.log
 - Install and configure bootloader
 - Generate users and passwords
 
+### Debug
+
+```bash
+$ pacman -S pastebinit
+$ pastebinit -b sprunge.us configure.log
+$ pastebinit -b sprunge.us install.log
+```
+
+##### Check EFI content
+```bash
+$ pacman -S dracut
+# check with lsinitrd
+```

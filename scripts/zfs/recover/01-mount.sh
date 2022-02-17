@@ -16,7 +16,7 @@ print "Load ZFS keys"
 zfs load-key zroot
 
 print "Mount slash dataset"
-zfs mount zroot/ROOT/default
+zfs mount zroot/ROOT/archlinux
 
 print "Mount other datasets"
 zfs mount -a
