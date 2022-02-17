@@ -245,9 +245,41 @@ chroot /mnt/ /bin/bash -e <<"EOF"
   generate-zbm
 EOF
 
+# Set DISK
+if [[ -f /tmp/disk ]]
+then
+  DISK=$(cat /tmp/disk)
+else
+  print 'Select the disk you installed on:'
+  select ENTRY in $(ls /dev/disk/by-id/);
+  do
+      DISK="/dev/disk/by-id/$ENTRY"
+      echo "Creating boot entries on $ENTRY."
+      break
+  done
+fi
+
+# Create UEFI entries
+print 'Create efi boot entries'
+modprobe efivarfs
+mount -t efivarfs efivarfs /sys/firmware/efi/efivars
+efibootmgr --disk "$DISK" \
+  --part 1 \
+  --create \
+  --label "ZFSBootMenu Backup" \
+  --loader "\EFI\ZBM\vmlinuz-backup.efi" \
+  --unicode "root=zfsbootmenu:POOL=zroot ro quiet spl_hostid=$(hostid)" \
+  --verbose
+efibootmgr --disk "$DISK" \
+  --part 1 \
+  --create \
+  --label "ZFSBootMenu" \
+  --loader "\EFI\ZBM\vmlinuz.efi" \
+  --unicode "root=zfsbootmenu:POOL=zroot ro quiet spl_hostid=$(hostid)" \
+  --verbose
+
 # Umount all parts
 print "Umount all parts"
-umount /mnt/boot
 umount /mnt/efi
 zfs umount -a
 

@@ -21,6 +21,7 @@ modprobe zfs
 select ENTRY in $(ls /dev/disk/by-id/);
 do
     DISK="/dev/disk/by-id/$ENTRY"
+    echo "$DISK" > /tmp/disk
     echo "Installing on $ENTRY."
     break
 done
