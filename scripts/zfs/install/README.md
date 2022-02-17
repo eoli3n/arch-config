@@ -25,10 +25,14 @@
 Boot latest archiso
 
 ```
-loadkeys fr
-pacman -Sy git
-git clone https://github.com/eoli3n/arch-config
-cd arch-config/scripts/install
-./01-configure.sh
-./02-install.sh
+$ loadkeys fr
+
+# Init ZFS module and install git
+$ curl -s https://eoli3n.github.io/archzfs/init | bash
+
+# Get install scripts
+$ git clone https://github.com/eoli3n/arch-config
+$ cd arch-config/scripts/zfs/install
+$ ./01-configure.sh
+$ ./02-install.sh
 ```
