@@ -116,10 +116,12 @@ EOSF
   mkinitcpio -P
 
   # Install ZFSBootMenu
-  git clone https://github.com/zbm-dev/zfsbootmenu/ /tmp/zfsbootmenu
+  git clone --depth=1 https://github.com/zbm-dev/zfsbootmenu/ /tmp/zfsbootmenu
+  pacman -S cpanminus --noconfirm
   cd /tmp/zfsbootmenu
   make
   make install
+  cpanm --notest --installdeps .
 
   # Create user
   useradd -m $user
@@ -210,12 +212,13 @@ mkdir -p /mnt/efi/EFI/ZBM
 
 # Generate zfsbootmenu efi
 print 'Configure zfsbootmenu'
+# https://github.com/zbm-dev/zfsbootmenu/blob/master/etc/zfsbootmenu/mkinitcpio.conf
 
 cat > /mnt/etc/zfsbootmenu/mkinitcpio.conf <<"EOF"
 MODULES=()
 BINARIES=()
 FILES=(/etc/zfs/zroot.key)
-HOOKS=(base udev autodetect modconf block keyboard keymap)
+HOOKS=(base udev autodetect modconf block keyboard keymap zfsbootmenu)
 COMPRESSION="zstd"
 EOF
 
