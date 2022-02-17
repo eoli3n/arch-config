@@ -84,7 +84,9 @@ print "Chroot and configure system"
 arch-chroot /mnt /bin/bash -xe <<EOF
 
   # ZFS deps
+  rm -Rf /etc/pacman.d/gnupg
   pacman -S archlinux-keyring --noconfirm
+  pacman-key --init
   pacman-key --populate archlinux
   pacman-key --recv-keys F75D9D76 --keyserver keyserver.ubuntu.com
   pacman-key --lsign-key F75D9D76
