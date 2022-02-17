@@ -23,7 +23,7 @@
 
 Boot latest archiso
 
-```
+```bash
 $ loadkeys fr
 
 # Init ZFS module and install git
@@ -34,4 +34,12 @@ $ git clone https://github.com/eoli3n/arch-config
 $ cd arch-config/scripts/zfs/install
 $ ./01-configure.sh
 $ ./02-install.sh
+```
+
+### Debug
+
+```bash
+$ pacman -S pastebinit
+$ pastebinit -b sprunge.us configure.log
+$ pastebinit -b sprunge.us install.log
 ```
