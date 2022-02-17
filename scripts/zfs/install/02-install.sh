@@ -237,7 +237,7 @@ zfs set org.zfsbootmenu:commandline="ro quiet nowatchdog rd.vconsole.keymap=fr" 
 
 # Generate ZBM
 print 'Generate zbm'
-chroot /mnt/ /bin/bash -e <<"EOF"
+chroot /mnt/ /bin/bash -xe <<"EOF"
 
   # Export locale
   export LANG="fr_FR.UTF-8"
