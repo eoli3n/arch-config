@@ -6,9 +6,6 @@
 - sda2  
   ZFS pool
 
-
-##### Boot latest arch iso
-
 ``01-configure.sh`` will 
 - Create partition scheme
 - Format everything
@@ -21,6 +18,8 @@
 - Configure hostname, locales, keymap, network
 - Install and configure bootloader
 - Generate users and passwords
+
+### How to Use
 
 Boot latest archiso
 
