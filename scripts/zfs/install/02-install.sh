@@ -272,14 +272,14 @@ efibootmgr --disk "$DISK" \
   --part 1 \
   --create \
   --label "ZFSBootMenu Backup" \
-  --loader "\EFI\ZBM\vmlinuz-backup.efi" \
+  --loader "\EFI\ZBM\vmlinuz-linux-lts-backup.efi" \
   --unicode "root=zfsbootmenu:POOL=zroot ro quiet spl_hostid=$(hostid)" \
   --verbose
 efibootmgr --disk "$DISK" \
   --part 1 \
   --create \
   --label "ZFSBootMenu" \
-  --loader "\EFI\ZBM\vmlinuz.efi" \
+  --loader "\EFI\ZBM\vmlinuz-linux-lts.efi" \
   --unicode "root=zfsbootmenu:POOL=zroot ro quiet spl_hostid=$(hostid)" \
   --verbose
 
