@@ -13,7 +13,7 @@ print "Import zpool"
 zpool import -d /dev/disk/by-id -R /mnt zroot -N
 
 print "Load ZFS keys"
-zfs load-key zroot
+zfs load-key -L prompt zroot
 
 print "Mount slash dataset"
 zfs mount zroot/ROOT/archlinux
@@ -23,7 +23,6 @@ zfs mount -a
 
 print "Mount EFI part"
 mount /dev/sda1 /mnt/efi
-mount --bind /mnt/efi/env/org.zectl-default /mnt/boot
 
 # Finish
 echo -e "\e[32mAll OK"
