@@ -83,7 +83,10 @@ print "Chroot and configure system"
 
 arch-chroot /mnt /bin/bash -xe <<EOF
 
-  # ZFS deps
+  ### Reinit keyring
+  # As keyring is initialized at boot, and copied to the install dir with pacstrap, and ntp is running
+  # Time changed after keyring initialization, it leads to malfunction
+  # Keyring needs to be reinitialised properly to be able to sign archzfs key.
   rm -Rf /etc/pacman.d/gnupg
   pacman-key --init
   pacman-key --populate archlinux
