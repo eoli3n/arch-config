@@ -115,9 +115,9 @@ EOSF
   # Generate Initramfs
   mkinitcpio -P
 
-  # Install ZFSBootMenu
+  # Install ZFSBootMenu and deps
   git clone --depth=1 https://github.com/zbm-dev/zfsbootmenu/ /tmp/zfsbootmenu
-  pacman -S cpanminus --noconfirm
+  pacman -S cpanminus kexec-tools fzf --noconfirm
   cd /tmp/zfsbootmenu
   make
   make install
