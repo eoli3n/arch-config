@@ -1,9 +1,9 @@
 ### EFI install
 
-- sda1
-  /boot
+- sda1  
+  /efi  
   FAT used as esp
-- sda2
+- sda2  
   ZFS pool
 
 
