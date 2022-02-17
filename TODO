@@ -1,29 +1,18 @@
 # ZFS
 - zfs hibernate without swap ?
 - smart test timer ?
+- periodic zfs-scrub
 
 # DNS
 - fix DNS per interface ? as https://github.com/jonathanio/update-systemd-resolved#preventing-leakage-to-corporate-networks
-
-# FIX
-- ipxe-netboot aur package broken
-- zfs-scrub, zfs-trim, backup service popup without reason ??
 
 # SERVICES
 - hardware acceleration packages
 - disable ipv6
 
-# ISSUES
-- virtio-gpu : https://bbs.archlinux.org/viewtopic.php?pid=1901266#p1901266
-- RW snapshots with snapper : https://github.com/openSUSE/snapper/issues/535
-- tray waybar : https://github.com/Alexays/Waybar/issues/21#issuecomment-635286264
-
 # IMPROVMENTS
-- notify-send : scrub, trim, and backup : root cannot send send notification to user
 - move max aur package to community equivalents
 
 # TESTS
 - zfs trim + zfs autoscrub systemd timer
-- libvirt zfs pool storage : how to use a subdataset ?
-- docker with zfs pool storage
 - reflector at startup
