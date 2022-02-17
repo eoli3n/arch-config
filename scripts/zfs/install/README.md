@@ -47,5 +47,5 @@ $ pastebinit -b sprunge.us install.log
 ##### Check EFI content
 ```bash
 $ pacman -S dracut
-# check with lsinitrd
+$ lsinitrd /efi/EFI/ZBM/*
 ```
