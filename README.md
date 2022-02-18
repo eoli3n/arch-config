@@ -2,9 +2,9 @@
 
 - Native encryption aes-256-gcm
 - Zstd compression on all datasets
-- Boot Environments managed with [zectl](https://github.com/johnramsden/zectl)
+- Boot Environments managed with [zfsbootmenu](https://zfsbootmenu.org/)
+  - /boot included in ZFS
 - No swap
-- Separated VFAT /boot
 - [Netboot recovery](https://eoli3n.github.io/archlinux/2020/04/25/recovery.html)
 
 ### BTRFS root features

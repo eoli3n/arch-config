@@ -46,8 +46,3 @@
   systemd:
     name: linux-modules-cleanup
     enabled: yes
-
-- name: Install archaudit hook
-  copy:
-    src: arch-audit.hook
-    dest: /usr/share/libalpm/hooks
