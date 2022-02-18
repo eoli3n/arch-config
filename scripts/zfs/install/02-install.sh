@@ -194,10 +194,10 @@ cp /etc/hostid /mnt/etc/hostid
 cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
 cp /etc/zfs/zroot.key /mnt/etc/zfs
 
-sudo systemctl enable zfs-import-cache --root=/mnt
-sudo systemctl enable zfs-mount --root=/mnt
-sudo systemctl enable zfs-import.target --root=/mnt
-sudo systemctl enable zfs.target --root=/mnt
+systemctl enable zfs-import-cache --root=/mnt
+systemctl enable zfs-mount --root=/mnt
+systemctl enable zfs-import.target --root=/mnt
+systemctl enable zfs.target --root=/mnt
 
 # Configure zfs-mount-generator
 print "Configure zfs-mount-generator"
@@ -205,7 +205,6 @@ mkdir -p /mnt/etc/zfs/zfs-list.cache
 touch /mnt/etc/zfs/zfs-list.cache/zroot
 zfs list -H -o name,mountpoint,canmount,atime,relatime,devices,exec,readonly,setuid,nbmand | sed 's/\/mnt//' > /mnt/etc/zfs/zfs-list.cache/zroot
 systemctl enable zfs-zed.service --root=/mnt
-systemctl enable zfs.target --root=/mnt
 
 # Configure zfsbootmenu
 mkdir -p /mnt/efi/EFI/ZBM
