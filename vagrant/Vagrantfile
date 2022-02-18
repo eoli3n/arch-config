@@ -27,8 +27,8 @@ Vagrant.configure("2") do |config|
       libvirt.storage :file, :device => :cdrom, :path => '/tmp/archlinux.iso', :bus => 'sata'
       # Set UEFI boot, comment for legacy
       ### On Arch Linux with OVMF package, use
-      libvirt.loader = '/usr/share/edk2-ovmf/x64/OVMF.fd'
-      libvirt.nvram = '/var/lib/libvirt/qemu/nvram/voidlinux-vagrant.fd'
+      libvirt.loader = '/usr/share/edk2-ovmf/x64/OVMF_CODE.fd'
+      libvirt.nvram = '/usr/share/edk2-ovmf/x64/OVMF_VARS_archlinux.fd'
       ### On Void Linux, use qemu edk2 firmwares
       # For secure boot, use "secure" firmware and force Q35 chipset
       #libvirt.machine_type = 'q35'
