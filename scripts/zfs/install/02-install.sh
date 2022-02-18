@@ -69,7 +69,7 @@ print "Prepare initramfs"
 cat > /mnt/etc/mkinitcpio.conf <<"EOF"
 MODULES=(i915 intel_agp)
 BINARIES=()
-FILES=()
+FILES=(/etc/zfs/zroot.key)
 HOOKS=(base udev autodetect modconf block keyboard keymap zfs filesystems)
 COMPRESSION="zstd"
 EOF
@@ -217,7 +217,7 @@ print 'Configure zfsbootmenu'
 cat > /mnt/etc/zfsbootmenu/mkinitcpio.conf <<"EOF"
 MODULES=()
 BINARIES=()
-FILES=(/etc/zfs/zroot.key)
+FILES=()
 HOOKS=(base udev autodetect modconf block keyboard keymap)
 COMPRESSION="zstd"
 EOF
