@@ -74,6 +74,11 @@ HOOKS=(base udev autodetect modconf block keyboard keymap zfs filesystems)
 COMPRESSION="zstd"
 EOF
 
+print "Copy ZFS files"
+cp /etc/hostid /mnt/etc/hostid
+cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
+cp /etc/zfs/zroot.key /mnt/etc/zfs
+
 ### Configure username
 print 'Set your username'
 read -r -p "Username: " user
@@ -190,10 +195,6 @@ systemctl enable systemd-resolved --root=/mnt
 
 # Activate zfs
 print "Configure ZFS"
-cp /etc/hostid /mnt/etc/hostid
-cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
-cp /etc/zfs/zroot.key /mnt/etc/zfs
-
 systemctl enable zfs-import-cache --root=/mnt
 systemctl enable zfs-mount --root=/mnt
 systemctl enable zfs-import.target --root=/mnt
@@ -238,7 +239,7 @@ Kernel:
 EOF
 
 # Set cmdline
-zfs set org.zfsbootmenu:commandline="ro quiet nowatchdog rd.vconsole.keymap=fr" zroot/ROOT
+zfs set org.zfsbootmenu:commandline="rw quiet nowatchdog rd.vconsole.keymap=fr" zroot/ROOT
 
 # Generate ZBM
 print 'Generate zbm'
