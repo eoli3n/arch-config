@@ -7,4 +7,3 @@
 
 ### zfsbootmenu
 - pacman hook to "generate-zbm" at each zfs-dkms upgrade
-- "no pools available" at startup ?
