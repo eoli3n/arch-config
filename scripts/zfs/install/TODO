@@ -4,3 +4,7 @@
 - reflector systemd timer
 - see Wayne's World
 - dynamic disk in 01-mount.sh recover script
+
+### zfsbootmenu
+- pacman hook to "generate-zbm" at each zfs-dkms upgrade
+- "no pools available" at startup ?
