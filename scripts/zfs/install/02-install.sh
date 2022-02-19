@@ -278,14 +278,14 @@ then
       --create \
       --label "ZFSBootMenu Backup" \
       --loader "\EFI\ZBM\vmlinuz-linux-lts-backup.efi" \
-      --unicode "root=zfsbootmenu:POOL=zroot ro quiet spl_hostid=$(hostid)" \
+      --unicode "root=zfsbootmenu:POOL=zroot ro quiet" \
       --verbose
     efibootmgr --disk "$DISK" \
       --part 1 \
       --create \
       --label "ZFSBootMenu" \
       --loader "\EFI\ZBM\vmlinuz-linux-lts.efi" \
-      --unicode "root=zfsbootmenu:POOL=zroot ro quiet spl_hostid=$(hostid)" \
+      --unicode "root=zfsbootmenu:POOL=zroot ro quiet" \
       --verbose
 else
     print 'Boot entries already created'
