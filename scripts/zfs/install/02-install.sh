@@ -19,6 +19,9 @@ print () {
     fi
 }
 
+# Root dataset
+root_dataset=$(cat /tmp/root_dataset)
+
 # Sort mirrors
 print "Sort mirrors"
 systemctl start reflector
@@ -38,9 +41,6 @@ pacstrap /mnt       \
   ansible           \
   iwd               \
   wpa_supplicant
-
-# Disable gummiboot post install hooks, only installs for generate-zbm
-#echo "GUMMIBOOT_DISABLE=1" > /mnt/etc/default/gummiboot
 
 # Generate fstab excluding ZFS entries
 print "Generate fstab excluding ZFS entries"
@@ -235,11 +235,12 @@ EFI:
   Versions: false
   Enabled: true
 Kernel:
-  CommandLine: ro quiet loglevel=0
+  CommandLine: ro quiet loglevel=0 zbm.import_policy=hostid
+  Prefix: vmlinuz
 EOF
 
 # Set cmdline
-zfs set org.zfsbootmenu:commandline="rw quiet nowatchdog rd.vconsole.keymap=fr" zroot/ROOT
+zfs set org.zfsbootmenu:commandline="rw quiet nowatchdog rd.vconsole.keymap=fr" zroot/ROOT/"$root_dataset"
 
 # Generate ZBM
 print 'Generate zbm'
@@ -268,20 +269,23 @@ fi
 
 # Create UEFI entries
 print 'Create efi boot entries'
-efibootmgr --disk "$DISK" \
-  --part 1 \
-  --create \
-  --label "ZFSBootMenu Backup" \
-  --loader "\EFI\ZBM\vmlinuz-linux-lts-backup.efi" \
-  --unicode "root=zfsbootmenu:POOL=zroot ro quiet spl_hostid=$(hostid)" \
-  --verbose
-efibootmgr --disk "$DISK" \
-  --part 1 \
-  --create \
-  --label "ZFSBootMenu" \
-  --loader "\EFI\ZBM\vmlinuz-linux-lts.efi" \
-  --unicode "root=zfsbootmenu:POOL=zroot ro quiet spl_hostid=$(hostid)" \
-  --verbose
+if ! efibootmgr | grep ZFSBootMenu
+then
+    efibootmgr --disk "$DISK" \
+      --part 1 \
+      --create \
+      --label "ZFSBootMenu Backup" \
+      --loader "\EFI\ZBM\vmlinuz-backup.efi" \
+      --verbose
+    efibootmgr --disk "$DISK" \
+      --part 1 \
+      --create \
+      --label "ZFSBootMenu" \
+      --loader "\EFI\ZBM\vmlinuz.efi" \
+      --verbose
+else
+    print 'Boot entries already created'
+fi
 
 # Umount all parts
 print "Umount all parts"
