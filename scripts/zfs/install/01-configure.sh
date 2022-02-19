@@ -76,9 +76,6 @@ create_pool () {
     # ZFS part
     ZFS="$DISK-part3"
 
-    # Generate zfs hostid
-    zgenhostid
-    
     # Generate key
     print "Set ZFS passphrase"
     read -r -p "> ZFS passphrase: " -s pass
@@ -109,11 +106,17 @@ create_root_dataset () {
     # Slash dataset
     print "Create slash dataset"
     zfs create -o mountpoint=none                 zroot/ROOT
-    zfs set org.zfsbootmenu:commandline="spl_hostid=$(hostid) ro quiet" zroot/ROOT
+
+    # Set cmdline
+    zfs set org.zfsbootmenu:commandline="ro quiet" zroot/ROOT
 }
 
 create_system_dataset () {
+    # Create system dataset
     zfs create -o mountpoint=/ -o canmount=noauto zroot/ROOT/"$1"
+
+    # Generate zfs hostid
+    zgenhostid
     
     # Set bootfs 
     print "Set ZFS bootfs"
@@ -140,7 +143,7 @@ export_pool () {
 }
 
 import_pool () {
-    zpool import -d /dev/disk/by-id -R /mnt zroot -N
+    zpool import -d /dev/disk/by-id -R /mnt zroot -N -f
     zfs load-key -L prompt zroot
 }
 
