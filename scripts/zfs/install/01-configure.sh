@@ -125,11 +125,6 @@ create_system_dataset () {
 
     # Manually mount slash dataset
     zfs mount zroot/ROOT/"$1"
-
-    # Copy ZFS cache
-    print "Generate and copy zfs cache"
-    mkdir -p /mnt/etc/zfs
-    zpool set cachefile=/etc/zfs/zpool.cache zroot
 }
 
 create_home_dataset () {
@@ -158,6 +153,13 @@ mount_system () {
     print "Mount EFI part"
     mkdir /mnt/efi
     mount "$EFI" /mnt/efi
+}
+
+copy_zpool_cache () {
+    # Copy ZFS cache
+    print "Generate and copy zfs cache"
+    mkdir -p /mnt/etc/zfs
+    zpool set cachefile=/etc/zfs/zpool.cache zroot
 }
 
 # Main
@@ -201,6 +203,7 @@ fi
 export_pool
 import_pool
 mount_system "$name_reply"
+copy_zpool_cache
 
 # Finish
 echo -e "\e[32mAll OK"
