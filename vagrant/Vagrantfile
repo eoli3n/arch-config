@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
     archlinux.vm.provider :libvirt do |libvirt|
       libvirt.cpu_mode = 'host-passthrough'
       libvirt.memory = '8192'
-      libvirt.cpus = '1'
+      libvirt.cpus = '4'
       libvirt.graphics_type = 'spice'
       # Create a disk
       libvirt.storage :file,
