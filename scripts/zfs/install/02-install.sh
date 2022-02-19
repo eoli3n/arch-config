@@ -238,7 +238,7 @@ EFI:
   Versions: false
   Enabled: true
 Kernel:
-  CommandLine: ro quiet loglevel=0
+  CommandLine: ro quiet loglevel=0 zbm.import_policy=hostid
 EOF
 
 # Set cmdline
@@ -289,6 +289,7 @@ then
       --verbose
 else
     print 'Boot entries already created'
+fi
 
 # Umount all parts
 print "Umount all parts"
