@@ -1,0 +1,15 @@
+---
+- name: install zrepl
+  pacman:
+    name: zrepl
+
+- name: create zrepl dir
+  file:
+    path: /etc/zrepl
+    state: present
+
+- name: configure zrepl
+  copy:
+    src: zrepl.yml
+    dest: /etc/zrepl
+  notify: restart zrepl

@@ -1,0 +1,7 @@
+---
+- name: restart zrepl
+  systemd:
+    name: zrepl
+    state: started
+    daemon_reload: yes
+    enabled: yes

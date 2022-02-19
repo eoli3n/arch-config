@@ -1,0 +1,15 @@
+jobs:
+- name: local
+  type: snap
+  filesystems: {
+    "zroot/ROOT<": true
+  }
+  snapshotting:
+    type: periodic
+    prefix: zrepl_
+    interval: 10m
+  pruning:
+    keep:
+    - type: grid
+      grid: 1x1h(keep=all) | 24x1h | 30x1d | 6x30d
+      regex: "^zrepl_"
