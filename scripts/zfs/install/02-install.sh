@@ -19,6 +19,9 @@ print () {
     fi
 }
 
+# Root dataset
+root_dataset=$(cat /tmp/root_dataset)
+
 # Sort mirrors
 print "Sort mirrors"
 systemctl start reflector
@@ -239,7 +242,7 @@ Kernel:
 EOF
 
 # Set cmdline
-zfs set org.zfsbootmenu:commandline="rw quiet nowatchdog rd.vconsole.keymap=fr" zroot/ROOT
+zfs set org.zfsbootmenu:commandline="rw quiet nowatchdog rd.vconsole.keymap=fr" zroot/ROOT/"$root_dataset"
 
 # Generate ZBM
 print 'Generate zbm'
@@ -268,20 +271,24 @@ fi
 
 # Create UEFI entries
 print 'Create efi boot entries'
-efibootmgr --disk "$DISK" \
-  --part 1 \
-  --create \
-  --label "ZFSBootMenu Backup" \
-  --loader "\EFI\ZBM\vmlinuz-linux-lts-backup.efi" \
-  --unicode "root=zfsbootmenu:POOL=zroot ro quiet spl_hostid=$(hostid)" \
-  --verbose
-efibootmgr --disk "$DISK" \
-  --part 1 \
-  --create \
-  --label "ZFSBootMenu" \
-  --loader "\EFI\ZBM\vmlinuz-linux-lts.efi" \
-  --unicode "root=zfsbootmenu:POOL=zroot ro quiet spl_hostid=$(hostid)" \
-  --verbose
+if ! efibootmgr | grep ZFSBootMenu
+then
+    efibootmgr --disk "$DISK" \
+      --part 1 \
+      --create \
+      --label "ZFSBootMenu Backup" \
+      --loader "\EFI\ZBM\vmlinuz-linux-lts-backup.efi" \
+      --unicode "root=zfsbootmenu:POOL=zroot ro quiet spl_hostid=$(hostid)" \
+      --verbose
+    efibootmgr --disk "$DISK" \
+      --part 1 \
+      --create \
+      --label "ZFSBootMenu" \
+      --loader "\EFI\ZBM\vmlinuz-linux-lts.efi" \
+      --unicode "root=zfsbootmenu:POOL=zroot ro quiet spl_hostid=$(hostid)" \
+      --verbose
+else
+    print 'Boot entries already created'
 
 # Umount all parts
 print "Umount all parts"
