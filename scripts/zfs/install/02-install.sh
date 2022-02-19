@@ -236,6 +236,7 @@ EFI:
   Enabled: true
 Kernel:
   CommandLine: ro quiet loglevel=0 zbm.import_policy=hostid
+  Prefix: vmlinuz
 EOF
 
 # Set cmdline
@@ -274,13 +275,13 @@ then
       --part 1 \
       --create \
       --label "ZFSBootMenu Backup" \
-      --loader "\EFI\ZBM\vmlinuz-linux-lts-backup.efi" \
+      --loader "\EFI\ZBM\vmlinuz-backup.efi" \
       --verbose
     efibootmgr --disk "$DISK" \
       --part 1 \
       --create \
       --label "ZFSBootMenu" \
-      --loader "\EFI\ZBM\vmlinuz-linux-lts.efi" \
+      --loader "\EFI\ZBM\vmlinuz.efi" \
       --verbose
 else
     print 'Boot entries already created'
