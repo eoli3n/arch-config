@@ -29,18 +29,17 @@
     update_cache: yes
     upgrade: yes
 
-- name: Install reflector service
+- name: Configure reflector
   copy:
-    src: reflector.service
-    dest: /etc/systemd/system/
+    src: reflector.conf
+    dest: /etc/xdg/reflector/
   notify: enable reflector
 
 - name: Install pacman hooks
   become: no
-  aur:
+  pacman:
     name:
       - kernel-modules-hook # keep kernel modules dir after an upgrade
-    skip_installed: true
 
 - name: Enable kernel modules cleanup
   systemd:

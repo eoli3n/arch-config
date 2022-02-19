@@ -1,6 +1,10 @@
 ---
 - name: enable reflector
   systemd:
-    name: reflector
+    name: '{{ item }}'
     daemon_reload: yes
     enabled: yes
+    state: started
+  loop:
+    - reflector.service
+    - reflector.timer
