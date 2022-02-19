@@ -42,9 +42,6 @@ pacstrap /mnt       \
   iwd               \
   wpa_supplicant
 
-# Disable gummiboot post install hooks, only installs for generate-zbm
-#echo "GUMMIBOOT_DISABLE=1" > /mnt/etc/default/gummiboot
-
 # Generate fstab excluding ZFS entries
 print "Generate fstab excluding ZFS entries"
 genfstab -U /mnt | grep -v "zroot" | tr -s '\n' | sed 's/\/mnt//'  > /mnt/etc/fstab
