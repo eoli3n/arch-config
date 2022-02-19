@@ -104,7 +104,7 @@ create_pool () {
 
 create_root_dataset () {
     # Slash dataset
-    print "Create slash dataset"
+    print "Create root dataset"
     zfs create -o mountpoint=none                 zroot/ROOT
 
     # Set cmdline
@@ -112,10 +112,11 @@ create_root_dataset () {
 }
 
 create_system_dataset () {
-    # Create system dataset
+    print "Create slash dataset"
     zfs create -o mountpoint=/ -o canmount=noauto zroot/ROOT/"$1"
 
     # Generate zfs hostid
+    print "Generate hostid"
     zgenhostid
     
     # Set bootfs 
@@ -138,16 +139,18 @@ create_home_dataset () {
 }
 
 export_pool () {
-    print "Export and reimport zpool"
+    print "Export zpool"
     zpool export zroot
 }
 
 import_pool () {
+    print "Import zpool"
     zpool import -d /dev/disk/by-id -R /mnt zroot -N -f
     zfs load-key -L prompt zroot
 }
 
 mount_system () {
+    print "Mount slash dataset"
     zfs mount zroot/ROOT/"$1"
     zfs mount -a
     
@@ -175,9 +178,8 @@ then
     partition
     # Create ZFS pool
     create_pool
-    # Create datasets
+    # Create root dataset
     create_root_dataset
-    create_home_dataset
 fi
 
 ask "Name of the slash dataset ?"
@@ -190,6 +192,12 @@ then
 fi
 
 create_system_dataset "$name_reply"
+
+if [[ $install_reply == "first" ]]
+then
+    create_home_dataset
+fi
+
 export_pool
 import_pool
 mount_system "$name_reply"
