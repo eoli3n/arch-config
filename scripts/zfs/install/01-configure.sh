@@ -72,15 +72,17 @@ partition () {
     mkfs.vfat "$EFI"
 }
 
-create_pool () {
-    # ZFS part
-    ZFS="$DISK-part3"
-
+zfs_passphrase () {
     # Generate key
     print "Set ZFS passphrase"
     read -r -p "> ZFS passphrase: " -s pass
     echo "$pass" > /etc/zfs/zroot.key
     chmod 000 /etc/zfs/zroot.key
+}
+
+create_pool () {
+    # ZFS part
+    ZFS="$DISK-part3"
     
     # Create ZFS pool
     print "Create ZFS pool"
@@ -141,7 +143,7 @@ export_pool () {
 import_pool () {
     print "Import zpool"
     zpool import -d /dev/disk/by-id -R /mnt zroot -N -f
-    zfs load-key -L prompt zroot
+    zfs load-key zroot
 }
 
 mount_system () {
@@ -171,6 +173,7 @@ print "Is this the first install or a second install to dualboot ?"
 install_reply=$(menu first dualboot)
 
 select_disk
+zfs_passphrase
 
 # If first install
 if [[ $install_reply == "first" ]]
