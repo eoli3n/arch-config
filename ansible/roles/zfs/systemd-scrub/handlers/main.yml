@@ -4,9 +4,3 @@
     name: zfs-scrub.timer
     daemon_reload: yes
     enabled: yes
-
-- name: enable zfs trim timer
-  systemd:
-    name: zfs-trim.timer
-    daemon_reload: yes
-    enabled: yes

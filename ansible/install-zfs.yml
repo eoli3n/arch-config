@@ -30,6 +30,5 @@
     - { role: virtualization, tags: virtualization }
     - { role: containers, tags: containers }
     - { role: recovery, tags: recovery }
-    - { role: zfs/systemd-boot-zectl, tags: boot }
     - { role: zfs/initramfs, tags: boot }
-    - { role: zfs/systemd-scrub-trim, tags: zfs }
+    - { role: zfs/systemd-scrub, tags: zfs }
