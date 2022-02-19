@@ -39,6 +39,8 @@ $ ./02-install.sh
 ### Debug
 
 ```bash
+$ ./01-configure.sh debug
+$ ./02-install.sh debug
 $ pacman -S pastebinit
 $ pastebinit -b sprunge.us configure.log
 $ pastebinit -b sprunge.us install.log
