@@ -15,6 +15,10 @@ $ ./01-configure.sh
 $ ./02-install.sh
 ```
 
+### DualBoot Support
+
+After installing Void Linux with [void-config](https://github.com/eoli3n/void-config/tree/master/scripts/install), run ``01-configure.sh`` and select ``dualboot`` in the menu.
+
 ### EFI install
 
 - sda1  
