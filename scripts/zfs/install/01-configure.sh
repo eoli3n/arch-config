@@ -24,11 +24,11 @@ menu () {
 
 # Tests
 tests () {
-ls /sys/firmware/efi/efivars > /dev/null &&   \
-    ping archlinux.org -c 1 > /dev/null &&    \
-    timedatectl set-ntp true > /dev/null &&   \
-    modprobe zfs &&                           \
-    print "Tests ok"
+    ls /sys/firmware/efi/efivars > /dev/null &&   \
+        ping archlinux.org -c 1 > /dev/null &&    \
+        timedatectl set-ntp true > /dev/null &&   \
+        modprobe zfs &&                           \
+        print "Tests ok"
 }
 
 select_disk () {
