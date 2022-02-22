@@ -11,7 +11,9 @@
     state: directory
 
 - name: configure zrepl
-  copy:
-    src: zrepl.yml
-    dest: /etc/zrepl
+  blockinfile:
+    block: "{{ lookup('file', 'zrepl.yml') }}"
+    marker: "# {mark} snapshot config"
+    dest: /etc/zrepl/zrepl.yml
+    create: yes
   notify: restart zrepl
