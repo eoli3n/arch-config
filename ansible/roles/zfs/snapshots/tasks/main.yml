@@ -1,12 +1,14 @@
 ---
 - name: install zrepl
-  pacman:
+  become: no
+  aur:
     name: zrepl
+    skip_installed: true
 
 - name: create zrepl dir
   file:
     path: /etc/zrepl
-    state: present
+    state: directory
 
 - name: configure zrepl
   copy:

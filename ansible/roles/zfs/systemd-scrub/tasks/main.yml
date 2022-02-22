@@ -9,14 +9,3 @@
     src: zfs-scrub.timer
     dest: /etc/systemd/system/
   notify: enable zfs scrub timer
-
-- name: copy zfs trim systemd service
-  copy:
-    src: zfs-trim.service
-    dest: /etc/systemd/system/
-
-- name: copy zfs trim systemd timer
-  copy:
-    src: zfs-trim.timer
-    dest: /etc/systemd/system/
-  notify: enable zfs trim timer
