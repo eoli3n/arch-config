@@ -17,3 +17,9 @@
     dest: /etc/zrepl/zrepl.yml
     create: yes
   notify: restart zrepl
+
+- name: setup daily zfs scrub
+  copy:
+    src: zscrub
+    dest: /etc/cron.weekly/
+    mode: 0755

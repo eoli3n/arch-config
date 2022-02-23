@@ -74,6 +74,13 @@ HOOKS=(base udev autodetect modconf block keyboard keymap zfs filesystems)
 COMPRESSION="zstd"
 EOF
 
+cat > /mnt/etc/mkinitcpio.d/linux-lts.preset <<"EOF"
+ALL_config="/etc/mkinitcpio.conf"
+ALL_kver="/boot/vmlinuz-linux-lts"
+PRESETS=('default')
+default_image="/boot/initramfs-linux-lts.img"
+EOF
+
 print "Copy ZFS files"
 cp /etc/hostid /mnt/etc/hostid
 cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache

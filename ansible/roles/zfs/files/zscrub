@@ -1,0 +1,3 @@
+#!/bin/bash
+
+zpool scrub zroot

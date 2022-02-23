@@ -1,6 +1,0 @@
----
-- name: enable zfs scrub timer
-  systemd:
-    name: zfs-scrub.timer
-    daemon_reload: yes
-    enabled: yes
