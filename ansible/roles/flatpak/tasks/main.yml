@@ -20,6 +20,7 @@
     - com.github.Anuken.Mindustry
     - us.zoom.Zoom
     - com.microsoft.Teams
+    - org.freecadweb.FreeCAD
 
 - name: Override Teams perms
   shell: |
