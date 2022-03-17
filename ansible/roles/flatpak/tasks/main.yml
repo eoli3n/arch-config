@@ -5,9 +5,12 @@
 
 - name: Add the flathub flatpak repo
   community.general.flatpak_remote:
-    name: flathub
+    name: "{{ item.name }}"
     state: present
-    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    flatpakrepo_url: "{{ item.repo }}"
+  loop:
+    - { name: 'flathub', repo: 'https://dl.flathub.org/repo/flathub.flatpakrepo' }
+    - { name: 'flathub-beta', repo: 'https://flathub.org/beta-repo/flathub-beta.flatpakrepo' }
 
 - name: Install flatpak packages
   community.general.flatpak:
