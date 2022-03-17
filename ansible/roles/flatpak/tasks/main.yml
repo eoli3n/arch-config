@@ -16,6 +16,7 @@
   community.general.flatpak:
     name: '{{ item }}'
     state: present
+    remote: flathub
   loop:
     - com.spotify.Client
     - com.vscodium.codium
@@ -23,6 +24,13 @@
     - com.github.Anuken.Mindustry
     - us.zoom.Zoom
     - com.microsoft.Teams
+
+- name: Install flatpak beta packages
+  community.general.flatpak:
+    name: '{{ item }}'
+    state: present
+    remote: flathub-beta
+  loop:
     - org.freecadweb.FreeCAD
 
 - name: Override Teams perms
