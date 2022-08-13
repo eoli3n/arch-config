@@ -11,6 +11,11 @@ then
     debug=1
 fi
 
+ask () {
+    read -p "> $1 " -r
+    echo
+}
+
 print () {
     echo -e "\n\033[1m> $1\033[0m\n"
     if [[ -n "$debug" ]]
@@ -27,20 +32,25 @@ print "Sort mirrors"
 systemctl start reflector
 
 # Install
+if grep -i -q amd < /proc/cpuinfo;
+then
+  microcode_package='amd-ucode'
+else
+  microcode_package='intel-ucode'
+fi
+
 print "Install Arch Linux"
-pacstrap /mnt       \
-  base              \
-  base-devel        \
-  linux-lts         \
-  linux-lts-headers \
-  linux-firmware    \
-  intel-ucode       \
-  efibootmgr        \
-  vim               \
-  git               \
-  ansible           \
-  iwd               \
-  wpa_supplicant
+pacstrap /mnt         \
+  base                \
+  base-devel          \
+  linux-lts           \
+  linux-lts-headers   \
+  linux-firmware      \
+  $microcode_package  \
+  efibootmgr          \
+  vim                 \
+  git                 \
+  ansible
 
 # Generate fstab excluding ZFS entries
 print "Generate fstab excluding ZFS entries"
@@ -59,15 +69,26 @@ cat > /mnt/etc/hosts <<EOF
 EOF
 
 # Prepare locales and keymap
+ask "Which keymap to use ? (fr, de ...)"
+keymap="$REPLY"
 print "Prepare locales and keymap"
-echo "KEYMAP=fr" > /mnt/etc/vconsole.conf
-sed -i 's/#\(fr_FR.UTF-8\)/\1/' /mnt/etc/locale.gen
-echo 'LANG="fr_FR.UTF-8"' > /mnt/etc/locale.conf
+echo "KEYMAP=$keymap" > /mnt/etc/vconsole.conf
+
+ask "Which locales to use ? (fr_FR, de_DE ...)"
+locale="$REPLY"
+sed -i 's/#\('"$locale"'.UTF-8\)/\1/' /mnt/etc/locale.gen
+echo 'LANG="'"$locale"'.UTF-8"' > /mnt/etc/locale.conf
 
 # Prepare initramfs
 print "Prepare initramfs"
+if lspci | grep ' VGA ' | grep -q -i intel
+then
+  modules="i915 intel_agp"
+else
+  modules=""
+fi
 cat > /mnt/etc/mkinitcpio.conf <<"EOF"
-MODULES=(i915 intel_agp)
+MODULES=($modules)
 BINARIES=()
 FILES=(/etc/zfs/zroot.key)
 HOOKS=(base udev autodetect modconf block keyboard keymap zfs filesystems)
@@ -157,8 +178,14 @@ Defaults rootpw
 EOF
 
 # Configure network
-print "Configure networking"
-cat > /mnt/etc/systemd/network/enoX.network <<"EOF"
+ask "Configure networking ?"
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  pacstrap /mnt         \
+    iwd                 \
+    wpa_supplicant
+
+  cat > /mnt/etc/systemd/network/enoX.network <<"EOF"
 [Match]
 Name=en*
 
@@ -170,7 +197,7 @@ IPForward=yes
 UseDNS=no
 RouteMetric=10
 EOF
-cat > /mnt/etc/systemd/network/wlX.network <<"EOF"
+  cat > /mnt/etc/systemd/network/wlX.network <<"EOF"
 [Match]
 Name=wl*
 
@@ -182,23 +209,27 @@ IPForward=yes
 UseDNS=no
 RouteMetric=20
 EOF
-systemctl enable systemd-networkd --root=/mnt
-systemctl disable systemd-networkd-wait-online --root=/mnt
+  systemctl enable systemd-networkd --root=/mnt
+  systemctl disable systemd-networkd-wait-online --root=/mnt
 
-mkdir /mnt/etc/iwd
-cat > /mnt/etc/iwd/main.conf <<"EOF"
+  mkdir /mnt/etc/iwd
+  cat > /mnt/etc/iwd/main.conf <<"EOF"
 [General]
 UseDefaultInterface=true
 EnableNetworkConfiguration=true
 EOF
-systemctl enable iwd --root=/mnt
+  systemctl enable iwd --root=/mnt
+fi
 
 # Configure DNS
-print "Configure DNS"
-rm /mnt/etc/resolv.conf
-ln -s /run/systemd/resolve/resolv.conf /mnt/etc/resolv.conf
-sed -i 's/^#DNS=.*/DNS=1.1.1.1/' /mnt/etc/systemd/resolved.conf
-systemctl enable systemd-resolved --root=/mnt
+ask "Configure DNS ?"
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  rm /mnt/etc/resolv.conf
+  ln -s /run/systemd/resolve/resolv.conf /mnt/etc/resolv.conf
+  sed -i 's/^#DNS=.*/DNS=1.1.1.1/' /mnt/etc/systemd/resolved.conf
+  systemctl enable systemd-resolved --root=/mnt
+fi
 
 # Activate zfs
 print "Configure ZFS"
