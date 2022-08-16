@@ -126,11 +126,19 @@ arch-chroot /mnt /bin/bash -xe <<EOF
   pacman-key --recv-keys F75D9D76 --keyserver keyserver.ubuntu.com
   pacman-key --lsign-key F75D9D76
   pacman -S archlinux-keyring --noconfirm
+  # https://wiki.archlinux.org/title/Unofficial_user_repositories#archzfs
   cat >> /etc/pacman.conf <<"EOSF"
 [archzfs]
-Server = http://archzfs.com/archzfs/x86_64
-Server = http://mirror.sum7.eu/archlinux/archzfs/archzfs/x86_64
-Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
+# Origin Server - France
+Server = http://archzfs.com/$repo/x86_64
+# Mirror - Germany
+Server = http://mirror.sum7.eu/archlinux/archzfs/$repo/x86_64
+# Mirror - Germany
+Server = https://mirror.biocrafting.net/archlinux/archzfs/$repo/x86_64
+# Mirror - India
+Server = https://mirror.in.themindsmaze.com/archzfs/$repo/x86_64
+# Mirror - US
+Server = https://zxcvfdsa.com/archzfs/$repo/$arch
 EOSF
   pacman -Syu --noconfirm zfs-dkms zfs-utils
 
