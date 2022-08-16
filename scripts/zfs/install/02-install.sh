@@ -114,6 +114,11 @@ read -r -p "Username: " user
 # Chroot and configure
 print "Chroot and configure system"
 
+# Set date
+ask "What is your timezone? Europe/Paris, Europe/Berlin ..."
+timezone="$REPLY"
+timedatectl set-ntp true
+
 arch-chroot /mnt /bin/bash -xe <<EOF
 
   ### Reinit keyring
@@ -142,16 +147,18 @@ Server = https://zxcvfdsa.com/archzfs/archzfs/x86_64
 EOSF
   pacman -Syu --noconfirm zfs-dkms zfs-utils
 
+  # Set date
+  lb -sf /usr/share/zoneinfo/$timezone /etc/localtime
+
   # Sync clock
   hwclock --systohc
-
-  # Set date
-  timedatectl set-ntp true
-  timedatectl set-timezone Europe/Paris
 
   # Generate locale
   locale-gen
   source /etc/locale.conf
+  
+  # Set keyboard layout
+  echo "KEYMAP=de-latin1" > /etc/vconsole.con
 
   # Generate Initramfs
   mkinitcpio -P
