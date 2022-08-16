@@ -130,15 +130,15 @@ arch-chroot /mnt /bin/bash -xe <<EOF
   cat >> /etc/pacman.conf <<"EOSF"
 [archzfs]
 # Origin Server - France
-Server = http://archzfs.com/\$repo/x86_64
+Server = http://archzfs.com/archzfs/x86_64
 # Mirror - Germany
-Server = http://mirror.sum7.eu/archlinux/archzfs/\$repo/x86_64
+Server = http://mirror.sum7.eu/archlinux/archzfs/archzfs/x86_64
 # Mirror - Germany
-Server = https://mirror.biocrafting.net/archlinux/archzfs/\$repo/x86_64
+Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
 # Mirror - India
-Server = https://mirror.in.themindsmaze.com/archzfs/\$repo/x86_64
+Server = https://mirror.in.themindsmaze.com/archzfs/archzfs/x86_64
 # Mirror - US
-Server = https://zxcvfdsa.com/archzfs/\$repo/\$arch
+Server = https://zxcvfdsa.com/archzfs/archzfs/x86_64
 EOSF
   pacman -Syu --noconfirm zfs-dkms zfs-utils
 
