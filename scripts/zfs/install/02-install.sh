@@ -148,7 +148,7 @@ EOSF
   pacman -Syu --noconfirm zfs-dkms zfs-utils
 
   # Set date
-  lb -sf /usr/share/zoneinfo/$timezone /etc/localtime
+  ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
 
   # Sync clock
   hwclock --systohc
