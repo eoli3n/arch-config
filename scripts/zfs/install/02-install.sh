@@ -40,7 +40,7 @@ else
 fi
 
 echo "Which kernel?"
-ask "[0] linux-lts\n [1] linux?"
+ask "0) linux-lts   1) linux?"
 
 if [[ ${REPLY} -eq 1 ]];
 then
@@ -206,11 +206,22 @@ EOF
 ask "Configure networking ?"
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+
+echo "Which network-provider?"
+ask "0) iwd + wpa_supplicant   1) networkmanager"
+if [[ ${REPLY} -eq 1 ]];
+then
+  pacstrap /mnt         \
+    NetworkManager
+
+  systemctl enable NetworkManager.service --root=/mnt
+
+else
   pacstrap /mnt         \
     iwd                 \
     wpa_supplicant
 
-  cat > /mnt/etc/systemd/network/enoX.network <<"EOF"
+    cat > /mnt/etc/systemd/network/enoX.network <<"EOF"
 [Match]
 Name=en*
 
@@ -243,7 +254,8 @@ EOF
 UseDefaultInterface=true
 EnableNetworkConfiguration=true
 EOF
-  systemctl enable iwd --root=/mnt
+    systemctl enable iwd --root=/mnt
+  fi
 fi
 
 # Configure DNS
