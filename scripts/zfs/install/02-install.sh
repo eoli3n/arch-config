@@ -39,12 +39,22 @@ else
   microcode_package='intel-ucode'
 fi
 
+echo "Which kernel?"
+ask "[0] linux-lts\n [1] linux?"
+
+if [[ ${REPLY} -eq 1 ]];
+then
+  kernel="linux"
+else
+  kernel="linux-lts"
+fi
+
 print "Install Arch Linux"
 pacstrap /mnt         \
   base                \
   base-devel          \
-  linux-lts           \
-  linux-lts-headers   \
+  $kernel             \
+  $kernel-headers     \
   linux-firmware      \
   $microcode_package  \
   efibootmgr          \
@@ -95,11 +105,11 @@ HOOKS=(base udev autodetect modconf block keyboard keymap zfs filesystems)
 COMPRESSION="zstd"
 EOF
 
-cat > /mnt/etc/mkinitcpio.d/linux-lts.preset <<"EOF"
+cat > /mnt/etc/mkinitcpio.d/$kernel.preset <<"EOF"
 ALL_config="/etc/mkinitcpio.conf"
-ALL_kver="/boot/vmlinuz-linux-lts"
+ALL_kver="/boot/vmlinuz-$kernel"
 PRESETS=('default')
-default_image="/boot/initramfs-linux-lts.img"
+default_image="/boot/initramfs-$kernel.img"
 EOF
 
 print "Copy ZFS files"
