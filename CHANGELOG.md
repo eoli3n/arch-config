@@ -41,10 +41,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 * zfs install
+  * added asking for zpool name
   * added asking for keymap
   * added asking for locale
+  * added asking for timezone
   * added asking to configure networking
   * added asking to configure dns
+  * added asking for kernel (`linux` or `linux-lts`)
+  * added usage of install.conf file to ease up multiple runs of the script (yep, perfect if you have to develop this script)
+  * added support for networkmanager configuration
+  * added prefix of >>:: << on each `print`-output
+  * added automatic detection of ucode package file (currently only amd and intel are supported)
 * this changelog
 
 ### Changed
