@@ -44,8 +44,10 @@ ask "0) linux-lts   1) linux?"
 
 if [[ ${REPLY} -eq 1 ]];
 then
+  is_lts_kernel=1
   kernel="linux"
 else
+  is_lts_kernel=0
   kernel="linux-lts"
 fi
 
@@ -105,12 +107,22 @@ HOOKS=(base udev autodetect modconf block keyboard keymap zfs filesystems)
 COMPRESSION="zstd"
 EOF
 
-cat > /mnt/etc/mkinitcpio.d/$kernel.preset <<"EOF"
+if [[ $is_lts_kernel -eq 0 ]];
+then
+  cat > /mnt/etc/mkinitcpio.d/linux-lts.preset <<"EOF"
 ALL_config="/etc/mkinitcpio.conf"
-ALL_kver="/boot/vmlinuz-$kernel"
+ALL_kver="/boot/vmlinuz-linux-lts"
 PRESETS=('default')
-default_image="/boot/initramfs-$kernel.img"
+default_image="/boot/initramfs-linux-lts.img"
 EOF
+else
+  cat > /mnt/etc/mkinitcpio.d/linux.preset <<"EOF"
+ALL_config="/etc/mkinitcpio.conf"
+ALL_kver="/boot/vmlinuz-linux"
+PRESETS=('default')
+default_image="/boot/initramfs-linux.img"
+EOF
+fi
 
 print "Copy ZFS files"
 cp /etc/hostid /mnt/etc/hostid
