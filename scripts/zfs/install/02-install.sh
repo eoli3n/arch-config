@@ -224,7 +224,7 @@ ask "0) iwd + wpa_supplicant   1) networkmanager"
 if [[ ${REPLY} -eq 1 ]];
 then
   pacstrap /mnt         \
-    NetworkManager
+    networkmanager
 
   systemctl enable NetworkManager.service --root=/mnt
 
