@@ -91,6 +91,8 @@ if [[ -z ${zpoolname+x} ]];
 then
   ask "Please input zpool name. Default is >>zroot<<."
   zpoolname="${REPLY:-zroot}"
+
+  echo "zpoolname=\"${zpoolname}\"" >> $install_conf
 fi
 
 # Generate fstab excluding ZFS entries
@@ -176,7 +178,7 @@ then
 else
   modules=""
 fi
-cat > /mnt/etc/mkinitcpio.conf <<"EOF"
+cat > /mnt/etc/mkinitcpio.conf <<EOF
 MODULES=($modules)
 BINARIES=()
 FILES=(/etc/zfs/$zpoolname.key)
@@ -463,7 +465,7 @@ Kernel:
 EOF
 
 # Set cmdline
-zfs set org.zfsbootmenu:commandline="rw quiet nowatchdog rd.vconsole.keymap=fr" $zpoolname/ROOT/"$root_dataset"
+zfs set org.zfsbootmenu:commandline="rw quiet nowatchdog rd.vconsole.keymap=$keymap" $zpoolname/ROOT/"$root_dataset"
 
 # Generate ZBM
 print ":: Generate zbm"

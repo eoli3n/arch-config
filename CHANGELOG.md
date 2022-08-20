@@ -43,6 +43,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+* Fixed issue with $zpoolname in the `mkinitcpio.conf` generation
+
 ## [1.0.0](https://github.com/stevleibelt/arch-linux-configuration/tree/1.0.0) - released at 20220820
 
 ### Added
