@@ -33,6 +33,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### To Change
 
+* Move `install.conf` creation out of 02-installation.sh and put it in 01-configuration.sh
+  * Create a `install.dist.conf` that is used in 02-installation.sh if `install.conf` is not available
 * Solve locale grub : https://forums.archlinux.fr/viewtopic.php?t=13830
 
 ## [Unreleased]
