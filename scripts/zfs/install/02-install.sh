@@ -357,7 +357,7 @@ then
   fi
 fi
 
-if [[ $configure_network -eq 1]];
+if [[ $configure_network -eq 1 ]];
 then
   pacstrap /mnt         \
     networkmanager
@@ -413,7 +413,8 @@ if [[ -z ${configure_dns+x} ]];
 then
   ask "Configure DNS? (y|N)"
 
-  if [[ $REPLY =~ ^[Yy]$ ]]
+  if [[ $REPLY =~ ^[Yy]$ ]];
+  then
     echo "configure_dns=1" >> $install_conf
   fi
 fi
