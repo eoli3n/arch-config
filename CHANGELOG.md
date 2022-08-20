@@ -40,16 +40,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-* zfs install
-  * added asking for keymap
-  * added asking for locale
-  * added asking to configure networking
-  * added asking to configure dns
-* this changelog
+### Changed
+
+## [1.0.0](https://github.com/stevleibelt/arch-linux-configuration/tree/1.0.0) - released at 20220820
+
+### Added
+
+* Added [LICENCE](LICENCE)
+* [ZFS Install](scripts/zfs/install)
+  * Added asking for keymap
+  * Added asking for locale
+  * Added asking to configure networking
+  * Added asking to configure dns
+* This [CHANGELOG](CHANGELOG.md)
 
 ### Changed
 
-* zfs install
-  * added switch to either install amd or intel ucode
-  * added check to only configure intel gpu modules when intel gpu is on the system
-  * moved installation of `iwd` and `wpa_supplicant` into section "configure networking"
+* Updated [README.md](README.nd)
+* [ZFS Install](scripts/zfs/install)
+  * Added switch to either install amd or intel ucode
+  * Added check to only configure intel gpu modules when intel gpu is on the system
+  * Moved installation of `iwd` and `wpa_supplicant` into section "configure networking"
+
