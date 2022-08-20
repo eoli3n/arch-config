@@ -232,6 +232,7 @@ then
   if [[ ${REPLY} =~ ^[Yy]$ ]];
   then
     arch-chroot /mnt /bin/bash -xe "userdel $user"
+    rm -fr /mnt/home/$user
   fi
 fi
 
