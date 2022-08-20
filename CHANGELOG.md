@@ -50,6 +50,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Fixed issue when configuring dns
 * Fixed issue when configuring network by using NetworkManager
 * Fixed issue when removing existing user
+* Changed where the configuration is done
+  * Configuration is now done in `01-configure.sh`
+  * You can execute `02-install.sh` without any previously done configuration, `install.dist.conf` is then used
 
 ## [1.0.0](https://github.com/stevleibelt/arch-linux-configuration/tree/1.0.0) - released at 20220820
 

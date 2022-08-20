@@ -33,21 +33,23 @@ print () {
     fi
 }
 
-#bo: configuration file
-if [[ -f install.conf ]];
+#bo: sourcing install configuration files
+if [[ -f install.dist.conf ]];
 then
-  install_conf="install.conf"
-else
-  install_conf="install.dist.conf"
+  . install.dist.conf
 fi
 
-if [[ -f ${install_conf} ]];
+if [[ -f install.conf ]];
 then
-  echo ":: Sourcing >>${install_conf}<< to use existing configuration."
-  . ${install_conf}
-else
-  echo ":: No configuration file exist. This is terrible wrong!"
-  echo "   Try to run >>01-configuration.sh<<."
+  . install.conf
+fi
+#bo: sourcing install configuration files
+
+if [[ -z ${install_configuration_sourced+x} ]];
+then
+  echo ":: No configuration file sourced."
+  echo "   This is super bad, neither >>install.dist.conf<< nor >>install.conf<< exists."
+  echo "   Please run >>01-configure.sh<<."
 
   exit 1
 fi
@@ -67,21 +69,6 @@ else
   microcode_package='intel-ucode'
 fi
 
-if [[ -z ${kernel+x} ]];
-then
-  echo ":: Which kernel?"
-  ask "0) linux-lts   1) linux?"
-
-  if [[ ${REPLY} -eq 1 ]];
-  then
-    kernel="linux"
-  else
-    kernel="linux-lts"
-  fi
-
-  echo "kernel=\"${kernel}\"" >> $install_conf
-fi
-
 print ":: Install Arch Linux"
 pacstrap /mnt         \
   base                \
@@ -95,27 +82,11 @@ pacstrap /mnt         \
   git                 \
   ansible
 
-if [[ -z ${zpoolname+x} ]];
-then
-  ask "Please input zpool name. Default is >>zroot<<."
-  zpoolname="${REPLY:-zroot}"
-
-  echo "zpoolname=\"${zpoolname}\"" >> $install_conf
-fi
-
 # Generate fstab excluding ZFS entries
 print ":: Generate fstab excluding ZFS entries"
 genfstab -U /mnt | grep -v "$zpoolname" | tr -s '\n' | sed 's/\/mnt//'  > /mnt/etc/fstab
  
 # Set hostname
-if [[ -z ${hostname+x} ]];
-then
-  read -r -p 'Please enter hostname : ' hostname
-  echo "$hostname" > /mnt/etc/hostname
-
-  echo "hostname=\"${hostname}\"" >> $install_conf
-fi
-
 # Configure /etc/hosts
 print ":: Configure hosts file"
   cat > /mnt/etc/hosts <<EOF
@@ -124,59 +95,12 @@ print ":: Configure hosts file"
   ::1   		    localhost             $hostname
 EOF
 
-# Prepare locales and keymap
-if [[ -z ${keymap+x} ]];
-then
-  print ":: Prepare locales and keymap"
-  echo "Which keymap do you want to use?"
-  ask "0) fr   1) de-latin1   2) input your own"
-
-  case ${REPLY} in
-    0)
-      keymap="fr"
-      ;;
-    1)
-      keymap="de-latin1"
-      ;;
-    2)
-      ask "Please insert your keymap"
-      keymap="${REPLY}"
-      ;;
-    *)
-      keymap="fr"
-      ;;
-  esac
-  echo "keymap=\"${keymap}\"" >> $install_conf
-fi
-
+# Prepare keymap
 echo "KEYMAP=$keymap" > /mnt/etc/vconsole.conf
 
-if [[ -z ${locale+x} ]];
-then
-  echo "Which locales to use?"
-  ask "0) fr_FR   1) de_DE   2) input your own"
-
-  case ${REPLY} in
-    0)
-      locale="fr_FR"
-      ;;
-    1)
-      locale="de_DE"
-      ;;
-    2)
-      ask "Please insert your keymap"
-      locale="${REPLY}"
-      ;;
-    *)
-      locale="fr_FR"
-      ;;
-  esac
-
-  sed -i 's/#\('"$locale"'.UTF-8\)/\1/' /mnt/etc/locale.gen
-  echo 'LANG="'"$locale"'.UTF-8"' > /mnt/etc/locale.conf
-
-  echo "locale=\"${locale}\"" >> $install_conf
-fi
+# Prepare locales
+sed -i 's/#\('"$locale"'.UTF-8\)/\1/' /mnt/etc/locale.gen
+echo 'LANG="'"$locale"'.UTF-8"' > /mnt/etc/locale.conf
 
 # Prepare initramfs
 print ":: Prepare initramfs"
@@ -217,14 +141,6 @@ cp /etc/zfs/zpool.cache /mnt/etc/zfs/zpool.cache
 cp /etc/zfs/$zpoolname.key /mnt/etc/zfs
 
 ### Configure username
-if [[ -z ${user+x} ]];
-then
-  ask "Please input your username"
-  user="${REPLY}"
-
-  echo "user=\"${user}\"" >> $install_conf
-fi
-
 if [[ -d /mnt/home/$user ]];
 then
   ask "User exists, delete it? (y|N)"
@@ -234,30 +150,6 @@ then
     arch-chroot /mnt /bin/bash -xe "userdel $user"
     rm -fr /mnt/home/$user
   fi
-fi
-
-if [[ -z ${timezone+x} ]];
-then
-  echo "What is your timezone?"
-  ask "0) Europe/Paris   1) Europe/Berlin   2) input your own"
-
-  case ${REPLY} in
-    0)
-      timezone="Europe/Paris"
-      ;;
-    1)
-      timezone="Europe/Berlin"
-      ;;
-    2)
-      ask "Please insert your keymap"
-      timezone="${REPLY}"
-      ;;
-    *)
-      timezone="Europe/Paris"
-      ;;
-  esac
-
-  echo "timezone=\"${timezone}\"" >> $install_conf
 fi
 
 print ":: Configure timezone"
@@ -346,18 +238,6 @@ Defaults rootpw
 EOF
 
 # Configure network
-if [[ -z ${configure_network+x} ]];
-then
-  ask "Configure networking? (y|N)"
-  if [[ $REPLY =~ ^[Yy]$ ]];
-  then
-    echo "Which network-provider?"
-    ask "0) iwd + wpa_supplicant   1) networkmanager"
-
-    echo "configure_network=\"${REPLY}\"" >> $install_conf
-  fi
-fi
-
 if [[ $configure_network -eq 1 ]];
 then
   pacstrap /mnt         \
@@ -410,16 +290,6 @@ else
 fi
 
 # Configure DNS
-if [[ -z ${configure_dns+x} ]];
-then
-  ask "Configure DNS? (y|N)"
-
-  if [[ $REPLY =~ ^[Yy]$ ]];
-  then
-    echo "configure_dns=1" >> $install_conf
-  fi
-fi
-
 if [[ $configure_dns -eq 1 ]];
 then
   rm /mnt/etc/resolv.conf

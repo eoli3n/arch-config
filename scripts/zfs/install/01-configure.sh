@@ -218,5 +218,161 @@ import_pool
 mount_system "$name_reply"
 copy_zpool_cache
 
+#bo: configuration section
+# By sourcing an existing file before asking the question, we can easily extend the questions/variables
+#   or use pre configured install.conf files but configure all missing variables
+
+install_conf="install.conf"
+
+if [[ -f ${install_conf} ]];
+then
+  echo ":: Sourcing >>${install_conf}<<."
+  echo "   You where only asked questions for not existing configuration values."
+  echo "   If you want to configure things in total, please remove >>${install_conf}<<."
+
+  . ${install_conf}
+fi
+
+##c
+if [[ -z ${configure_dns+x} ]];
+then
+  ask "Configure DNS? (y|N)"
+
+  if [[ $REPLY =~ ^[Yy]$ ]];
+  then
+    echo "configure_dns=1" >> $install_conf
+  fi
+fi
+
+if [[ -z ${configure_network+x} ]];
+then
+  ask "Configure networking? (y|N)"
+  if [[ $REPLY =~ ^[Yy]$ ]];
+  then
+    echo "Which network-provider?"
+    ask "0) iwd + wpa_supplicant   1) networkmanager"
+
+    echo "configure_network=\"${REPLY}\"" >> $install_conf
+  fi
+fi
+
+##h
+if [[ -z ${hostname+x} ]];
+then
+  read -r -p 'Please enter hostname : ' hostname
+  echo "$hostname" > /mnt/etc/hostname
+
+  echo "hostname=\"${hostname}\"" >> $install_conf
+fi
+
+##k
+if [[ -z ${kernel+x} ]];
+then
+  echo ":: Which kernel?"
+  ask "0) linux-lts   1) linux?"
+
+  if [[ ${REPLY} -eq 1 ]];
+  then
+    kernel="linux"
+  else
+    kernel="linux-lts"
+  fi
+
+  echo "kernel=\"${kernel}\"" >> $install_conf
+fi
+
+if [[ -z ${keymap+x} ]];
+then
+  print ":: Prepare locales and keymap"
+  echo "Which keymap do you want to use?"
+  ask "0) fr   1) de-latin1   2) input your own"
+
+  case ${REPLY} in
+    0)
+      keymap="fr"
+      ;;
+    1)
+      keymap="de-latin1"
+      ;;
+    2)
+      ask "Please insert your keymap"
+      keymap="${REPLY}"
+      ;;
+    *)
+      keymap="fr"
+      ;;
+  esac
+  echo "keymap=\"${keymap}\"" >> $install_conf
+fi
+
+##l
+if [[ -z ${locale+x} ]];
+then
+  echo "Which locales to use?"
+  ask "0) fr_FR   1) de_DE   2) input your own"
+
+  case ${REPLY} in
+    0)
+      locale="fr_FR"
+      ;;
+    1)
+      locale="de_DE"
+      ;;
+    2)
+      ask "Please insert your keymap"
+      locale="${REPLY}"
+      ;;
+    *)
+      locale="fr_FR"
+      ;;
+  esac
+
+  echo "locale=\"${locale}\"" >> $install_conf
+fi
+
+##t
+if [[ -z ${timezone+x} ]];
+then
+  echo "What is your timezone?"
+  ask "0) Europe/Paris   1) Europe/Berlin   2) input your own"
+
+  case ${REPLY} in
+    0)
+      timezone="Europe/Paris"
+      ;;
+    1)
+      timezone="Europe/Berlin"
+      ;;
+    2)
+      ask "Please insert your keymap"
+      timezone="${REPLY}"
+      ;;
+    *)
+      timezone="Europe/Paris"
+      ;;
+  esac
+
+  echo "timezone=\"${timezone}\"" >> $install_conf
+fi
+
+##u
+if [[ -z ${user+x} ]];
+then
+  ask "Please input your username"
+  user="${REPLY}"
+
+  echo "user=\"${user}\"" >> $install_conf
+fi
+
+##z
+if [[ -z ${zpoolname+x} ]];
+then
+  ask "Please input zpool name. Default is >>zroot<<."
+  zpoolname="${REPLY:-zroot}"
+
+  echo "zpoolname=\"${zpoolname}\"" >> $install_conf
+fi
+#eo: configuration section
+
 # Finish
 echo -e "\e[32mAll OK"
