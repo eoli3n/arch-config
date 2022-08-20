@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+####
+# Simple script prepare system for zfs installation
+####
+# @since 2022-08-22
+# @author:
+#   eoli3n <https://eoli3n.eu.org/about/>
+#   stev leibelt <artodeto@bazzline.net>
+####
 
 set -e
 

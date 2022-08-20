@@ -11,30 +11,29 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### zfsbootmenu
 
-* dynamic disk in 01-mount.sh recover script
-* see Wayne's World
-* periodic trim with timer when host is down ? https://unix.stackexchange.com/a/352596
-* reflector systemd timer
-* zfs
-  * zfs hibernate without swap ?
-  * smart test timer ?
-  * periodic zfs-scrub
-  * pacman hook to "generate-zbm" at each zfs-dkms upgrade
+* Dynamic disk in 01-mount.sh recover script
+* Periodic trim with timer when host is down ? https://unix.stackexchange.com/a/352596
+* Reflector systemd timer
+* ZFS
+  * Zfs hibernate without swap ?
+  * Smart test timer ?
+  * Periodic zfs-scrub
+  * Pacman hook to "generate-zbm" at each zfs-dkms upgrade
 * DNS
-  * fix DNS per interface ? as https://github.com/jonathanio/update-systemd-resolved#preventing-leakage-to-corporate-networks
+  * Fix DNS per interface ? as https://github.com/jonathanio/update-systemd-resolved#preventing-leakage-to-corporate-networks
 * SERVICES
-  * hardware acceleration packages
-  * disable ipv6
+  * Hardware acceleration packages
+  * Disable ipv6
 * IMPROVMENTS
-  * move max aur package to community equivalents
+  * Move max aur package to community equivalents
 * TESTS
-  * zfs trim + zfs autoscrub systemd timer
-  * reflector at startup
-  * test resume in GRUB_CMDLINE_LINUX
+  * Zfs trim + zfs autoscrub systemd timer
+  * Reflector at startup
+  * Test resume in GRUB_CMDLINE_LINUX
 
 ### To Change
 
-* solve locale grub : https://forums.archlinux.fr/viewtopic.php?t=13830
+* Solve locale grub : https://forums.archlinux.fr/viewtopic.php?t=13830
 
 ## [Unreleased]
 
@@ -48,10 +47,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * Added [LICENCE](LICENCE)
 * [ZFS Install](scripts/zfs/install)
+  * Added asking for zpool name
   * Added asking for keymap
   * Added asking for locale
+  * Added asking for timezone
   * Added asking to configure networking
   * Added asking to configure dns
+  * Added asking for kernel (`linux` or `linux-lts`)
+  * Added usage of install.conf file to ease up multiple runs of the script (yep, perfect if you have to develop this script)
+  * Added support for networkmanager configuration
+  * Added prefix of >>:: << on each `print`-output
+  * Added automatic detection of ucode package file (currently only amd and intel are supported)
 * This [CHANGELOG](CHANGELOG.md)
 
 ### Changed
