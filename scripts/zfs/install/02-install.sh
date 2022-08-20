@@ -33,15 +33,23 @@ print () {
     fi
 }
 
-# Initialize current_step
-install_conf="install.conf"
-
-if [[ -f $install_conf ]];
+#bo: configuration file
+if [[ -f install.conf ]];
 then
-  echo ":: Sourcing >>$install_conf<< to use existing configuration."
-  . $install_conf
+  install_conf="install.conf"
 else
-  touch $install_conf
+  install_conf="install.dist.conf"
+fi
+
+if [[ -f ${install_conf} ]];
+then
+  echo ":: Sourcing >>${install_conf}<< to use existing configuration."
+  . ${install_conf}
+else
+  echo ":: No configuration file exist. This is terrible wrong!"
+  echo "   Try to run >>01-configuration.sh<<."
+
+  exit 1
 fi
 
 # Root dataset

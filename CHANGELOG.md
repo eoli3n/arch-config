@@ -41,6 +41,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+* [ZFS Install](scripts/zfs/install)
+  * Added support for `install.dist.conf`
+
 ### Changed
 
 * Fixed issue with $zpoolname in the `mkinitcpio.conf` generation
