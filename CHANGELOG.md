@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### To Add
 
+* Add automatic installation of fitting [xorg drivers](https://wiki.archlinux.org/title/Xorg#Installation)
+* Add [pacman hook](https://wiki.archlinux.org/title/Dynamic_Kernel_Module_Support#Initial_ramdisk) when zfs-dkms is installed
+* Add usage of `localectl set-{keymap|locale|x11-keymap}` as figured out [here](https://github.com/sddm/sddm/issues/202)
+
 ### zfsbootmenu
 
 * Dynamic disk in 01-mount.sh recover script
