@@ -73,6 +73,7 @@ print ":: Install Arch Linux"
 pacstrap /mnt         \
   base                \
   base-devel          \
+  bash-completion     \
   $kernel             \
   $kernel-headers     \
   linux-firmware      \
@@ -296,6 +297,22 @@ then
   ln -s /run/systemd/resolve/resolv.conf /mnt/etc/resolv.conf
   sed -i 's/^#DNS=.*/DNS=1.1.1.1/' /mnt/etc/systemd/resolved.conf
   systemctl enable systemd-resolved --root=/mnt
+fi
+
+# Configure display manager
+if [[ $configure_displaymanager = "kde" ]];
+then
+#@see
+#   https://wiki.archlinux.org/title/Xorg#Installation
+#   https://wiki.archlinux.org/title/KDE#Installation
+#   https://wiki.archlinux.org/title/SDDM#Installation
+  pacstrap /mnt         \
+    xorg-server         \
+    xorg-apps           \
+    plasma-meta         \
+    kde-applications
+
+    systemctl enable sddm.service --root=/mnt
 fi
 
 # Activate zfs
