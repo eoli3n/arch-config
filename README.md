@@ -4,7 +4,7 @@ This repository contains, free as in freedom, scripts to configure your archiso 
 
 The current change log can be found [here](CHANGELOG.md).
 
-See my [ærchzfs](https://archzfs.leibelt.de) page if you want to know more.
+See my [archzfs](https://archzfs.leibelt.de) page if you want to know more.
 
 This is a hard fork from [eoli3n/archiso-zfs](https://github.com/eoli3n/arch-config). For the history, [eoli3n](https://github.com/eoli3n/arch-config/pull/4) asked me kindly to do a hard fork, so I did.
 
@@ -14,6 +14,9 @@ Boot your archiso, either an iso with [build in OpenZFS support](https://archzfs
 
 ```
 git clone --recursive https://github.com/stevleibelt/arch-linux-configuration
+#if you want to setup upstream too
+#git remote add upstream https://github.com/eoli3n/arch-config
+#git fetch upstream
 
 #bo: zfs installer section
 cd scripts/zfs/install
