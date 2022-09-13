@@ -15,6 +15,7 @@
       - wofi # rofi for wayland
       - swayidle
       - xdg-user-dirs
+      - xdg-desktop-portal-wlr
     state: present
 
 - name: install video packages
