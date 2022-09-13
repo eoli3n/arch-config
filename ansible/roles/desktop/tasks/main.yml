@@ -99,6 +99,7 @@
       - wf-recorder-git # screen recorder for wayland
       - grimshot-git # grim+slurp wrapper
       - swaylock-fancy-git # locker for wayland
+      - waypipe # wayland ssh -X
       - wob # bars for wayland
       - connman-gtk # connman gtk gui
       #- gnome-ssh-askpass2 # ssh askpass gui
