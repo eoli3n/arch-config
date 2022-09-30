@@ -15,6 +15,10 @@
         line: 'CheckSpace'
     - lineinfile:
         path: /etc/pacman.conf
+        regexp: '#VerbosePkgLists'
+        line: 'VerbosePkgLists'
+    - lineinfile:
+        path: /etc/pacman.conf
         regexp: '#ILoveCandy'
         line: 'ILoveCandy'
         insertafter: '# Misc options'
