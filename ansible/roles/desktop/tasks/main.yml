@@ -60,7 +60,7 @@
       - lollypop # music player
       - lxappearance # theme manager
       - mpv # video player
-      - thunar # file manager
+      - nemo # file manager
       - tumbler # thumbnailer
       - openvpn
       - playerctl # music player cli controller
