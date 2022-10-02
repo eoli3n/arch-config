@@ -136,7 +136,9 @@ EOSF
   cpanm --notest --installdeps .
 
   # Create user
-  useradd -m $user
+  zfs create zroot/data/home/${user}
+  useradd -m ${user}
+  chown -R ${user}:${user} /home/${user}
 
 EOF
 
