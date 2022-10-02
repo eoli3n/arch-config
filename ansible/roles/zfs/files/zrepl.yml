@@ -17,7 +17,8 @@ jobs:
 - name: home
   type: snap
   filesystems: {
-    "zroot/data/home<": true
+    "zroot/data/home/user<": true,
+    "zroot/data/home/user/downloads": false
   }
   snapshotting:
     type: periodic
