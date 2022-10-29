@@ -15,5 +15,5 @@ repos:
       name: Ansible syntax check
       entry: "ansible/contrib/syntax-check.sh"
       pass_filenames: no
-      types: [yaml]
+      types_or: [yaml, jinja]
       language: script
