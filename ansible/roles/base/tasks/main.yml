@@ -52,12 +52,13 @@
       - wget               # downloader
       - bind-tools         # dns tools
       - openbsd-netcat     # network utility
-      - speedtest-cli      # 
+      - speedtest-cli      #
       # Utils
       - cronie             # Scheduler
       - at                 # Scheduler
       - borgbackup         # backup utility
       - borgmatic          # backup utility automation
+      - pwgen              # random password generator
       - lsd                # improved ls command
       - rsync              # sync tool
       - rclone             # sync tool
