@@ -45,7 +45,7 @@ pacstrap /mnt       \
 # Generate fstab excluding ZFS entries
 print "Generate fstab excluding ZFS entries"
 genfstab -U /mnt | grep -v "zroot" | tr -s '\n' | sed 's/\/mnt//'  > /mnt/etc/fstab
- 
+
 # Set hostname
 read -r -p 'Please enter hostname : ' hostname
 echo "$hostname" > /mnt/etc/hostname
@@ -115,10 +115,6 @@ EOSF
 
   # Sync clock
   hwclock --systohc
-
-  # Set date
-  timedatectl set-ntp true
-  timedatectl set-timezone Europe/Paris
 
   # Generate locale
   locale-gen

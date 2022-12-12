@@ -1,0 +1,6 @@
+---
+- name: set ntp
+  shell: timedatectl set-ntp true
+
+- name: set timezone
+  shell: timedatectl set-timezone Europe/Paris

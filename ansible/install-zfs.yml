@@ -24,6 +24,7 @@
     - { role: pacman, tags: pacman }
     - { role: aur, tags: aur }
     - { role: base, tags: base }
+    - { role: ntp, tags: ntp }
     - { role: desktop, tags: desktop }
     - { role: flatpak, tags: flatpak }
     - { role: cronie, tags: cronie }
