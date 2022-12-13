@@ -98,7 +98,6 @@
       - wdisplays-git # arandr for wayland
       - wf-recorder-git # screen recorder for wayland
       - grimshot-git # grim+slurp wrapper
-      - swaylock-fancy-git # locker for wayland
       - waypipe # wayland ssh -X
       - wob # bars for wayland
       - connman-gtk # connman gtk gui
@@ -116,3 +115,20 @@
       - swappy # screenshot editor
       - senpai-irc # irc client for soju
       #- phockup # picture sorting tool
+      #
+- name: test swaylock-fancy
+  stat:
+    path: /bin/swaylock-fancy
+  register: swaylock
+
+- name: clone swaylock-fancy
+  git:
+    repo: https://github.com/eoli3n/swaylock-fancy
+    dest: /tmp/swaylock-fancy
+  when: not swaylock.stat.exists
+
+- name: install swaylock-fancy
+  shell: make install
+  args:
+    chdir: /tmp/swaylock-fancy
+  when: not swaylock.stat.exists
