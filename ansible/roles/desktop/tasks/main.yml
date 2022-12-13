@@ -75,7 +75,7 @@
       - variety # random backgrounds
       - papirus-icon-theme # icon theme
       - gnome-themes-extra # gtk themes
-      - x2goclient 
+      #- x2goclient 
       - youtube-dl
       - gopass # password manager
     state: present
@@ -115,4 +115,4 @@
       - starleaf-breeze
       - swappy # screenshot editor
       - senpai-irc # irc client for soju
-      - phockup # picture sorting tool
+      #- phockup # picture sorting tool
