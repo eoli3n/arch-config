@@ -40,3 +40,7 @@
       --filesystem=~/img:ro \
       --filesystem=~/downloads:ro \
       --filesystem=~/share:ro
+
+- name: zoom screen sharing
+  shell : |
+    flatpak override --env=XDG_CURRENT_DESKTOP=GNOME us.zoom.Zoom
