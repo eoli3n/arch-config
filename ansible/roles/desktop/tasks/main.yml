@@ -75,7 +75,7 @@
       - variety # random backgrounds
       - papirus-icon-theme # icon theme
       - gnome-themes-extra # gtk themes
-      #- x2goclient 
+      #- x2goclient
       - youtube-dl
       - gopass # password manager
     state: present
@@ -94,7 +94,7 @@
     skip_installed: true
     name:
       - adapta-gtk-theme #https://github.com/Alexays/Waybar/issues/515
-      - equilux-theme 
+      - equilux-theme
       - wdisplays-git # arandr for wayland
       - wf-recorder-git # screen recorder for wayland
       - grimshot-git # grim+slurp wrapper
@@ -114,8 +114,9 @@
       - starleaf-breeze
       - swappy # screenshot editor
       - senpai-irc # irc client for soju
+      - rbenv # ruby env manager
       #- phockup # picture sorting tool
-      #
+
 - name: test swaylock-fancy
   stat:
     path: /bin/swaylock-fancy
