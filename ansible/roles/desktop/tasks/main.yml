@@ -63,7 +63,8 @@
       - mpv # video player
       - nemo # file manager
       - tumbler # thumbnailer
-      - openvpn
+      - openvpn # vpn client
+      - openconnect # globalprotect vpn client
       - playerctl # music player cli controller
       - rdesktop # remote desktop client
       - steam # games manager
@@ -75,7 +76,7 @@
       - variety # random backgrounds
       - papirus-icon-theme # icon theme
       - gnome-themes-extra # gtk themes
-      - x2goclient 
+      - x2goclient
       - youtube-dl
       - gopass # password manager
     state: present
@@ -94,7 +95,7 @@
     skip_installed: true
     name:
       - adapta-gtk-theme #https://github.com/Alexays/Waybar/issues/515
-      - equilux-theme 
+      - equilux-theme
       - wdisplays-git # arandr for wayland
       - wf-recorder-git # screen recorder for wayland
       - grimshot-git # grim+slurp wrapper
