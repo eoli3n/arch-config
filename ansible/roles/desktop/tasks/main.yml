@@ -67,6 +67,7 @@
       - openconnect # globalprotect vpn client
       - playerctl # music player cli controller
       - rdesktop # remote desktop client
+      - remmina # remote desktop client
       - steam # games manager
       - transmission-gtk # torrent downloader
       - texlive-bin # latex
