@@ -133,7 +133,7 @@ EOSF
 
   # Create user
   zfs create zroot/data/home/${user}
-  useradd -m ${user}
+  useradd -m ${user} -G wheel
   chown -R ${user}:${user} /home/${user}
 
 EOF
