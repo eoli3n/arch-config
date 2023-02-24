@@ -81,6 +81,8 @@
       #- x2goclient
       - youtube-dl
       - gopass # password manager
+      - okular # pdf editor, no image overlay
+      - xournalpp # pdf editor, no form
     state: present
 
 - name: add missing gpg keys for aur
