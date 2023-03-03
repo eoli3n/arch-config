@@ -67,6 +67,8 @@
       - openconnect # globalprotect vpn client
       - playerctl # music player cli controller
       - rdesktop # remote desktop client
+      - remmina # remote desktop client
+      - freerdp # remmina dep for rdp
       - steam # games manager
       - transmission-gtk # torrent downloader
       - texlive-bin # latex
@@ -79,6 +81,8 @@
       #- x2goclient
       - youtube-dl
       - gopass # password manager
+      - okular # pdf editor, no image overlay
+      - xournalpp # pdf editor, no form
     state: present
 
 - name: add missing gpg keys for aur
