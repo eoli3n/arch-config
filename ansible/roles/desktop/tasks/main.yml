@@ -120,6 +120,7 @@
       - swappy # screenshot editor
       - senpai-irc # irc client for soju
       - rbenv # ruby env manager
+      - iwgtk # gui for iwd
       #- phockup # picture sorting tool
 
 - name: test swaylock-fancy
