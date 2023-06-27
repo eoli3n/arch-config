@@ -78,6 +78,7 @@
       - dmidecode          # dump dmi table content
       - python-pre-commit  # pre-commit hook manager
       - zim                # wiki app
+      - mailutils          # mail client
     state: present
 
 - name: Configure root
