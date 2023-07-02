@@ -24,7 +24,7 @@
     - com.github.Anuken.Mindustry
     - us.zoom.Zoom
     - fi.skyjake.Lagrange # gemini browser
-    - net.xmind.XMind8 # mind mapping
+    - net.xmind.XMind # mind mapping
     #- com.microsoft.Teams
 
 - name: Install flatpak beta packages
