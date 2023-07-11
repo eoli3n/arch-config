@@ -32,3 +32,4 @@
     - { role: recovery, tags: recovery }
     - { role: zfs, tags: zfs }
     - { role: printers, tags: printers }
+    - { role: com, tags: com }

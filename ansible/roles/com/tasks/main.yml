@@ -1,0 +1,10 @@
+---
+- name: Add user to uucp group
+  user:
+    name: '{{ user }}'
+    groups: docker
+    append: yes
+
+- name: Install picocom
+  pacman:
+    name: picocom
