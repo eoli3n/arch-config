@@ -17,9 +17,9 @@ Vagrant.configure("2") do |config|
       libvirt.graphics_type = 'spice'
       # Create a disk
       libvirt.storage :file,
-        size: '50G',
-        type: 'qcow2',
-        bus: 'sata'
+        size: '20G',
+        bus: 'scsi'
+
       # Set fr keyboard for vnc connection
       libvirt.keymap = 'fr'
       libvirt.boot 'cdrom'
