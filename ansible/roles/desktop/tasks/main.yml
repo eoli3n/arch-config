@@ -46,7 +46,7 @@
   pacman:
     name:
       - imv # img visualizer
-      - kitty # terminal emulator
+      - wezterm # terminal emulator
       - evince # pdf viewer
       - evolution # mail client
       - gnome-keyring # evolution gnome keyring
