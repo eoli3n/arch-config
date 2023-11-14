@@ -115,7 +115,6 @@
       - otf-font-awesome
       #- ttf-impallari-cabin-font # xelatex cv
       - pastel # color viewer
-      - tiny-irc-client-git
       - starleaf-breeze
       - swappy # screenshot editor
       - senpai-irc # irc client for soju
