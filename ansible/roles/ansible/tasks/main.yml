@@ -1,0 +1,27 @@
+---
+- name: create pipx install dir
+  file:
+    path: /opt/pipx
+    state: directory
+
+- name: configure pipx bin dir
+  lineinfile:
+    path: /etc/environment
+    create: yes
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  loop:
+    - regexp: '^PIPX_BIN_DIR='
+      line: 'PIPX_BIN_DIR=/usr/local/bin'
+    - regexp: '^PIPX_HOME='
+      line: 'PIPX_HOME=/opt/pipx'
+
+- name: install ansible
+  community.general.pipx:
+    name: ansible
+    install_deps: yes
+    inject_packages:
+      - pywinrm
+      - requests-credssp
+      - dnspython
+      - pyvmomi
