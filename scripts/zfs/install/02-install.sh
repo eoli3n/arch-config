@@ -245,7 +245,7 @@ Kernel:
 EOF
 
 # Set cmdline
-zfs set org.zfsbootmenu:commandline="rw quiet nowatchdog rd.vconsole.keymap=fr" zroot/ROOT/"$root_dataset"
+zfs set org.zfsbootmenu:commandline="rw quiet nowatchdog rd.vconsole.keymap=fr zswap.enabled=0" zroot/ROOT/"$root_dataset"
 
 # Generate ZBM
 print 'Generate zbm'

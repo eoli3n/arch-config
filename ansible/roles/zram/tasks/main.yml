@@ -1,0 +1,10 @@
+---
+- name: install zram-generator
+  pacman:
+    name: zram-generator
+
+- name: configure zram generator
+  copy:
+    src: zram-generator.conf
+    dest: /etc/systemd/
+  notify: restart zram-generator

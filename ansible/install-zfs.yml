@@ -32,5 +32,6 @@
     - { role: containers, tags: containers }
     - { role: recovery, tags: recovery }
     - { role: zfs, tags: zfs }
+    - { role: zram, tags: zram }
     - { role: printers, tags: printers }
     - { role: com, tags: com }

@@ -1,0 +1,7 @@
+---
+- name: restart zram-generator
+  systemd:
+    name: systemd-zram-setup@zram0.service
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
