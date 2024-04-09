@@ -7,7 +7,7 @@
       - ttf-impallari-cabin-font # cv font
       - ttf-ms-fonts # microsoft fonts
       - glow # render markdown cli
-      - zrepl # zfs snapshot manager
+      - zfs-auto-snapshot-git
 
 - name: install base packages
   pacman:

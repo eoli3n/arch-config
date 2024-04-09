@@ -1,22 +1,14 @@
 ---
-- name: install zrepl
-  become: no
-  aur:
-    name: zrepl
-    skip_installed: true
-
-- name: create zrepl dir
-  file:
-    path: /etc/zrepl
-    state: directory
-
-- name: configure zrepl
-  blockinfile:
-    block: "{{ lookup('file', 'zrepl.yml') }}"
-    marker: "# {mark} snapshot config"
-    dest: /etc/zrepl/zrepl.yml
-    create: yes
-  notify: restart zrepl
+- name: configure zfs auto snapshot
+  shell: |
+    zfs set com.sun:auto-snapshot=false zroot
+    zfs set com.sun:auto-snapshot=false zroot/data
+    zfs set com.sun:auto-snapshot=true zroot/data/home
+    zfs set com.sun:auto-snapshot:frequent=false dpool/data/home
+    zfs set com.sun:auto-snapshot:monthly=false dpool/data/home
+    zfs set com.sun:auto-snapshot:hourly=false dpool/data/home
+    zfs set com.sun:auto-snapshot:weekly=false dpool/data/home
+    zfs set com.sun:auto-snapshot:daily=true dpool/data/home
 
 - name: setup daily zfs scrub
   copy:
