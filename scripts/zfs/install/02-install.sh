@@ -102,7 +102,7 @@ arch-chroot /mnt /bin/bash -xe <<EOF
   rm -Rf /etc/pacman.d/gnupg
   pacman-key --init
   pacman-key --populate archlinux
-  pacman-key --recv-keys F75D9D76 --keyserver keyserver.ubuntu.com
+  pacman-key --recv-keys F75D9D76
   pacman-key --lsign-key F75D9D76
   pacman -S archlinux-keyring --noconfirm
   cat >> /etc/pacman.conf <<"EOSF"
