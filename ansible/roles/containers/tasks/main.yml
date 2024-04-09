@@ -13,6 +13,7 @@
       - helm            # kubernetes package manager
       - packer          # golden images creator
       - terraform       # infrastructure as code
+      - podman-compose  # docker-compose for podman
       # https://github.com/kubernetes-sigs/krew
 
 - name: install containers aur packages
@@ -24,11 +25,6 @@
       - k3s-bin         # Lightweight Kubernetes in a signle binary
       - stern           # tail multiple pods on Kubernetes
       - kubespy         # observe Kubernetes resources in real time
-
-- name: install pip3 containers packages
-  community.general.pipx:
-    name:
-      - podman-compose  # mutli-container podman apps
 
 - name: copy subuid files for podman rootless
   template:
