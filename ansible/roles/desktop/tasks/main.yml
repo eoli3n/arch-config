@@ -116,7 +116,7 @@
       #- ttf-impallari-cabin-font # xelatex cv
       - pastel # color viewer
       - swappy # screenshot editor
-      - rbenv # ruby env manager
+      - rbenv-latest # ruby env manager
       - iwgtk # gui for iwd
       #- phockup # picture sorting tool
 
