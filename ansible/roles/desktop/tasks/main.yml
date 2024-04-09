@@ -70,6 +70,7 @@
       - remmina # remote desktop client
       - freerdp # remmina dep for rdp
       - steam # games manager
+      - senpai # irc client for soju
       - transmission-gtk # torrent downloader
       - texlive-bin # latex
       - texlive-core # latex
@@ -115,7 +116,6 @@
       #- ttf-impallari-cabin-font # xelatex cv
       - pastel # color viewer
       - swappy # screenshot editor
-      - senpai-irc # irc client for soju
       - rbenv # ruby env manager
       - iwgtk # gui for iwd
       #- phockup # picture sorting tool
