@@ -2,7 +2,7 @@
 - name: install virt packages
   pacman:
     name:
-      - qemu
+      - qemu-base
       - libvirt
       - virt-manager
       - ebtables
@@ -20,5 +20,5 @@
 - name: enable nested virtualization
   copy:
     dest: /etc/modprobe.d/kvm.conf
-    content: | 
+    content: |
       options kvm_intel nested=1
