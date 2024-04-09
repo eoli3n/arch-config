@@ -86,7 +86,7 @@
 
 - name: add missing gpg keys for aur
   become: no
-  shell: gpg --recv --keyserver keyserver.ubuntu.com '{{item}}'
+  shell: gpg --recv '{{item}}'
   loop:
     - F4B432D5D67990E3 # wob
 

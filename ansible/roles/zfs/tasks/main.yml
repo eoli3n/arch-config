@@ -3,12 +3,22 @@
   shell: |
     zfs set com.sun:auto-snapshot=false zroot
     zfs set com.sun:auto-snapshot=false zroot/data
+    zfs set com.sun:auto-snapshot=false zroot/ROOT
+    zfs set com.sun:auto-snapshot=false zroot/data
     zfs set com.sun:auto-snapshot=true zroot/data/home
-    zfs set com.sun:auto-snapshot:frequent=false dpool/data/home
-    zfs set com.sun:auto-snapshot:monthly=false dpool/data/home
-    zfs set com.sun:auto-snapshot:hourly=false dpool/data/home
-    zfs set com.sun:auto-snapshot:weekly=false dpool/data/home
-    zfs set com.sun:auto-snapshot:daily=true dpool/data/home
+    zfs set com.sun:auto-snapshot=true zroot/ROOT/archlinux
+    zfs set com.sun:auto-snapshot:frequent=false zroot/data/home
+    zfs set com.sun:auto-snapshot:monthly=false zroot/data/home
+    zfs set com.sun:auto-snapshot:hourly=false zroot/data/home
+    zfs set com.sun:auto-snapshot:weekly=false zroot/data/home
+    zfs set com.sun:auto-snapshot:daily=true zroot/data/home
+    zfs set com.sun:auto-snapshot=true zroot/data/home
+    zfs set com.sun:auto-snapshot:frequent=false zroot/ROOT/archlinux
+    zfs set com.sun:auto-snapshot:monthly=false zroot/ROOT/archlinux
+    zfs set com.sun:auto-snapshot:hourly=false zroot/ROOT/archlinux
+    zfs set com.sun:auto-snapshot:weekly=false zroot/ROOT/archlinux
+    zfs set com.sun:auto-snapshot:daily=true zroot/ROOT/archlinux
+    zfs set com.sun:auto-snapshot=true zroot/ROOT/archlinux
 
 - name: setup daily zfs scrub
   copy:
