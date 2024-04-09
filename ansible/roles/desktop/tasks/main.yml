@@ -101,7 +101,7 @@
       - equilux-theme
       - wdisplays-git # arandr for wayland
       - wf-recorder-git # screen recorder for wayland
-      - grimshot-git # grim+slurp wrapper
+      - grimshot # grim+slurp wrapper
       - waypipe # wayland ssh -X
       - wob # bars for wayland
       - connman-gtk # connman gtk gui
