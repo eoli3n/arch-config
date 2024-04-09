@@ -114,7 +114,6 @@
       - otf-font-awesome
       #- ttf-impallari-cabin-font # xelatex cv
       - pastel # color viewer
-      - starleaf-breeze
       - swappy # screenshot editor
       - senpai-irc # irc client for soju
       - rbenv # ruby env manager
