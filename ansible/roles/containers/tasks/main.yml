@@ -26,7 +26,7 @@
       - kubespy         # observe Kubernetes resources in real time
 
 - name: install pip3 containers packages
-  pip:
+  community.general.pipx:
     name:
       - podman-compose  # mutli-container podman apps
 
