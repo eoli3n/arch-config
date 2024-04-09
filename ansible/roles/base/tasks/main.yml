@@ -79,7 +79,7 @@
       - python-pre-commit  # pre-commit hook manager
       - zim                # wiki app
       - mailutils          # mail client
-      - pipx               # pip package manager
+      - python-pipx               # pip package manager
     state: present
 
 - name: Configure root
