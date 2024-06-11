@@ -14,6 +14,7 @@
       - brightnessctl # brightness manager
       - wofi # rofi for wayland
       - swayidle
+      - swaylock # lock screen for sway
       - xdg-user-dirs
       - xdg-desktop-portal-wlr
     state: present
