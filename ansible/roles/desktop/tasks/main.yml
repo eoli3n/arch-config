@@ -17,6 +17,7 @@
       - swaylock # lock screen for sway
       - xdg-user-dirs
       - xdg-desktop-portal-wlr
+      - xdg-desktop-portal-gtk
     state: present
 
 - name: install video packages
