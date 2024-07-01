@@ -50,7 +50,7 @@
       - imv # img visualizer
       - wezterm # terminal emulator
       - evince # pdf viewer
-      - evolution # mail client
+      - thunderbird # mail client
       - gnome-keyring # evolution gnome keyring
       - seahorse # keyring manager
       - firefox
