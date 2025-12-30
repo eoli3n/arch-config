@@ -25,6 +25,7 @@
     - us.zoom.Zoom
     - fi.skyjake.Lagrange # gemini browser
     - net.xmind.XMind # mind mapping
+    - info.portfolio_performance.PortfolioPerformance
     #- com.microsoft.Teams
 
 - name: Install flatpak beta packages
