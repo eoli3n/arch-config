@@ -21,7 +21,7 @@
     name: ansible
     install_deps: yes
     state: install
-    system_site_packages: yes
+    #system_site_packages: yes
 
 - name: install ansible
   community.general.pipx:
