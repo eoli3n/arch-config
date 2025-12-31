@@ -26,6 +26,7 @@
     - fi.skyjake.Lagrange # gemini browser
     - net.xmind.XMind # mind mapping
     - info.portfolio_performance.PortfolioPerformance
+    - com.jgraph.drawio.desktop
     #- com.microsoft.Teams
 
 - name: Install flatpak beta packages
