@@ -107,9 +107,8 @@ arch-chroot /mnt /bin/bash -xe <<EOF
   pacman -S archlinux-keyring --noconfirm
   cat >> /etc/pacman.conf <<"EOSF"
 [archzfs]
-Server = http://archzfs.com/archzfs/x86_64
-Server = http://mirror.sum7.eu/archlinux/archzfs/archzfs/x86_64
-Server = https://mirror.biocrafting.net/archlinux/archzfs/archzfs/x86_64
+SigLevel = Never
+Server = https://github.com/archzfs/archzfs/releases/download/experimental
 EOSF
   pacman -Syu --noconfirm zfs-dkms zfs-utils
 
