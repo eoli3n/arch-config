@@ -60,6 +60,7 @@
       - kolourpaint # img editor
       - shotwell # photo manager
       - libreoffice-still-fr # libreoffice suite fr
+      - hunspell-fr # dictionnaire francais
       - lollypop # music player
       - lxappearance # theme manager
       - mpv # video player
